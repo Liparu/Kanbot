@@ -45,7 +45,7 @@ def create_api_key(
         api_key = APIKey(
             user_id=user_obj.id,
             name=name,
-            key=key_value,
+            key_hash=key_value,
             is_agent=True,
         )
         session.add(api_key)
