@@ -96,7 +96,7 @@ async def check_space_access(user_id: UUID, space_id: str) -> bool:
                 return True
             
             for member in space.members:
-                if member.id == user_id:
+                if member.user_id == user_id:
                     return True
             
             return False
