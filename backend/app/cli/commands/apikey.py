@@ -9,6 +9,7 @@ from rich.table import Table
 from app.cli.utils.output import output_success, output_error, output_data, create_table, console
 from app.cli.utils.db import get_db_session
 from app.models.user import User, APIKey
+from app.core.security import hash_api_key
 
 app = typer.Typer(no_args_is_help=True)
 
@@ -45,7 +46,7 @@ def create_api_key(
         api_key = APIKey(
             user_id=user_obj.id,
             name=name,
-            key_hash=key_value,
+            key_hash=hash_api_key(key_value),
             is_agent=True,
         )
         session.add(api_key)
@@ -98,9 +99,8 @@ def list_api_keys(
                 {
                     "id": str(k.id),
                     "name": k.name,
-                    "key_prefix": k.key[:12] + "..." if k.key else "***",
+                    "key_hash_prefix": k.key_hash[:12] + "..." if k.key_hash else "***",
                     "user_id": str(k.user_id),
-                    "is_active": k.is_active,
                     "is_agent": k.is_agent,
                     "created_at": k.created_at.isoformat(),
                 }
@@ -112,13 +112,12 @@ def list_api_keys(
         if json:
             output_data(data, json)
         else:
-            table = create_table("API Keys", ["ID", "Name", "Key Prefix", "Active", "Agent"])
+            table = create_table("API Keys", ["ID", "Name", "Hash Prefix", "Agent"])
             for k in keys:
                 table.add_row(
                     str(k.id)[:8] + "...",
                     k.name,
-                    k.key[:12] + "..." if k.key else "***",
-                    "Y" if k.is_active else "N",
+                    k.key_hash[:12] + "..." if k.key_hash else "***",
                     "Y" if k.is_agent else "N",
                 )
             output_data(None, False, table)
@@ -157,7 +156,7 @@ def revoke_api_key(
             if not confirm:
                 raise typer.Abort()
         
-        api_key.is_active = False
+        session.delete(api_key)
         session.commit()
         
         output_success(f"API key '{api_key.name}' has been revoked", json, {"id": str(api_key.id), "name": api_key.name})
