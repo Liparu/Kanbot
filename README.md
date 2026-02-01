@@ -46,7 +46,92 @@ The application will be available at:
 - **API**: http://localhost:8000
 - **API Docs**: http://localhost:8000/docs (disabled in production)
 
-## Quick Start (Manual)
+## Quick Start (Docker Hub - Pre-built Images)
+
+You can also run Kanbot using pre-built images from Docker Hub without building locally:
+
+```bash
+# Create a docker-compose.yml file with pre-built images:
+cat > docker-compose.yml << 'EOF'
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - frontend
+      - backend
+
+  frontend:
+    image: liparu/kanbot-frontend:v1.0
+    environment:
+      - VITE_API_URL=http://localhost:8000
+
+  backend:
+    image: liparu/kanbot-backend:v1.0
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://kanbot:kanbot@postgres:5432/kanbot
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=your-secret-key-here-change-in-production
+      - ENVIRONMENT=development
+      - CORS_ORIGINS=http://localhost,http://localhost:80
+      - ADMIN_EMAIL=admin@kanbot.local
+      - ADMIN_PASSWORD=admin123
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=kanbot
+      - POSTGRES_PASSWORD=kanbot
+      - POSTGRES_DB=kanbot
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kanbot"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+EOF
+
+# Create nginx config directory and download config
+mkdir -p nginx
+curl -o nginx/nginx.conf https://raw.githubusercontent.com/Liparu/Kanbot/main/nginx/nginx.conf
+
+# Start the application
+docker-compose up -d
+
+# Run database migrations
+docker-compose exec backend python -m alembic upgrade head
+
+# Create admin user
+docker-compose exec backend python -m app.cli db seed
+```
+
+**Docker Hub Repositories:**
+- Frontend: `docker pull liparu/kanbot-frontend:v1.0`
+- Backend: `docker pull liparu/kanbot-backend:v1.0`
+
+## Quick Start (Build from Source)
 
 ### Prerequisites
 
