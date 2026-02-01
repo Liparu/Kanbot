@@ -77,8 +77,14 @@ async def create_space(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
+    sanitized_name = sanitize_text(space_data.name)
+    if not sanitized_name or not sanitized_name.strip():
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Space name cannot be empty after sanitization",
+        )
     space = Space(
-        name=sanitize_text(space_data.name),
+        name=sanitized_name,
         type=space_data.type,
         owner_id=current_user.id,
         settings=space_data.settings or {},

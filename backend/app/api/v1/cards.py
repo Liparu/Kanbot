@@ -180,9 +180,16 @@ async def create_card(
     if column.category == ColumnCategory.IN_PROGRESS and not start_date:
         start_date = date.today()
     
+    sanitized_name = sanitize_text(card_data.name)
+    if not sanitized_name or not sanitized_name.strip():
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Card name cannot be empty after sanitization",
+        )
+    
     card = Card(
         column_id=card_data.column_id,
-        name=sanitize_text(card_data.name),
+        name=sanitized_name,
         description=sanitize_text(card_data.description),
         start_date=start_date,
         end_date=card_data.end_date,
