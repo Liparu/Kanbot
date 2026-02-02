@@ -1,0 +1,14 @@
+# Docker Compose override to use Docker Hub images instead of local builds.
+# Usage: docker compose -f docker-compose.yml -f docker-compose.hub.yml up -d
+#
+# Images are auto-published on every push to main via GitHub Actions.
+# Override tag with KANBOT_TAG env var (default: latest).
+
+services:
+  backend:
+    image: liparu/kanbot-backend:${KANBOT_TAG:-latest}
+    build: !reset null
+
+  frontend:
+    image: liparu/kanbot-frontend:${KANBOT_TAG:-latest}
+    build: !reset null
