@@ -208,21 +208,22 @@ async def create_card(
     await log_card_action(db, card, "created", {"name": card.name}, actor)
     
     await db.commit()
-    await db.refresh(card)
-    await db.refresh(column, attribute_names=["space"])
-    await db.refresh(column.space, attribute_names=["members"])
-    
+
+    # Eagerly load all relationships needed for notifications and websocket
     result = await db.execute(
         select(Card)
         .where(Card.id == card.id)
         .options(
             selectinload(Card.tags).selectinload(CardTag.tag),
             selectinload(Card.assignees),
+            selectinload(Card.column)
+            .selectinload(Column.space)
+            .selectinload(Space.members),
         )
     )
     created_card = result.scalar_one()
-    
-    space_id = str(column.space.id)
+
+    space_id = str(created_card.column.space.id)
     
     await ws_manager.send_card_created(
         space_id,
@@ -245,7 +246,7 @@ async def create_card(
     if actor.is_agent:
         notify_targets = {
             member.user_id
-            for member in column.space.members
+            for member in created_card.column.space.members
             if member.user_id != actor.user.id
         }
         created_notifications = []

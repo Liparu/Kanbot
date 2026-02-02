@@ -48,8 +48,8 @@ services:
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
       ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@kanbot.local}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
-    #volumes:
-    #  - ./backend:/app
+    volumes:
+      - ./backend:/app
     ports:
       - "8000:8000"
     depends_on:
