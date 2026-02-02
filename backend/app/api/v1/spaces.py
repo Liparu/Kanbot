@@ -310,6 +310,8 @@ async def update_space(
     
     if space_data.name is not None:
         space.name = sanitize_text(space_data.name)
+    if space_data.type is not None:
+        space.type = space_data.type
     if space_data.settings is not None:
         space.settings = space_data.settings
     if space_data.calendar_public is not None:

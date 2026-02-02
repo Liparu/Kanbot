@@ -23,6 +23,7 @@ class SpaceCreate(BaseModel):
 
 class SpaceUpdate(BaseModel):
     name: Optional[str] = Field(None, min_length=1, max_length=200)
+    type: Optional[SpaceType] = None
     settings: Optional[dict] = None
     calendar_public: Optional[bool] = None
     color: Optional[str] = Field(None, max_length=7)

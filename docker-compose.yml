@@ -70,8 +70,8 @@ services:
       dockerfile: Dockerfile
     container_name: kanbot-frontend
     environment:
-      VITE_API_URL: ${VITE_API_URL:-http://localhost:8000}
-      VITE_WS_URL: ${VITE_WS_URL:-ws://localhost:8000}
+      VITE_API_URL: ${VITE_API_URL:-}
+      VITE_WS_URL: ${VITE_WS_URL:-}
     #volumes:
     #  - ./frontend:/app
     #  - /app/node_modules
