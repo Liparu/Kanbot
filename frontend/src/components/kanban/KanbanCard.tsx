@@ -5,6 +5,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { CheckSquare, ChevronDown, ChevronUp } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Card } from '@/types'
+import { getAvatarColor } from '@/utils/avatarColor'
 
 interface KanbanCardProps {
   card: Card
@@ -70,7 +71,10 @@ export default function KanbanCard({ card, isDragging, onClick, onToggleTask }: 
         <div className="absolute top-2 right-2 flex -space-x-1.5">
           {card.assignees.slice(0, 3).map((user) => (
             <div key={user.id} className="relative group">
-              <div className="w-5 h-5 bg-primary-600 rounded-full flex items-center justify-center text-[10px] text-white border border-dark-700">
+              <div
+                className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] text-white border border-dark-700"
+                style={{ backgroundColor: getAvatarColor(user.username) }}
+              >
                 {user.username[0].toUpperCase()}
               </div>
               <div className="absolute top-6 right-0 bg-dark-800 border border-dark-600 text-xs text-dark-100 rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-30 shadow-lg">

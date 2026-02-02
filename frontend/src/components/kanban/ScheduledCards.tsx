@@ -8,6 +8,7 @@ import { spacesApi } from '@/api/spaces'
 import DateTimePicker from '@/components/common/DateTimePicker'
 import { useSettingsStore } from '@/stores/settings'
 import { formatDate } from '@/utils/dateFormat'
+import { getAvatarColor } from '@/utils/avatarColor'
 import type { Column, Tag } from '@/types'
 
 interface ScheduledCardsProps {
@@ -318,7 +319,7 @@ export default function ScheduledCards({ spaceId, columns, onClose }: ScheduledC
                             : 'bg-dark-700 text-dark-300'
                         }`}
                       >
-                        <div className="w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center text-white text-[10px]">
+                        <div className="w-5 h-5 rounded-full flex items-center justify-center text-white text-[10px]" style={{backgroundColor: getAvatarColor(member.username)}}>
                           {member.username[0].toUpperCase()}
                         </div>
                         {member.username}

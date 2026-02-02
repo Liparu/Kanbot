@@ -30,6 +30,7 @@ import MonthView from './MonthView'
 import WeekView from './WeekView'
 import CardDetailModal from '@/components/kanban/CardDetailModal'
 import type { CalendarDisplayEvent } from '@/utils/calendar'
+import { getAvatarColor } from '@/utils/avatarColor'
 import type { Card, Column, Space } from '@/types'
 
 type ViewMode = 'month' | 'week'
@@ -1342,7 +1343,7 @@ function CardCreationModal({
                             <Check className="w-3 h-3 text-white" />
                           )}
                         </div>
-                        <div className="w-6 h-6 bg-primary-600 rounded-full flex items-center justify-center text-xs text-white">
+                        <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs text-white" style={{backgroundColor: getAvatarColor(member.username || '?')}}>
                           {(member.username || '?')[0].toUpperCase()}
                         </div>
                         <span className="text-sm text-dark-200">{member.username}</span>

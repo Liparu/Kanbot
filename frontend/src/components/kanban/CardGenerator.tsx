@@ -6,6 +6,7 @@ import { X, Wand2, Plus, Trash2 } from 'lucide-react'
 import { cardsApi, tagsApi } from '@/api/boards'
 import { spacesApi } from '@/api/spaces'
 import { useBoardStore } from '@/stores/boards'
+import { getAvatarColor } from '@/utils/avatarColor'
 import type { Column, Tag } from '@/types'
 
 interface CardGeneratorProps {
@@ -252,7 +253,7 @@ export default function CardGenerator({ spaceId, columns, onClose }: CardGenerat
                           : 'bg-dark-700 text-dark-300'
                       }`}
                     >
-                      <div className="w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center text-white text-[10px]">
+                      <div className="w-5 h-5 rounded-full flex items-center justify-center text-white text-[10px]" style={{backgroundColor: getAvatarColor(member.username)}}>
                         {member.username[0].toUpperCase()}
                       </div>
                       {member.username}

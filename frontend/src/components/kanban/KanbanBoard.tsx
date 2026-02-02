@@ -25,6 +25,7 @@ import { columnsApi, cardsApi, tagsApi } from '@/api/boards'
 import { spacesApi } from '@/api/spaces'
 import { filterTemplatesApi } from '@/api/filterTemplates'
 import { useBoardStore } from '@/stores/boards'
+import { getAvatarColor } from '@/utils/avatarColor'
 import KanbanColumn from './KanbanColumn'
 import KanbanCard from './KanbanCard'
 import CardDetailModal from './CardDetailModal'
@@ -516,7 +517,8 @@ export default function KanbanBoard({ spaceId }: KanbanBoardProps) {
                   {space.members.slice(0, 5).map((member) => (
                     <div
                       key={member.user_id}
-                      className="w-7 h-7 bg-primary-600 rounded-full flex items-center justify-center text-xs text-white border-2 border-dark-900 relative group"
+                      className="w-7 h-7 rounded-full flex items-center justify-center text-xs text-white border-2 border-dark-900 relative group"
+                      style={{ backgroundColor: getAvatarColor(member.username) }}
                     >
                       {member.username[0].toUpperCase()}
                       <div className="absolute top-8 left-0 bg-dark-800 border border-dark-700 text-xs text-dark-100 rounded-lg px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-[100] shadow-lg">

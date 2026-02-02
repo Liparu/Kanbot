@@ -19,6 +19,7 @@ import {
 import { cardsApi, tagsApi } from '@/api/boards'
 import { spacesApi } from '@/api/spaces'
 import { useBoardStore } from '@/stores/boards'
+import { getAvatarColor } from '@/utils/avatarColor'
 import DateTimePicker from '@/components/common/DateTimePicker'
 import { useToast } from '@/components/common/Toast'
 import { useConfirm } from '@/components/common/ConfirmDialog'
@@ -506,7 +507,10 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
                           <Check className="w-3 h-3 text-white" />
                         )}
                       </div>
-                      <div className="w-6 h-6 bg-primary-600 rounded-full flex items-center justify-center text-xs text-white">
+                      <div
+                        className="w-6 h-6 rounded-full flex items-center justify-center text-xs text-white"
+                        style={{ backgroundColor: getAvatarColor(member.username) }}
+                      >
                         {member.username[0].toUpperCase()}
                       </div>
                       <span className="text-sm text-dark-200">{member.username}</span>
@@ -525,7 +529,10 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
                       key={member.user_id}
                       className="flex items-center gap-2 px-2 py-1 bg-dark-700 rounded-full"
                     >
-                      <div className="w-5 h-5 bg-primary-600 rounded-full flex items-center justify-center text-xs text-white">
+                      <div
+                        className="w-5 h-5 rounded-full flex items-center justify-center text-xs text-white"
+                        style={{ backgroundColor: getAvatarColor(member.username) }}
+                      >
                         {member.username[0].toUpperCase()}
                       </div>
                       <span className="text-xs text-dark-200">{member.username}</span>
@@ -679,7 +686,10 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 bg-primary-600 rounded-full flex items-center justify-center text-xs text-white">
+                      <div
+                        className="w-6 h-6 rounded-full flex items-center justify-center text-xs text-white"
+                        style={{ backgroundColor: getAvatarColor(comment.actor_name || 'Unknown') }}
+                      >
                         {comment.actor_name?.[0]?.toUpperCase() || 'U'}
                       </div>
                       <span className="text-sm font-medium text-dark-200">{comment.actor_name}</span>
