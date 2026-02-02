@@ -211,6 +211,8 @@ async def create_card(
     
     await db.commit()
     await db.refresh(card)
+    await db.refresh(column, attribute_names=["space"])
+    await db.refresh(column.space, attribute_names=["members"])
     
     result = await db.execute(
         select(Card)
@@ -368,6 +370,8 @@ async def update_card(
     await db.refresh(card, attribute_names=["tags", "assignees", "column"])
     for ct in card.tags:
         await db.refresh(ct, attribute_names=["tag"])
+    await db.refresh(card.column, attribute_names=["space"])
+    await db.refresh(card.column.space, attribute_names=["members"])
     updated_card = card
     space_id = str(updated_card.column.space.id)
     
