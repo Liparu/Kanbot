@@ -364,16 +364,11 @@ async def update_card(
     
     await db.commit()
     
-    result = await db.execute(
-        select(Card)
-        .where(Card.id == card.id)
-        .options(
-            selectinload(Card.tags).selectinload(CardTag.tag),
-            selectinload(Card.assignees),
-            selectinload(Card.column).selectinload(Column.space),
-        )
-    )
-    updated_card = result.scalar_one()
+    # Refresh the card to pick up updated relationships
+    await db.refresh(card, attribute_names=["tags", "assignees", "column"])
+    for ct in card.tags:
+        await db.refresh(ct, attribute_names=["tag"])
+    updated_card = card
     space_id = str(updated_card.column.space.id)
     
     await ws_manager.send_card_updated(
