@@ -32,8 +32,13 @@ export default function RegisterPage() {
       setAuth(response.access_token, response.user)
       navigate('/')
     } catch (err: unknown) {
-      const error = err as { response?: { data?: { detail?: string } } }
-      setError(error.response?.data?.detail || 'Registration failed')
+      const error = err as { response?: { data?: { detail?: string | Array<{ msg?: string }> } } }
+      const detail = error.response?.data?.detail
+      if (Array.isArray(detail)) {
+        setError(detail.map(d => d.msg || '').filter(Boolean).join('. '))
+      } else {
+        setError(detail || 'Registration failed')
+      }
     } finally {
       setLoading(false)
     }
@@ -99,8 +104,11 @@ export default function RegisterPage() {
                 className="w-full px-4 py-2 bg-dark-700 border border-dark-600 rounded-lg text-dark-100 placeholder-dark-500 focus:outline-none focus:border-primary-500 transition-colors"
                 placeholder="********"
                 required
-                minLength={6}
+                minLength={8}
               />
+              <p className="mt-1 text-xs text-dark-500">
+                Min 8 chars, uppercase, lowercase, number &amp; special character
+              </p>
             </div>
 
             <div>
