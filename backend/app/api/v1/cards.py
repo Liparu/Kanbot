@@ -196,11 +196,9 @@ async def create_card(
     await db.flush()
     
     if card_data.assignee_ids:
-        for user_id in card_data.assignee_ids:
-            result = await db.execute(select(User).where(User.id == user_id))
-            user = result.scalar_one_or_none()
-            if user:
-                card.assignees.append(user)
+        from app.models.card import card_assignees
+        for uid in card_data.assignee_ids:
+            await db.execute(card_assignees.insert().values(card_id=card.id, user_id=uid))
     
     if card_data.tag_ids:
         for tag_id in card_data.tag_ids:
