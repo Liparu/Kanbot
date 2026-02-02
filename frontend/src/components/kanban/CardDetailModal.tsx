@@ -117,7 +117,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
     onSuccess: (updatedCard) => {
       updateCardInStore(columnId, cardId, updatedCard)
       queryClient.invalidateQueries({ queryKey: ['card', cardId] })
-      queryClient.invalidateQueries({ queryKey: ['board'] })
+      queryClient.invalidateQueries({ queryKey: ['columns'] })
     },
   })
 
@@ -125,7 +125,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
     mutationFn: () => cardsApi.delete(cardId),
     onSuccess: () => {
       removeCard(columnId, cardId)
-      queryClient.invalidateQueries({ queryKey: ['board'] })
+      queryClient.invalidateQueries({ queryKey: ['columns'] })
       toast.success(t('cards.deleted'))
       onClose()
     },
@@ -157,7 +157,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
         })
       }
       queryClient.invalidateQueries({ queryKey: ['card', cardId] })
-      queryClient.invalidateQueries({ queryKey: ['board'] })
+      queryClient.invalidateQueries({ queryKey: ['columns'] })
       setNewTaskText('')
     },
   })
@@ -177,7 +177,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
         })
       }
       queryClient.invalidateQueries({ queryKey: ['card', cardId] })
-      queryClient.invalidateQueries({ queryKey: ['board'] })
+      queryClient.invalidateQueries({ queryKey: ['columns'] })
     },
   })
 
@@ -197,7 +197,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
         })
       }
       queryClient.invalidateQueries({ queryKey: ['card', cardId] })
-      queryClient.invalidateQueries({ queryKey: ['board'] })
+      queryClient.invalidateQueries({ queryKey: ['columns'] })
     },
   })
 

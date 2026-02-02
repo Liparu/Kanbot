@@ -34,14 +34,13 @@ import ColorPicker from '@/components/common/ColorPicker'
 import { useToast } from '@/components/common/Toast'
 import { useConfirm } from '@/components/common/ConfirmDialog'
 import { useWebSocket } from '@/hooks/useWebSocket'
-import type { Board, Column, Card, ColumnCategory } from '@/types'
+import type { Column, Card, ColumnCategory } from '@/types'
 
 interface KanbanBoardProps {
-  board: Board & { columns: Column[] }
-  spaceId?: string
+  spaceId: string
 }
 
-export default function KanbanBoard({ board, spaceId }: KanbanBoardProps) {
+export default function KanbanBoard({ spaceId }: KanbanBoardProps) {
   const { t } = useTranslation()
   const queryClient = useQueryClient()
   const toast = useToast()
@@ -214,7 +213,7 @@ export default function KanbanBoard({ board, spaceId }: KanbanBoardProps) {
         setArchiveTag('')
       }
       queryClient.invalidateQueries({ queryKey: ['tags', spaceId] })
-      queryClient.invalidateQueries({ queryKey: ['board', board.id] })
+      queryClient.invalidateQueries({ queryKey: ['columns', spaceId] })
       toast.success(t('tags.deleted'))
     },
     onError: () => {
@@ -245,12 +244,22 @@ export default function KanbanBoard({ board, spaceId }: KanbanBoardProps) {
     return () => document.removeEventListener('mousedown', handleClickAway)
   }, [showTagsDropdown])
 
+  const { data: fetchedColumns = [] } = useQuery({
+    queryKey: ['columns', spaceId],
+    queryFn: () => columnsApi.list(spaceId),
+    enabled: !!spaceId,
+  })
+
   useEffect(() => {
-    setColumns(board.columns || [])
-    board.columns?.forEach((col) => {
-      setCards(col.id, col.cards || [])
-    })
-  }, [board, setColumns, setCards])
+    if (fetchedColumns.length > 0) {
+      setColumns(fetchedColumns)
+      fetchedColumns.forEach((col) => {
+        cardsApi.list({ column_id: col.id }).then((columnCards) => {
+          setCards(col.id, columnCards)
+        })
+      })
+    }
+  }, [fetchedColumns, setColumns, setCards])
 
   useEffect(() => {
     if (!spaceId || filterTemplates.length === 0) return
@@ -275,7 +284,7 @@ export default function KanbanBoard({ board, spaceId }: KanbanBoardProps) {
   }, [spaceId, filterTemplates])
 
   const createColumnMutation = useMutation({
-    mutationFn: (data: { name: string; board_id: string; category: string }) =>
+    mutationFn: (data: { name: string; space_id: string; category: string }) =>
       columnsApi.create(data),
     onSuccess: (newColumn) => {
       addColumn(newColumn)
@@ -314,7 +323,7 @@ export default function KanbanBoard({ board, spaceId }: KanbanBoardProps) {
   const reorderColumnsMutation = useMutation({
     mutationFn: (columnIds: string[]) => columnsApi.reorder(columnIds),
     onError: () => {
-      queryClient.invalidateQueries({ queryKey: ['board', board.id] })
+      queryClient.invalidateQueries({ queryKey: ['columns', spaceId] })
       toast.error(t('common.operationFailed'))
     },
   })
@@ -337,7 +346,7 @@ export default function KanbanBoard({ board, spaceId }: KanbanBoardProps) {
           break
         }
       }
-      queryClient.invalidateQueries({ queryKey: ['board', board.id] })
+      queryClient.invalidateQueries({ queryKey: ['columns', spaceId] })
       queryClient.invalidateQueries({ queryKey: ['card', vars.cardId] })
     },
   })
@@ -489,7 +498,7 @@ export default function KanbanBoard({ board, spaceId }: KanbanBoardProps) {
     if (newColumnName.trim()) {
       createColumnMutation.mutate({
         name: newColumnName,
-        board_id: board.id,
+        space_id: spaceId,
         category: newColumnCategory,
       })
     }
@@ -500,7 +509,7 @@ export default function KanbanBoard({ board, spaceId }: KanbanBoardProps) {
       <div className="flex flex-col gap-3 mb-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-dark-100">{space?.name || board.name}</h1>
+            <h1 className="text-2xl font-bold text-dark-100">{space?.name || space?.name || ''}</h1>
             {space?.members && space.members.length > 0 && (
               <div className="flex items-center gap-2 mt-2">
                 <div className="flex -space-x-2">

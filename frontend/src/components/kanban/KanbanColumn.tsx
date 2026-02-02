@@ -136,7 +136,7 @@ export default function KanbanColumn({
     mutationFn: () => columnsApi.delete(column.id),
     onSuccess: () => {
       removeColumn(column.id)
-      queryClient.invalidateQueries({ queryKey: ['board'] })
+      queryClient.invalidateQueries({ queryKey: ['columns'] })
       if (spaceId) {
         queryClient.invalidateQueries({ queryKey: ['space-stats', spaceId] })
       }

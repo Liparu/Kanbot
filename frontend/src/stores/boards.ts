@@ -1,15 +1,11 @@
 import { create } from 'zustand'
 import { arrayMove } from '@dnd-kit/sortable'
-import type { Board, Column, Card } from '@/types'
+import type { Column, Card } from '@/types'
 
 interface BoardState {
-  boards: Board[]
-  currentBoard: Board | null
   columns: Column[]
   cards: Record<string, Card[]>
 
-  setBoards: (boards: Board[]) => void
-  setCurrentBoard: (board: Board | null) => void
   setColumns: (columns: Column[]) => void
   setCards: (columnId: string, cards: Card[]) => void
   
@@ -24,14 +20,8 @@ interface BoardState {
 }
 
 export const useBoardStore = create<BoardState>((set) => ({
-  boards: [],
-  currentBoard: null,
   columns: [],
   cards: {},
-
-  setBoards: (boards) => set({ boards }),
-
-  setCurrentBoard: (board) => set({ currentBoard: board }),
 
   setColumns: (columns) => set({ columns }),
 

@@ -10,7 +10,7 @@ from datetime import timezone as dt_timezone
 from app.core.database import get_db
 from app.models.user import User
 from app.models.space import Space, SpaceMember
-from app.models.board import Board
+from app.models.column import Column
 from app.models.column import Column, ColumnCategory
 from app.models.card import Card, Task, CardTag
 from app.models.scheduled_card import ScheduledCard, RecurrenceInterval
@@ -281,9 +281,8 @@ async def create_card_from_schedule(db: AsyncSession, scheduled_card: ScheduledC
     if not column_id:
         result = await db.execute(
             select(Column)
-            .join(Board)
             .where(
-                Board.space_id == scheduled_card.space_id,
+                Column.space_id == scheduled_card.space_id,
                 Column.name == scheduled_card.column_name,
             )
         )
@@ -291,20 +290,12 @@ async def create_card_from_schedule(db: AsyncSession, scheduled_card: ScheduledC
         
         if not column:
             result = await db.execute(
-                select(Board).where(Board.space_id == scheduled_card.space_id).order_by(Board.position)
-            )
-            board = result.scalars().first()
-            
-            if not board:
-                raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No board found in space")
-            
-            result = await db.execute(
-                select(Column).where(Column.board_id == board.id).order_by(Column.position.desc())
+                select(Column).where(Column.space_id == scheduled_card.space_id).order_by(Column.position.desc())
             )
             last_column = result.scalars().first()
             
             column = Column(
-                board_id=board.id,
+                space_id=scheduled_card.space_id,
                 name=scheduled_card.column_name,
                 category=ColumnCategory.DEFAULT,
                 position=(last_column.position + 1) if last_column else 0,

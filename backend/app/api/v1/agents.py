@@ -10,7 +10,6 @@ from pydantic import BaseModel
 from app.core.database import get_db
 from app.models.user import User
 from app.models.space import Space
-from app.models.board import Board
 from app.models.column import Column
 from app.models.card import Card, CardHistory
 from app.services.notifications import create_notification, serialize_notification
@@ -56,9 +55,7 @@ async def get_available_actions():
     return [
         ActionReference(endpoint="/api/v1/spaces", method="GET", description="List all spaces the agent has access to"),
         ActionReference(endpoint="/api/v1/spaces", method="POST", description="Create a new space"),
-        ActionReference(endpoint="/api/v1/boards?space_id={id}", method="GET", description="List boards in a space"),
-        ActionReference(endpoint="/api/v1/boards", method="POST", description="Create a new board"),
-        ActionReference(endpoint="/api/v1/columns?board_id={id}", method="GET", description="List columns in a board"),
+        ActionReference(endpoint="/api/v1/columns?space_id={id}", method="GET", description="List columns in a space"),
         ActionReference(endpoint="/api/v1/columns", method="POST", description="Create a new column"),
         ActionReference(endpoint="/api/v1/cards", method="GET", description="List cards with optional filters"),
         ActionReference(endpoint="/api/v1/cards", method="POST", description="Create a new card"),
@@ -119,8 +116,7 @@ async def query_audit_logs(
         query = (
             query.join(Card, Card.id == CardHistory.card_id)
             .join(Column, Column.id == Card.column_id)
-            .join(Board, Board.id == Column.board_id)
-            .where(Board.space_id == space_id)
+            .where(Column.space_id == space_id)
         )
     if actor_type:
         query = query.where(CardHistory.actor_type == actor_type)

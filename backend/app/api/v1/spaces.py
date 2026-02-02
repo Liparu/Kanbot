@@ -11,7 +11,6 @@ from app.core.sanitize import sanitize_text
 from app.models.user import User
 from app.models.space import Space, SpaceMember, MemberRole
 from app.models.calendar import Calendar
-from app.models.board import Board
 from app.models.column import Column, ColumnCategory
 from app.models.card import Card, CardTag, card_assignees
 from app.models.tag import Tag
@@ -103,17 +102,9 @@ async def create_space(
     calendar = Calendar(space_id=space.id)
     db.add(calendar)
 
-    board = Board(
-        space_id=space.id,
-        name="Main Board",
-        position=0,
-    )
-    db.add(board)
-    await db.flush()
-
     columns = [
         Column(
-            board_id=board.id,
+            space_id=space.id,
             name=name,
             category=category,
             position=index,
@@ -231,10 +222,9 @@ async def get_space_stats(
 
     result = await db.execute(
         select(Column.category, Card.id, Card.end_date)
-        .join(Board, Board.id == Column.board_id)
         .join(Card, Card.column_id == Column.id)
         .join(card_assignees, card_assignees.c.card_id == Card.id)
-        .where(Board.space_id == space_id, card_assignees.c.user_id == current_user.id)
+        .where(Column.space_id == space_id, card_assignees.c.user_id == current_user.id)
     )
     rows = result.all()
 

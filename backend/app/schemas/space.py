@@ -63,6 +63,10 @@ class SpaceResponse(BaseModel):
         from_attributes = True
 
 
+class SpaceWithColumnsResponse(SpaceResponse):
+    columns: List["ColumnWithCardsResponse"] = Field(default_factory=list)
+
+
 class SpaceStatsResponse(BaseModel):
     space_id: UUID
     total_cards: int
@@ -77,3 +81,7 @@ class SpaceStatsResponse(BaseModel):
 class InviteMember(BaseModel):
     email: EmailStr
     role: MemberRole = MemberRole.MEMBER
+
+
+from app.schemas.column import ColumnWithCardsResponse
+SpaceWithColumnsResponse.model_rebuild()

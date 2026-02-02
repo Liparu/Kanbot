@@ -14,7 +14,6 @@ from app.schemas.space import (
     SpaceMemberResponse,
     InviteMember,
 )
-from app.schemas.board import BoardCreate, BoardUpdate, BoardResponse
 from app.schemas.column import ColumnCreate, ColumnUpdate, ColumnResponse
 from app.schemas.card import (
     CardCreate,

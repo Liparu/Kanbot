@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { useQuery } from '@tanstack/react-query'
 import { LayoutGrid, Users, Calendar, Tag, AlertTriangle, Inbox, Clock, ClipboardCheck, Archive } from 'lucide-react'
 import { spacesApi } from '@/api/spaces'
-import { boardsApi } from '@/api/boards'
 
 export default function SpaceDashboard() {
   const { t } = useTranslation()
@@ -16,19 +15,13 @@ export default function SpaceDashboard() {
     enabled: !!spaceId,
   })
 
-  const { data: boards = [], isLoading: boardsLoading } = useQuery({
-    queryKey: ['boards', spaceId],
-    queryFn: () => boardsApi.list(spaceId!),
-    enabled: !!spaceId,
-  })
-
   const { data: stats } = useQuery({
     queryKey: ['space-stats', spaceId],
     queryFn: () => spacesApi.stats(spaceId!),
     enabled: !!spaceId,
   })
 
-  if (spaceLoading || boardsLoading) {
+  if (spaceLoading) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-dark-400">{t('common.loading')}</div>
@@ -44,8 +37,6 @@ export default function SpaceDashboard() {
     )
   }
 
-  const mainBoard = boards[0]
-
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-6">
@@ -53,7 +44,7 @@ export default function SpaceDashboard() {
           <div>
             <h1 className="text-2xl font-bold text-dark-100">{space.name}</h1>
             <p className="text-dark-400 mt-1">
-              {space.type === 'personal' ? t('spaces.personal') : t('spaces.company')} · {space.members?.length || 0}{' '}
+              {space.type === 'personal' ? t('spaces.personal') : space.type === 'agent' ? t('spaces.agent') : t('spaces.company')} · {space.members?.length || 0}{' '}
               {t('spaces.members').toLowerCase()}
             </p>
           </div>
@@ -72,10 +63,10 @@ export default function SpaceDashboard() {
 
       <div className="flex flex-wrap items-center gap-4 mb-4">
         <button
-          onClick={() => mainBoard && navigate(`/spaces/${spaceId}/boards/${mainBoard.id}`)}
+          onClick={() => navigate(`/spaces/${spaceId}/kanban`)}
           className="px-3 py-2 bg-primary-600 hover:bg-primary-500 text-white rounded-lg text-sm"
         >
-          {t('boards.title')}
+          {t('kanban.title') || 'Kanban'}
         </button>
         <button className="px-3 py-2 bg-dark-800 border border-dark-700 text-dark-300 rounded-lg text-sm">
           <Users className="w-4 h-4 inline mr-1" />

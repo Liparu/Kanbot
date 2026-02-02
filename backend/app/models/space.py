@@ -42,7 +42,7 @@ class Space(Base):
     
     owner: Mapped["User"] = relationship("User", back_populates="owned_spaces", foreign_keys=[owner_id])
     members: Mapped[list["SpaceMember"]] = relationship("SpaceMember", back_populates="space", cascade="all, delete-orphan")
-    boards: Mapped[list["Board"]] = relationship("Board", back_populates="space", cascade="all, delete-orphan")
+    columns: Mapped[list["Column"]] = relationship("Column", back_populates="space", cascade="all, delete-orphan", order_by="Column.position")
     tags: Mapped[list["Tag"]] = relationship("Tag", back_populates="space", cascade="all, delete-orphan")
     calendar: Mapped["Calendar"] = relationship("Calendar", back_populates="space", uselist=False, cascade="all, delete-orphan")
     webhooks: Mapped[list["Webhook"]] = relationship("Webhook", back_populates="space", cascade="all, delete-orphan")
@@ -68,7 +68,7 @@ class SpaceMember(Base):
 
 
 from app.models.user import User
-from app.models.board import Board
+from app.models.column import Column
 from app.models.tag import Tag
 from app.models.calendar import Calendar
 from app.models.webhook import Webhook

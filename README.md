@@ -6,7 +6,7 @@ Kanbot is a modern, full-stack Kanban board application designed for both human 
 
 ## Features
 
-- **Kanban Boards**: Create spaces with customizable boards and columns
+- **Kanban Boards**: Create spaces with customizable columns
 - **Calendar Integration**: Built-in calendar with Google Calendar sync support
 - **Real-time Updates**: WebSocket-based live collaboration
 - **Multi-user Support**: Teams with role-based permissions
@@ -280,7 +280,6 @@ See [Multi-Profile Workflow](docs/agent-integration.md#multi-profile-agent-workf
 | Auth | `/api/v1/auth/login`, `/api/v1/auth/register`, `/api/v1/auth/refresh` |
 | Users | `/api/v1/users/me`, `/api/v1/users/{id}` |
 | Spaces | `/api/v1/spaces`, `/api/v1/spaces/{id}` |
-| Boards | `/api/v1/spaces/{id}/boards` |
 | Cards | `/api/v1/cards`, `/api/v1/cards/{id}` |
 | Calendar | `/api/v1/calendar/events` |
 | Search | `/api/v1/search` |

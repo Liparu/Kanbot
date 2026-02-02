@@ -21,16 +21,16 @@ class Column(Base):
     __tablename__ = "columns"
 
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    board_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("boards.id", ondelete="CASCADE"), nullable=False)
+    space_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("spaces.id", ondelete="CASCADE"), nullable=False)
     name: Mapped[str] = mapped_column(String(200), nullable=False)
     category: Mapped[ColumnCategory] = mapped_column(Enum(ColumnCategory), nullable=False, default=ColumnCategory.DEFAULT)
     position: Mapped[int] = mapped_column(Integer, default=0)
     settings: Mapped[dict] = mapped_column(JSON, default=dict)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
     
-    board: Mapped["Board"] = relationship("Board", back_populates="columns")
+    space: Mapped["Space"] = relationship("Space", back_populates="columns")
     cards: Mapped[list["Card"]] = relationship("Card", back_populates="column", cascade="all, delete-orphan", order_by="Card.position", foreign_keys="Card.column_id")
 
 
-from app.models.board import Board
+from app.models.space import Space
 from app.models.card import Card

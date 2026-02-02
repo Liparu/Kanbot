@@ -27,7 +27,7 @@ function App() {
                 <Route path="/" element={<Navigate to="/spaces" />} />
                 <Route path="/spaces" element={<SpacesPage />} />
                 <Route path="/spaces/:spaceId" element={<BoardPage />} />
-                <Route path="/spaces/:spaceId/boards/:boardId" element={<BoardPage />} />
+                <Route path="/spaces/:spaceId/kanban" element={<BoardPage />} />
                 <Route path="/spaces/:spaceId/calendar" element={<CalendarPage />} />
                 <Route path="/calendar" element={<CalendarPage />} />
                 <Route path="/settings" element={<SettingsPage />} />

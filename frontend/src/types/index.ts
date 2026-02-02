@@ -32,18 +32,9 @@ export interface SpaceMember {
   joined_at: string
 }
 
-export interface Board {
-  id: string
-  space_id: string
-  name: string
-  position: number
-  created_at: string
-  columns?: Column[]
-}
-
 export interface Column {
   id: string
-  board_id: string
+  space_id: string
   name: string
   category: ColumnCategory
   position: number

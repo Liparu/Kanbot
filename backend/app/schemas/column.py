@@ -7,7 +7,7 @@ from app.models.column import ColumnCategory
 
 class ColumnCreate(BaseModel):
     name: str = Field(..., min_length=1, max_length=200)
-    board_id: UUID
+    space_id: UUID
     category: ColumnCategory = ColumnCategory.DEFAULT
     position: Optional[int] = None
     settings: Optional[dict] = None
@@ -22,7 +22,7 @@ class ColumnUpdate(BaseModel):
 
 class ColumnResponse(BaseModel):
     id: UUID
-    board_id: UUID
+    space_id: UUID
     name: str
     category: ColumnCategory
     position: int = 0

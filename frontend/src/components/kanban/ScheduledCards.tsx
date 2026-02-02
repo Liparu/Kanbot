@@ -88,7 +88,7 @@ export default function ScheduledCards({ spaceId, columns, onClose }: ScheduledC
   const triggerMutation = useMutation({
     mutationFn: (id: string) => scheduledCardsApi.trigger(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['board'] })
+      queryClient.invalidateQueries({ queryKey: ['columns'] })
     },
   })
 

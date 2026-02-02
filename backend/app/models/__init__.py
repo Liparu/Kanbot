@@ -1,7 +1,6 @@
 from app.core.database import Base
 from app.models.user import User, APIKey
 from app.models.space import Space, SpaceMember
-from app.models.board import Board
 from app.models.column import Column
 from app.models.card import Card, Task, CardTag, CardDependency, CardHistory, Comment
 from app.models.tag import Tag
@@ -16,7 +15,6 @@ __all__ = [
     "APIKey",
     "Space",
     "SpaceMember",
-    "Board",
     "Column",
     "Card",
     "Task",

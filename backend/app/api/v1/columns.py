@@ -8,7 +8,6 @@ from uuid import UUID
 from app.core.database import get_db
 from app.models.user import User
 from app.models.space import Space, SpaceMember
-from app.models.board import Board
 from app.models.column import Column
 from app.models.card import Card, CardTag
 from app.schemas.column import ColumnCreate, ColumnUpdate, ColumnResponse, ColumnWithCardsResponse
@@ -17,35 +16,35 @@ from app.api.deps import get_current_user
 router = APIRouter()
 
 
-async def verify_board_access(board_id: UUID, user: User, db: AsyncSession) -> Board:
+async def verify_space_access(space_id: UUID, user: User, db: AsyncSession) -> Space:
     result = await db.execute(
-        select(Board)
-        .where(Board.id == board_id)
-        .options(selectinload(Board.space).selectinload(Space.members))
+        select(Space)
+        .where(Space.id == space_id)
+        .options(selectinload(Space.members))
     )
-    board = result.scalar_one_or_none()
+    space = result.scalar_one_or_none()
     
-    if not board:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Board not found")
+    if not space:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Space not found")
     
-    is_member = any(m.user_id == user.id for m in board.space.members)
+    is_member = any(m.user_id == user.id for m in space.members)
     if not is_member:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not a member of this space")
     
-    return board
+    return space
 
 
 @router.get("", response_model=List[ColumnResponse])
 async def list_columns(
-    board_id: UUID,
+    space_id: UUID,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    await verify_board_access(board_id, current_user, db)
+    await verify_space_access(space_id, current_user, db)
     
     result = await db.execute(
         select(Column)
-        .where(Column.board_id == board_id)
+        .where(Column.space_id == space_id)
         .order_by(Column.position)
     )
     return result.scalars().all()
@@ -57,12 +56,12 @@ async def create_column(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    await verify_board_access(column_data.board_id, current_user, db)
+    await verify_space_access(column_data.space_id, current_user, db)
     
     if column_data.position is None:
         result = await db.execute(
             select(Column)
-            .where(Column.board_id == column_data.board_id)
+            .where(Column.space_id == column_data.space_id)
             .order_by(Column.position.desc())
         )
         last_column = result.scalars().first()
@@ -71,7 +70,7 @@ async def create_column(
         position = column_data.position
     
     column = Column(
-        board_id=column_data.board_id,
+        space_id=column_data.space_id,
         name=column_data.name,
         category=column_data.category,
         position=position,
@@ -96,7 +95,7 @@ async def get_column(
         .options(
             selectinload(Column.cards).selectinload(Card.tags).selectinload(CardTag.tag),
             selectinload(Column.cards).selectinload(Card.assignees),
-            selectinload(Column.board).selectinload(Board.space).selectinload(Space.members),
+            selectinload(Column.space).selectinload(Space.members),
         )
     )
     column = result.scalar_one_or_none()
@@ -104,7 +103,7 @@ async def get_column(
     if not column:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Column not found")
     
-    is_member = any(m.user_id == current_user.id for m in column.board.space.members)
+    is_member = any(m.user_id == current_user.id for m in column.space.members)
     if not is_member:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not a member of this space")
     
@@ -121,14 +120,14 @@ async def update_column(
     result = await db.execute(
         select(Column)
         .where(Column.id == column_id)
-        .options(selectinload(Column.board).selectinload(Board.space).selectinload(Space.members))
+        .options(selectinload(Column.space).selectinload(Space.members))
     )
     column = result.scalar_one_or_none()
     
     if not column:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Column not found")
     
-    is_member = any(m.user_id == current_user.id for m in column.board.space.members)
+    is_member = any(m.user_id == current_user.id for m in column.space.members)
     if not is_member:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not a member of this space")
     
@@ -156,14 +155,14 @@ async def delete_column(
     result = await db.execute(
         select(Column)
         .where(Column.id == column_id)
-        .options(selectinload(Column.board).selectinload(Board.space).selectinload(Space.members))
+        .options(selectinload(Column.space).selectinload(Space.members))
     )
     column = result.scalar_one_or_none()
     
     if not column:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Column not found")
     
-    is_member = any(m.user_id == current_user.id for m in column.board.space.members)
+    is_member = any(m.user_id == current_user.id for m in column.space.members)
     if not is_member:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not a member of this space")
     

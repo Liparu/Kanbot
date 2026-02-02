@@ -10,7 +10,6 @@ from app.core.database import get_db
 from app.core.sanitize import sanitize_text
 from app.models.user import User
 from app.models.space import Space, SpaceMember
-from app.models.board import Board
 from app.models.column import Column, ColumnCategory
 from app.models.card import Card, Task, Comment, CardTag, CardDependency, CardHistory
 from app.models.tag import Tag
@@ -42,8 +41,7 @@ async def verify_card_access(card_id: UUID, user: User, db: AsyncSession) -> Car
         .where(Card.id == card_id)
         .options(
             selectinload(Card.column)
-            .selectinload(Column.board)
-            .selectinload(Board.space)
+            .selectinload(Column.space)
             .selectinload(Space.members),
             selectinload(Card.assignees),
             selectinload(Card.tags).selectinload(CardTag.tag),
@@ -54,7 +52,7 @@ async def verify_card_access(card_id: UUID, user: User, db: AsyncSession) -> Car
     if not card:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Card not found")
     
-    is_member = any(m.user_id == user.id for m in card.column.board.space.members)
+    is_member = any(m.user_id == user.id for m in card.column.space.members)
     if not is_member:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not a member of this space")
     
@@ -82,7 +80,6 @@ async def log_card_action(
 @router.get("", response_model=List[CardResponse])
 async def list_cards(
     space_id: Optional[UUID] = None,
-    board_id: Optional[UUID] = None,
     column_id: Optional[UUID] = None,
     assignee_id: Optional[UUID] = None,
     tag_id: Optional[UUID] = None,
@@ -99,8 +96,7 @@ async def list_cards(
     query = (
         select(Card)
         .join(Column)
-        .join(Board)
-        .join(Space)
+        .join(Space, Column.space_id == Space.id)
         .join(SpaceMember)
         .where(SpaceMember.user_id == current_user.id)
         .options(
@@ -111,8 +107,6 @@ async def list_cards(
     
     if space_id:
         query = query.where(Space.id == space_id)
-    if board_id:
-        query = query.where(Board.id == board_id)
     if column_id:
         query = query.where(Column.id == column_id)
     if assignee_id:
@@ -154,8 +148,7 @@ async def create_card(
         select(Column)
         .where(Column.id == card_data.column_id)
         .options(
-            selectinload(Column.board)
-            .selectinload(Board.space)
+            selectinload(Column.space)
             .selectinload(Space.members)
         )
     )
@@ -164,7 +157,7 @@ async def create_card(
     if not column:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Column not found")
     
-    is_member = any(m.user_id == actor.user.id for m in column.board.space.members)
+    is_member = any(m.user_id == actor.user.id for m in column.space.members)
     if not is_member:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not a member of this space")
     
@@ -229,8 +222,10 @@ async def create_card(
     )
     created_card = result.scalar_one()
     
+    space_id = str(column.space.id)
+    
     await ws_manager.send_card_created(
-        str(column.board.space.id),
+        space_id,
         {
             "id": str(created_card.id),
             "column_id": str(created_card.column_id),
@@ -250,7 +245,7 @@ async def create_card(
     if actor.is_agent:
         notify_targets = {
             member.user_id
-            for member in column.board.space.members
+            for member in column.space.members
             if member.user_id != actor.user.id
         }
         created_notifications = []
@@ -264,8 +259,7 @@ async def create_card(
                 data={
                     "card_id": str(created_card.id),
                     "column_id": str(created_card.column_id),
-                    "board_id": str(column.board.id),
-                    "space_id": str(column.board.space.id),
+                    "space_id": space_id,
                     "actor_id": actor.actor_id,
                     "actor_name": actor.actor_display_name,
                 },
@@ -277,12 +271,12 @@ async def create_card(
                 await db.refresh(notification)
             for notification in created_notifications:
                 await ws_manager.send_notification(
-                    str(column.board.space.id),
+                    space_id,
                     serialize_notification(notification),
                 )
     await dispatch_webhooks(
         db,
-        str(column.board.space.id),
+        space_id,
         "card_created",
         {"card_id": str(created_card.id), "column_id": str(created_card.column_id)},
     )
@@ -305,8 +299,7 @@ async def get_card(
             selectinload(Card.tasks),
             selectinload(Card.comments),
             selectinload(Card.column)
-            .selectinload(Column.board)
-            .selectinload(Board.space)
+            .selectinload(Column.space)
             .selectinload(Space.members),
         )
     )
@@ -315,7 +308,7 @@ async def get_card(
     if not card:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Card not found")
     
-    is_member = any(m.user_id == current_user.id for m in card.column.board.space.members)
+    is_member = any(m.user_id == current_user.id for m in card.column.space.members)
     if not is_member:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not a member of this space")
     
@@ -377,13 +370,14 @@ async def update_card(
         .options(
             selectinload(Card.tags).selectinload(CardTag.tag),
             selectinload(Card.assignees),
-            selectinload(Card.column).selectinload(Column.board),
+            selectinload(Card.column).selectinload(Column.space),
         )
     )
     updated_card = result.scalar_one()
+    space_id = str(updated_card.column.space.id)
     
     await ws_manager.send_card_updated(
-        str(updated_card.column.board.space_id),
+        space_id,
         {
             "id": str(updated_card.id),
             "column_id": str(updated_card.column_id),
@@ -403,7 +397,7 @@ async def update_card(
     if actor.is_agent:
         notify_targets = {
             member.user_id
-            for member in updated_card.column.board.space.members
+            for member in updated_card.column.space.members
             if member.user_id != actor.user.id
         }
         created_notifications = []
@@ -417,8 +411,7 @@ async def update_card(
                 data={
                     "card_id": str(updated_card.id),
                     "column_id": str(updated_card.column_id),
-                    "board_id": str(updated_card.column.board.id),
-                    "space_id": str(updated_card.column.board.space_id),
+                    "space_id": space_id,
                     "actor_id": actor.actor_id,
                     "actor_name": actor.actor_display_name,
                 },
@@ -430,12 +423,12 @@ async def update_card(
                 await db.refresh(notification)
             for notification in created_notifications:
                 await ws_manager.send_notification(
-                    str(updated_card.column.board.space_id),
+                    space_id,
                     serialize_notification(notification),
                 )
     await dispatch_webhooks(
         db,
-        str(updated_card.column.board.space_id),
+        space_id,
         "card_updated",
         {"card_id": str(updated_card.id), "column_id": str(updated_card.column_id)},
     )
@@ -456,8 +449,7 @@ async def move_card(
         select(Column)
         .where(Column.id == move_data.column_id)
         .options(
-            selectinload(Column.board)
-            .selectinload(Board.space)
+            selectinload(Column.space)
             .selectinload(Space.members)
         )
     )
@@ -466,7 +458,7 @@ async def move_card(
     if not target_column:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Target column not found")
     
-    is_member = any(m.user_id == actor.user.id for m in target_column.board.space.members)
+    is_member = any(m.user_id == actor.user.id for m in target_column.space.members)
     if not is_member:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not a member of target space")
     
@@ -490,8 +482,10 @@ async def move_card(
     
     await db.commit()
     
+    space_id = str(target_column.space.id)
+    
     await ws_manager.send_card_moved(
-        str(target_column.board.space.id),
+        space_id,
         str(card_id),
         str(old_column_id),
         str(move_data.column_id),
@@ -501,7 +495,7 @@ async def move_card(
     if actor.is_agent:
         notify_targets = {
             member.user_id
-            for member in target_column.board.space.members
+            for member in target_column.space.members
             if member.user_id != actor.user.id
         }
         created_notifications = []
@@ -516,8 +510,7 @@ async def move_card(
                     "card_id": str(card.id),
                     "from_column": str(old_column_id),
                     "to_column": str(move_data.column_id),
-                    "board_id": str(target_column.board.id),
-                    "space_id": str(target_column.board.space.id),
+                    "space_id": space_id,
                     "actor_id": actor.actor_id,
                     "actor_name": actor.actor_display_name,
                 },
@@ -529,12 +522,12 @@ async def move_card(
                 await db.refresh(notification)
             for notification in created_notifications:
                 await ws_manager.send_notification(
-                    str(target_column.board.space.id),
+                    space_id,
                     serialize_notification(notification),
                 )
     await dispatch_webhooks(
         db,
-        str(target_column.board.space.id),
+        space_id,
         "card_moved",
         {
             "card_id": str(card_id),
@@ -563,16 +556,16 @@ async def delete_card(
 ):
     card = await verify_card_access(card_id, actor.user, db)
     column_id = card.column_id
-    space_id = card.column.board.space.id
+    space_id = str(card.column.space.id)
     
     await db.delete(card)
     await db.commit()
     
-    await ws_manager.send_card_deleted(str(space_id), str(card_id), str(column_id), str(actor.user.id))
+    await ws_manager.send_card_deleted(space_id, str(card_id), str(column_id), str(actor.user.id))
     if actor.is_agent:
         notify_targets = {
             member.user_id
-            for member in card.column.board.space.members
+            for member in card.column.space.members
             if member.user_id != actor.user.id
         }
         created_notifications = []
@@ -586,8 +579,7 @@ async def delete_card(
                 data={
                     "card_id": str(card.id),
                     "column_id": str(column_id),
-                    "board_id": str(card.column.board.id),
-                    "space_id": str(space_id),
+                    "space_id": space_id,
                     "actor_id": actor.actor_id,
                     "actor_name": actor.actor_display_name,
                 },
@@ -599,12 +591,12 @@ async def delete_card(
                 await db.refresh(notification)
             for notification in created_notifications:
                 await ws_manager.send_notification(
-                    str(space_id),
+                    space_id,
                     serialize_notification(notification),
                 )
     await dispatch_webhooks(
         db,
-        str(space_id),
+        space_id,
         "card_deleted",
         {"card_id": str(card_id), "column_id": str(column_id)},
     )
@@ -618,7 +610,7 @@ async def add_task(
     db: AsyncSession = Depends(get_db),
 ):
     card = await verify_card_access(card_id, actor.user, db)
-    space_id = str(card.column.board.space.id)
+    space_id = str(card.column.space.id)
     
     result = await db.execute(
         select(Task)
@@ -665,7 +657,7 @@ async def update_task(
     db: AsyncSession = Depends(get_db),
 ):
     card = await verify_card_access(card_id, actor.user, db)
-    space_id = str(card.column.board.space.id)
+    space_id = str(card.column.space.id)
     
     result = await db.execute(select(Task).where(Task.id == task_id, Task.card_id == card_id))
     task = result.scalar_one_or_none()
@@ -711,7 +703,7 @@ async def delete_task(
     db: AsyncSession = Depends(get_db),
 ):
     card = await verify_card_access(card_id, actor.user, db)
-    space_id = str(card.column.board.space.id)
+    space_id = str(card.column.space.id)
     
     result = await db.execute(select(Task).where(Task.id == task_id, Task.card_id == card_id))
     task = result.scalar_one_or_none()
@@ -742,7 +734,7 @@ async def add_comment(
     db: AsyncSession = Depends(get_db),
 ):
     card = await verify_card_access(card_id, actor.user, db)
-    space_id = str(card.column.board.space.id)
+    space_id = str(card.column.space.id)
     
     comment = Comment(
         card_id=card_id,
@@ -771,7 +763,7 @@ async def add_comment(
     if actor.is_agent:
         notify_targets = {
             member.user_id
-            for member in card.column.board.space.members
+            for member in card.column.space.members
             if member.user_id != actor.user.id
         }
         created_notifications = []
@@ -785,8 +777,7 @@ async def add_comment(
                 data={
                     "card_id": str(card.id),
                     "column_id": str(card.column_id),
-                    "board_id": str(card.column.board.id),
-                    "space_id": str(card.column.board.space.id),
+                    "space_id": space_id,
                     "comment_id": str(comment.id),
                     "actor_id": actor.actor_id,
                     "actor_name": actor.actor_display_name,
@@ -799,7 +790,7 @@ async def add_comment(
                 await db.refresh(notification)
             for notification in created_notifications:
                 await ws_manager.send_notification(
-                    str(card.column.board.space.id),
+                    space_id,
                     serialize_notification(notification),
                 )
     
@@ -815,7 +806,7 @@ async def update_comment(
     db: AsyncSession = Depends(get_db),
 ):
     card = await verify_card_access(card_id, actor.user, db)
-    space_id = str(card.column.board.space.id)
+    space_id = str(card.column.space.id)
     
     result = await db.execute(
         select(Comment).where(Comment.id == comment_id, Comment.card_id == card_id)
@@ -860,7 +851,7 @@ async def delete_comment(
     db: AsyncSession = Depends(get_db),
 ):
     card = await verify_card_access(card_id, actor.user, db)
-    space_id = str(card.column.board.space.id)
+    space_id = str(card.column.space.id)
     
     result = await db.execute(
         select(Comment).where(Comment.id == comment_id, Comment.card_id == card_id)

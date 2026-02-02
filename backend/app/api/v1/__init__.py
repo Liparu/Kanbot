@@ -1,13 +1,12 @@
 from fastapi import APIRouter
 
-from app.api.v1 import auth, users, spaces, boards, columns, cards, tags, calendar, webhooks, agents, notifications, filter_templates, scheduled_cards, admin, search
+from app.api.v1 import auth, users, spaces, columns, cards, tags, calendar, webhooks, agents, notifications, filter_templates, scheduled_cards, admin, search
 
 api_router = APIRouter()
 
 api_router.include_router(auth.router, prefix="/auth", tags=["Authentication"])
 api_router.include_router(users.router, prefix="/users", tags=["Users"])
 api_router.include_router(spaces.router, prefix="/spaces", tags=["Spaces"])
-api_router.include_router(boards.router, prefix="/boards", tags=["Boards"])
 api_router.include_router(columns.router, prefix="/columns", tags=["Columns"])
 api_router.include_router(cards.router, prefix="/cards", tags=["Cards"])
 api_router.include_router(tags.router, prefix="/tags", tags=["Tags"])

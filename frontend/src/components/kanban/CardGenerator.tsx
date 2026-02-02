@@ -86,7 +86,7 @@ export default function CardGenerator({ spaceId, columns, onClose }: CardGenerat
         }
       }
 
-      queryClient.invalidateQueries({ queryKey: ['board'] })
+      queryClient.invalidateQueries({ queryKey: ['columns'] })
       onClose()
     } catch (error) {
       console.error('Failed to generate cards:', error)

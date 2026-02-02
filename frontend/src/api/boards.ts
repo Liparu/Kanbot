@@ -1,39 +1,13 @@
 import api from './client'
-import type { Board, Column, Card, Task, Comment, Tag } from '@/types'
-
-export const boardsApi = {
-  list: async (spaceId: string): Promise<Board[]> => {
-    const response = await api.get('/boards', { params: { space_id: spaceId } })
-    return response.data
-  },
-
-  get: async (boardId: string): Promise<Board & { columns: Column[] }> => {
-    const response = await api.get(`/boards/${boardId}`)
-    return response.data
-  },
-
-  create: async (data: { name: string; space_id: string }): Promise<Board> => {
-    const response = await api.post('/boards', data)
-    return response.data
-  },
-
-  update: async (boardId: string, data: Partial<Board>): Promise<Board> => {
-    const response = await api.patch(`/boards/${boardId}`, data)
-    return response.data
-  },
-
-  delete: async (boardId: string): Promise<void> => {
-    await api.delete(`/boards/${boardId}`)
-  },
-}
+import type { Column, Card, Task, Comment, Tag } from '@/types'
 
 export const columnsApi = {
-  list: async (boardId: string): Promise<Column[]> => {
-    const response = await api.get('/columns', { params: { board_id: boardId } })
+  list: async (spaceId: string): Promise<Column[]> => {
+    const response = await api.get('/columns', { params: { space_id: spaceId } })
     return response.data
   },
 
-  create: async (data: { name: string; board_id: string; category?: string }): Promise<Column> => {
+  create: async (data: { name: string; space_id: string; category?: string }): Promise<Column> => {
     const response = await api.post('/columns', data)
     return response.data
   },
@@ -59,7 +33,6 @@ export const columnsApi = {
 export const cardsApi = {
   list: async (params?: {
     space_id?: string
-    board_id?: string
     column_id?: string
     assignee_id?: string
     tag_id?: string

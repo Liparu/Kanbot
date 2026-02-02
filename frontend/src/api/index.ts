@@ -1,5 +1,5 @@
 export { api } from './client'
 export { authApi } from './auth'
 export { spacesApi } from './spaces'
-export { boardsApi, columnsApi, cardsApi, tagsApi } from './boards'
+export { columnsApi, cardsApi, tagsApi } from './boards'
 export { notificationsApi } from './notifications'

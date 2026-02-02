@@ -10,7 +10,7 @@ from app.core.database import get_db
 from app.api.deps import get_current_user
 from app.models.user import User
 from app.models.space import Space, SpaceMember
-from app.models.board import Board, Column
+from app.models.column import Column
 from app.models.card import Card
 
 router = APIRouter()
@@ -80,8 +80,7 @@ async def global_search(
         cards_query = (
             select(Card, Column.name.label('column_name'), Space.name.label('space_name'), Space.id.label('space_id'))
             .join(Column, Card.column_id == Column.id)
-            .join(Board, Column.board_id == Board.id)
-            .join(Space, Board.space_id == Space.id)
+            .join(Space, Column.space_id == Space.id)
             .where(
                 Space.id.in_(search_space_ids),
                 or_(

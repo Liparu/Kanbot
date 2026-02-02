@@ -22,7 +22,7 @@ import {
   Check,
 } from 'lucide-react'
 import { format, startOfWeek, addDays, addMonths, subMonths, addWeeks, subWeeks, parseISO, addHours, isSameMonth, isToday, isSameDay } from 'date-fns'
-import { boardsApi, cardsApi, tagsApi } from '@/api/boards'
+import { columnsApi, cardsApi, tagsApi } from '@/api/boards'
 import { spacesApi } from '@/api/spaces'
 import { useToast } from '@/components/common/Toast'
 import DateTimePicker from '@/components/common/DateTimePicker'
@@ -30,7 +30,7 @@ import MonthView from './MonthView'
 import WeekView from './WeekView'
 import CardDetailModal from '@/components/kanban/CardDetailModal'
 import type { CalendarDisplayEvent } from '@/utils/calendar'
-import type { Card, Column } from '@/types'
+import type { Card, Column, Space } from '@/types'
 
 type ViewMode = 'month' | 'week'
 type SpaceType = 'personal' | 'company' | 'agent'
@@ -205,7 +205,7 @@ export default function CalendarPage() {
     return spaceOverlays.filter(s => s.visible).map(s => s.id)
   }, [spaceOverlays])
 
-  // Fetch boards for all visible spaces in global view - FIXED: parallel fetching
+  // Fetch columns and cards for all visible spaces in global view
   const { data: allSpaceBoards, isLoading: boardsLoading } = useQuery({
     queryKey: ['allSpaceBoards', visibleSpaceIds.sort().join(',')],
     queryFn: async () => {
@@ -214,12 +214,17 @@ export default function CalendarPage() {
       const results = await Promise.all(
         visibleSpaceIds.map(async (sid) => {
           try {
-            const boards = await boardsApi.list(sid)
-            if (boards.length > 0) {
-              const boardDetails = await boardsApi.get(boards[0].id)
+            const cols = await columnsApi.list(sid)
+            if (cols.length > 0) {
+              const colsWithCards = await Promise.all(
+                cols.map(async (col) => {
+                  const colCards = await cardsApi.list({ column_id: col.id })
+                  return { ...col, cards: colCards }
+                })
+              )
               return {
                 spaceId: sid,
-                boards: [boardDetails]
+                boards: [{ id: sid, columns: colsWithCards }]
               } as SpaceBoardData
             }
             return null
@@ -234,16 +239,26 @@ export default function CalendarPage() {
     staleTime: 30000,
   })
 
-  const { data: boards } = useQuery({
-    queryKey: ['boards', spaceId],
-    queryFn: () => boardsApi.list(spaceId!),
-    enabled: !!spaceId,
+  // Fetch columns and cards for single space view
+  const { data: spaceColumns } = useQuery({
+    queryKey: ['columns', spaceId],
+    queryFn: () => columnsApi.list(spaceId!),
+    enabled: !!spaceId && !isGlobalView,
   })
 
   const { data: board, isLoading: singleBoardLoading } = useQuery({
-    queryKey: ['board', boards?.[0]?.id],
-    queryFn: () => boardsApi.get(boards![0].id),
-    enabled: !!boards?.[0]?.id,
+    queryKey: ['spaceBoard', spaceId, spaceColumns?.length],
+    queryFn: async () => {
+      if (!spaceColumns || spaceColumns.length === 0) return null
+      const colsWithCards = await Promise.all(
+        spaceColumns.map(async (col) => {
+          const colCards = await cardsApi.list({ column_id: col.id })
+          return { ...col, cards: colCards }
+        })
+      )
+      return { id: spaceId!, columns: colsWithCards }
+    },
+    enabled: !!spaceColumns && spaceColumns.length > 0,
   })
 
   // Click away to close overlay selector
@@ -423,14 +438,14 @@ export default function CalendarPage() {
     setSelectedCardId(null)
     setSearchParams({})
     // Refresh data
-    queryClient.invalidateQueries({ queryKey: ['board'] })
+    queryClient.invalidateQueries({ queryKey: ['columns'] })
     queryClient.invalidateQueries({ queryKey: ['allSpaceBoards'] })
   }
 
   const handleCardCreated = () => {
     setShowCreateModal(false)
     setCreateModalDate(null)
-    queryClient.invalidateQueries({ queryKey: ['board'] })
+    queryClient.invalidateQueries({ queryKey: ['columns'] })
     queryClient.invalidateQueries({ queryKey: ['allSpaceBoards'] })
     toast.success(t('cards.created'))
   }
@@ -1014,17 +1029,14 @@ function CardCreationModal({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // Fetch boards for selected space
-  const { data: spaceBoards } = useQuery({
-    queryKey: ['boards', selectedSpaceId],
-    queryFn: () => boardsApi.list(selectedSpaceId),
-    enabled: !!selectedSpaceId,
-  })
-
+  // Fetch columns for selected space
   const { data: boardDetails } = useQuery({
-    queryKey: ['board', spaceBoards?.[0]?.id],
-    queryFn: () => boardsApi.get(spaceBoards![0].id),
-    enabled: !!spaceBoards?.[0]?.id,
+    queryKey: ['columns', selectedSpaceId],
+    queryFn: async () => {
+      const cols = await columnsApi.list(selectedSpaceId)
+      return { columns: cols }
+    },
+    enabled: !!selectedSpaceId,
   })
 
   // Fetch tags for selected space
@@ -1109,7 +1121,7 @@ function CardCreationModal({
       return card
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['boards'] })
+      queryClient.invalidateQueries({ queryKey: ['columns'] })
       queryClient.invalidateQueries({ queryKey: ['cards'] })
       onCreated()
     },
