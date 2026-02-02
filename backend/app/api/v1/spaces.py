@@ -451,8 +451,10 @@ async def remove_member(
     if user_id == space.owner_id:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Cannot remove space owner")
     
-    if user_id != current_user.id and space.owner_id != current_user.id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Only owner can remove other members")
+    is_owner = space.owner_id == current_user.id
+    is_admin = getattr(current_user, 'is_admin', False)
+    if user_id != current_user.id and not is_owner and not is_admin:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Only owner or admin can remove other members")
     
     member_to_remove = next((m for m in space.members if m.user_id == user_id), None)
     if not member_to_remove:
