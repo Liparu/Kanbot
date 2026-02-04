@@ -165,7 +165,9 @@
     "noCustomCards": "Zatím žádné karty. Klikněte níže pro přidání karet.",
     "addCard": "Přidat kartu",
     "generating": "Vytvářím...",
-    "generate": "Vytvořit karty"
+    "generate": "Vytvořit karty",
+    "createdBy": "Vytvořil",
+    "createdAt": "Vytvořeno"
   },
   "calendar": {
     "title": "Kalendář",

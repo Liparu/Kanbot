@@ -15,6 +15,8 @@ import {
   Check,
   Pencil,
   ChevronDown,
+  User,
+  Clock,
 } from 'lucide-react'
 import { cardsApi, tagsApi } from '@/api/boards'
 import { spacesApi } from '@/api/spaces'
@@ -412,6 +414,28 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
                 {card.description || t('cards.clickToAddDescription')}
               </p>
             )}
+          </div>
+
+          {/* Created by info */}
+          <div className="flex items-center gap-4 text-sm text-dark-400">
+            {card.creator && (
+              <div className="flex items-center gap-2">
+                <User className="w-4 h-4" />
+                <span>{t('cards.createdBy')}</span>
+                <div
+                  className="w-5 h-5 rounded-full flex items-center justify-center text-xs text-white"
+                  style={{ backgroundColor: getAvatarColor(card.creator.username) }}
+                >
+                  {card.creator.username[0].toUpperCase()}
+                </div>
+                <span className="text-dark-200">{card.creator.username}</span>
+              </div>
+            )}
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              <span>{t('cards.createdAt')}</span>
+              <span className="text-dark-200">{new Date(card.created_at).toLocaleString()}</span>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">

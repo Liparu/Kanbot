@@ -165,7 +165,9 @@
     "noCustomCards": "No cards added yet. Click below to add cards.",
     "addCard": "Add Card",
     "generating": "Generating...",
-    "generate": "Generate Cards"
+    "generate": "Generate Cards",
+    "createdBy": "Created by",
+    "createdAt": "Created at"
   },
   "calendar": {
     "title": "Calendar",
