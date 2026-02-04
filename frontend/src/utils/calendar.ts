@@ -73,9 +73,12 @@ export function processEventsForDisplay(
       const isFirst = dayIdx === 0
       const isLast = dayIdx === daysSpan - 1
       
+      // Preserve original start time for the first day, use midnight for continuation days
+      const segmentStart = isFirst ? event.start : segmentDay
+      
       processedEvents.push({
         ...event,
-        start: segmentDay,
+        start: segmentStart,
         end: endDate,
         spanDays: daysSpan,
         dayIndex: dayIdx,
