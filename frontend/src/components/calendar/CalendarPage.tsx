@@ -310,7 +310,9 @@ export default function CalendarPage() {
                 const start = card.start_date ? parseISOLocal(card.start_date) : parseISOLocal(card.end_date!)
                 const end = card.end_date ? parseISOLocal(card.end_date) : start
                 const tagColor = card.tags?.[0]?.tag?.color || overlay.color || '#3b82f6'
-                const hasTime = card.start_date?.includes('T') && !(start.getHours() === 0 && start.getMinutes() === 0)
+                // Check if time was explicitly set by looking for 'T' in the ISO string
+                // (date-only strings like "2026-02-04" don't have 'T', datetime strings like "2026-02-04T14:30:00" do)
+                const hasTime = card.start_date?.includes('T')
                 allEvents.push({
                   id: card.id,
                   title: card.name,
@@ -344,7 +346,9 @@ export default function CalendarPage() {
             const start = card.start_date ? parseISOLocal(card.start_date) : parseISOLocal(card.end_date!)
             const end = card.end_date ? parseISOLocal(card.end_date) : start
             const tagColor = card.tags?.[0]?.tag?.color || '#3b82f6'
-            const hasTime = card.start_date?.includes('T') && !(start.getHours() === 0 && start.getMinutes() === 0)
+            // Check if time was explicitly set by looking for 'T' in the ISO string
+            // (date-only strings like "2026-02-04" don't have 'T', datetime strings like "2026-02-04T14:30:00" do)
+            const hasTime = card.start_date?.includes('T')
             allEvents.push({
               id: card.id,
               title: card.name,
