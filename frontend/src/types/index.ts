@@ -50,8 +50,8 @@ export interface Card {
   column_id: string
   name: string
   description?: string
-  start_date?: string
-  end_date?: string
+  start_date?: string | null
+  end_date?: string | null
   location?: string
   position: number
   task_counter: number

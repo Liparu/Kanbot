@@ -73,8 +73,16 @@ export function processEventsForDisplay(
       const isFirst = dayIdx === 0
       const isLast = dayIdx === daysSpan - 1
       
-      // Preserve original start time for the first day, use midnight for continuation days
-      const segmentStart = isFirst ? event.start : segmentDay
+      // Preserve original start time for all segments - this is the original event time
+      // For continuation days, we still show the same time (not midnight)
+      const segmentStart = isFirst ? event.start : new Date(
+        segmentDay.getFullYear(),
+        segmentDay.getMonth(),
+        segmentDay.getDate(),
+        event.start.getHours(),
+        event.start.getMinutes(),
+        event.start.getSeconds()
+      )
       
       processedEvents.push({
         ...event,

@@ -61,7 +61,7 @@ export const cardsApi = {
     return response.data
   },
 
-  update: async (cardId: string, data: Partial<Card & { assignee_ids?: string[]; tag_ids?: string[] }>): Promise<Card> => {
+  update: async (cardId: string, data: Partial<Card & { assignee_ids?: string[]; tag_ids?: string[] }> & { start_date?: string | null; end_date?: string | null }): Promise<Card> => {
     const response = await api.patch(`/cards/${cardId}`, data)
     return response.data
   },

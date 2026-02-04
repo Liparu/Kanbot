@@ -52,6 +52,12 @@ describe('dateFormat timezone handling', () => {
       const result = isAllDay('2026-02-04T14:30:00')
       expect(result).toBe(false)
     })
+
+    it('should return true for date-only strings (no time component)', () => {
+      // Date-only strings like "2026-02-04" should be treated as all-day events
+      const result = isAllDay('2026-02-04')
+      expect(result).toBe(true)
+    })
   })
 
   describe('formatTime', () => {

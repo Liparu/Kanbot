@@ -118,12 +118,15 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
       setSelectedAssigneeIds(card.assignees?.map(a => a.id) || [])
       setSelectedTagIds(card.tags?.map(t => t.tag.id) || [])
     }
-  }, [card, isDescriptionDirty])
+  }, [card])
 
   const updateMutation = useMutation({
     mutationFn: (data: Partial<Card> & { assignee_ids?: string[]; tag_ids?: string[] }) =>
       cardsApi.update(cardId, data),
     onSuccess: (updatedCard) => {
+      // Reset dirty state FIRST to prevent useEffect race condition
+      setIsDescriptionDirty(false)
+      // Then update store and invalidate queries
       updateCardInStore(columnId, cardId, updatedCard)
       queryClient.invalidateQueries({ queryKey: ['card', cardId] })
       queryClient.invalidateQueries({ queryKey: ['columns'] })
@@ -245,8 +248,10 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
   const handleSaveDescription = () => {
     if (editedDescription !== (card?.description || '')) {
       updateMutation.mutate({ description: editedDescription })
+    } else {
+      // No change to save, reset dirty state immediately
+      setIsDescriptionDirty(false)
     }
-    setIsDescriptionDirty(false)
     setIsEditingDescription(false)
   }
 

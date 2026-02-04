@@ -81,7 +81,7 @@ export default function MonthView({
       events.map((e) => ({
         ...e,
         end: e.end || e.start,
-        isAllDay: e.isAllDay ?? (!e.start.getHours() && !e.start.getMinutes()),
+        isAllDay: e.isAllDay ?? false,
         isManualEvent: false,
       }))
     )

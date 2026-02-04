@@ -87,6 +87,8 @@ export function getPlaceholder(dateFormat: DateFormat): string {
  */
 export function isAllDay(dateTimeStr: string | null | undefined): boolean {
   if (!dateTimeStr) return true
+  // Date-only strings (without 'T') are all-day events
+  if (!dateTimeStr.includes('T')) return true
   // Check the raw string first to avoid parsing issues
   if (dateTimeStr.match(/T00:00:00$/)) return true
   
