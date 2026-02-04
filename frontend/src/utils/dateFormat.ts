@@ -11,6 +11,31 @@ const FORMAT_MAP: Record<DateFormat, string> = {
 const TIME_FORMAT_12H = 'h:mm a'
 const TIME_FORMAT_24H = 'HH:mm'
 
+/**
+ * Parse a datetime string without timezone shifts.
+ * Our ISO strings are stored as 'yyyy-MM-ddTHH:mm:ss' without timezone info,
+ * representing local wall-clock time. We parse them to avoid UTC shifts.
+ */
+function parseLocalDateTime(dateTimeStr: string): Date {
+  // Parse manually to avoid timezone issues
+  // Format: yyyy-MM-ddTHH:mm:ss or yyyy-MM-ddTHH:mm:ss.SSSZ
+  const match = dateTimeStr.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/)
+  if (!match) {
+    return parseISO(dateTimeStr)
+  }
+  
+  const [, year, month, day, hour, minute, second] = match
+  // Create date using local components - month is 0-indexed in Date constructor
+  return new Date(
+    parseInt(year, 10),
+    parseInt(month, 10) - 1,
+    parseInt(day, 10),
+    parseInt(hour, 10),
+    parseInt(minute, 10),
+    parseInt(second, 10)
+  )
+}
+
 export function formatDate(isoDate: string | undefined | null, dateFormat: DateFormat): string {
   if (!isoDate) return ''
   const date = parse(isoDate, 'yyyy-MM-dd', new Date())
@@ -36,10 +61,14 @@ export function getPlaceholder(dateFormat: DateFormat): string {
 
 /**
  * Check if a datetime string represents an all-day event (time is 00:00:00)
+ * Uses local parsing to avoid timezone shifts.
  */
 export function isAllDay(dateTimeStr: string | null | undefined): boolean {
   if (!dateTimeStr) return true
-  const date = parseISO(dateTimeStr)
+  // Check the raw string first to avoid parsing issues
+  if (dateTimeStr.match(/T00:00:00$/)) return true
+  
+  const date = parseLocalDateTime(dateTimeStr)
   if (!isValid(date)) return true
   return date.getHours() === 0 && date.getMinutes() === 0 && date.getSeconds() === 0
 }
@@ -47,6 +76,7 @@ export function isAllDay(dateTimeStr: string | null | undefined): boolean {
 /**
  * Format a datetime string for display
  * If all-day, shows only date. If has time, shows date + time.
+ * Uses local parsing to avoid timezone shifts.
  */
 export function formatDateTime(
   isoDateTime: string | undefined | null,
@@ -55,7 +85,7 @@ export function formatDateTime(
 ): string {
   if (!isoDateTime) return ''
   
-  const date = parseISO(isoDateTime)
+  const date = parseLocalDateTime(isoDateTime)
   if (!isValid(date)) return isoDateTime
   
   const datePart = format(date, FORMAT_MAP[dateFormat])
@@ -70,6 +100,7 @@ export function formatDateTime(
 
 /**
  * Format just the time portion
+ * Uses local parsing to avoid timezone shifts.
  */
 export function formatTime(
   isoDateTime: string | undefined | null,
@@ -77,7 +108,7 @@ export function formatTime(
 ): string {
   if (!isoDateTime) return ''
   
-  const date = parseISO(isoDateTime)
+  const date = parseLocalDateTime(isoDateTime)
   if (!isValid(date)) return ''
   
   return format(date, use24Hour ? TIME_FORMAT_24H : TIME_FORMAT_12H)
@@ -124,23 +155,40 @@ export function createISODateTime(
 }
 
 /**
+ * Convert a Date object to local ISO string format (yyyy-MM-ddTHH:mm:ss)
+ * This preserves local wall-clock time instead of converting to UTC.
+ * Use this instead of .toISOString() to avoid timezone shifts.
+ */
+export function dateToLocalISOString(date: Date): string {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  const hours = String(date.getHours()).padStart(2, '0')
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+  const seconds = String(date.getSeconds()).padStart(2, '0')
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`
+}
+
+/**
  * Extract date part from ISO datetime
+ * Uses local parsing to avoid timezone shifts.
  */
 export function getDatePart(isoDateTime: string | null): string {
   if (!isoDateTime) return ''
-  const date = parseISO(isoDateTime)
+  const date = parseLocalDateTime(isoDateTime)
   if (!isValid(date)) return ''
   return format(date, 'yyyy-MM-dd')
 }
 
 /**
  * Extract time part from ISO datetime
+ * Uses local parsing to avoid timezone shifts.
  */
 export function getTimePart(isoDateTime: string | null): string | null {
   if (!isoDateTime) return null
-  const date = parseISO(isoDateTime)
-  if (!isValid(date)) return null
   if (isAllDay(isoDateTime)) return null
+  const date = parseLocalDateTime(isoDateTime)
+  if (!isValid(date)) return null
   return format(date, 'HH:mm')
 }
 

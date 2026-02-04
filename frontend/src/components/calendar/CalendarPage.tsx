@@ -22,6 +22,7 @@ import {
   Check,
 } from 'lucide-react'
 import { format, startOfWeek, addDays, addMonths, subMonths, addWeeks, subWeeks, parseISO, addHours, isSameMonth, isToday, isSameDay } from 'date-fns'
+import { dateToLocalISOString } from '@/utils/dateFormat'
 import { columnsApi, cardsApi, tagsApi } from '@/api/boards'
 import { spacesApi } from '@/api/spaces'
 import { useToast } from '@/components/common/Toast'
@@ -972,11 +973,11 @@ function CardCreationModal({
     }
   }, [spaceId, allSpaces, selectedSpaceId])
 
-  // Initialize dates safely
+  // Initialize dates safely - use local ISO format to avoid timezone shifts
   useEffect(() => {
     if (initialDate && initialDate instanceof Date && !isNaN(initialDate.getTime())) {
-      setStartDate(initialDate.toISOString())
-      setEndDate(addHours(initialDate, 1).toISOString())
+      setStartDate(dateToLocalISOString(initialDate))
+      setEndDate(dateToLocalISOString(addHours(initialDate, 1)))
     }
   }, [])
 

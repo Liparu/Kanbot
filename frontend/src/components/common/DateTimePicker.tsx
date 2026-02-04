@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { DayPicker } from 'react-day-picker'
-import { format, parse, isValid, parseISO } from 'date-fns'
+import { format, parse, isValid } from 'date-fns'
 import { Calendar, X, Clock } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useSettingsStore } from '@/stores/settings'
-import { getDateFnsFormat, getPlaceholder, getDatePart, getTimePart, createISODateTime } from '@/utils/dateFormat'
+import { getDateFnsFormat, getPlaceholder, getDatePart, getTimePart, createISODateTime, isAllDay as checkIsAllDay } from '@/utils/dateFormat'
 
 interface DateTimePickerProps {
   value: string | null | undefined  // ISO datetime string or null
@@ -23,20 +23,31 @@ export default function DateTimePicker({ value, onChange, placeholder, className
   const containerRef = useRef<HTMLDivElement>(null)
 
   // Determine if this is an all-day event (no time or time is 00:00)
-  const isAllDay = !value || (() => {
-    const date = parseISO(value)
-    if (!isValid(date)) return true
-    return date.getHours() === 0 && date.getMinutes() === 0 && date.getSeconds() === 0
-  })()
+  const isAllDay = !value || checkIsAllDay(value)
 
   // Separate state for date and time
   const [datePart, setDatePart] = useState<string>(value ? getDatePart(value) : '')
   const [timePart, setTimePart] = useState<string | null>(value && !isAllDay ? getTimePart(value) : null)
   const [isAllDayState, setIsAllDayState] = useState(isAllDay)
 
+  // Helper to parse datetime string without timezone shifts
+  const parseLocalDateTime = (dateTimeStr: string): Date => {
+    const match = dateTimeStr.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/)
+    if (!match) return new Date(dateTimeStr)
+    const [, year, month, day, hour, minute, second] = match
+    return new Date(
+      parseInt(year, 10),
+      parseInt(month, 10) - 1,
+      parseInt(day, 10),
+      parseInt(hour, 10),
+      parseInt(minute, 10),
+      parseInt(second, 10)
+    )
+  }
+
   useEffect(() => {
     if (value) {
-      const date = parseISO(value)
+      const date = parseLocalDateTime(value)
       if (isValid(date)) {
         setInputValue(format(date, isAllDay ? dateFnsFormat : `${dateFnsFormat} HH:mm`))
         setDatePart(getDatePart(value))
