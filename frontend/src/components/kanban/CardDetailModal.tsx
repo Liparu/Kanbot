@@ -51,6 +51,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
 
   const [editedName, setEditedName] = useState('')
   const [editedDescription, setEditedDescription] = useState('')
+  const [isDescriptionDirty, setIsDescriptionDirty] = useState(false)
   const [editedStartDate, setEditedStartDate] = useState('')
   const [editedEndDate, setEditedEndDate] = useState('')
   const [editedLocation, setEditedLocation] = useState('')
@@ -105,7 +106,9 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
   useEffect(() => {
     if (card) {
       setEditedName(card.name)
-      setEditedDescription(card.description || '')
+      if (!isDescriptionDirty) {
+        setEditedDescription(card.description || '')
+      }
       setEditedStartDate(card.start_date || '')
       setEditedEndDate(card.end_date || '')
       isLocationUserEditRef.current = false
@@ -115,7 +118,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
       setSelectedAssigneeIds(card.assignees?.map(a => a.id) || [])
       setSelectedTagIds(card.tags?.map(t => t.tag.id) || [])
     }
-  }, [card])
+  }, [card, isDescriptionDirty])
 
   const updateMutation = useMutation({
     mutationFn: (data: Partial<Card> & { assignee_ids?: string[]; tag_ids?: string[] }) =>
@@ -243,6 +246,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
     if (editedDescription !== (card?.description || '')) {
       updateMutation.mutate({ description: editedDescription })
     }
+    setIsDescriptionDirty(false)
     setIsEditingDescription(false)
   }
 
@@ -252,7 +256,8 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
     } else {
       setEditedEndDate(value || '')
     }
-    updateMutation.mutate({ [field]: value || undefined })
+    // Explicitly send null to clear dates, not undefined
+    updateMutation.mutate({ [field]: value })
   }
 
   const handleLocationChange = () => {
@@ -387,7 +392,10 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
               <div className="space-y-2">
                 <textarea
                   value={editedDescription}
-                  onChange={(e) => setEditedDescription(e.target.value)}
+                  onChange={(e) => {
+                    setEditedDescription(e.target.value)
+                    setIsDescriptionDirty(true)
+                  }}
                   onBlur={handleSaveDescription}
                   rows={4}
                   className="w-full px-3 py-2 bg-dark-700 border border-dark-600 rounded-lg text-dark-100 text-sm"
