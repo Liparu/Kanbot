@@ -35,12 +35,14 @@ const createTestQueryClient = () =>
     },
   })
 
-const mockSpace = {
+import type { Space } from '@/types'
+
+const mockSpace: Space = {
   id: 'test-space-id',
   name: 'Test Space',
   type: 'company',
   owner_id: 'owner-id',
-  color: null,
+  color: undefined,
   settings: {},
   calendar_public: false,
   created_at: '2024-01-01T00:00:00Z',
@@ -85,7 +87,7 @@ describe('SpaceDashboard - Member Rename', () => {
     vi.clearAllMocks()
     vi.mocked(spacesApi.get).mockResolvedValue(mockSpace)
     vi.mocked(spacesApi.stats).mockResolvedValue(mockStats)
-    vi.mocked(spacesApi.update).mockResolvedValue({ ...mockSpace, name: 'Renamed Space' })
+    vi.mocked(spacesApi.update).mockResolvedValue({ ...mockSpace, name: 'Renamed Space' } as Space)
   })
 
   it('should display space name', async () => {

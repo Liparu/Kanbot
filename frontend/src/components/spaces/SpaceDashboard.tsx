@@ -27,7 +27,7 @@ export default function SpaceDashboard() {
 
   const updateSpaceMutation = useMutation({
     mutationFn: (data: { name: string }) => spacesApi.update(spaceId!, data),
-    onSuccess: (updatedSpace) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['space', spaceId] })
       queryClient.invalidateQueries({ queryKey: ['spaces'] })
       setIsEditingName(false)
