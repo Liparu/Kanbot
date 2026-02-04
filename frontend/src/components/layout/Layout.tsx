@@ -15,7 +15,6 @@ import {
   Menu,
   X,
   Bot,
-  Activity,
 } from 'lucide-react'
 import { useAuthStore } from '@/stores/auth'
 import { useSpaceStore } from '@/stores/spaces'
@@ -240,20 +239,6 @@ export default function Layout({ children }: LayoutProps) {
                 <Calendar className="w-4 h-4" />
                 {t('calendar.title')}
               </Link>
-
-              {user?.is_admin && (
-                <Link
-                  to="/dashboard"
-                  className={`flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors mt-2 ${
-                    location.pathname === '/dashboard'
-                      ? 'bg-dark-800 text-dark-100'
-                      : 'text-dark-300 hover:bg-dark-800 hover:text-dark-100'
-                  }`}
-                >
-                  <Activity className="w-4 h-4" />
-                  Qratos Status
-                </Link>
-              )}
             </nav>
 
             <div className="p-2 border-t border-dark-700">
