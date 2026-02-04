@@ -336,9 +336,11 @@ async def update_card(
         card.name = sanitized_name
     if card_data.description is not None:
         card.description = sanitize_text(card_data.description)
-    if card_data.start_date is not None:
+    # Check if start_date was explicitly provided (including None to clear it)
+    if 'start_date' in card_data.model_fields_set:
         card.start_date = card_data.start_date
-    if card_data.end_date is not None:
+    # Check if end_date was explicitly provided (including None to clear it)
+    if 'end_date' in card_data.model_fields_set:
         card.end_date = card_data.end_date
     if card_data.location is not None:
         card.location = sanitize_text(card_data.location)
