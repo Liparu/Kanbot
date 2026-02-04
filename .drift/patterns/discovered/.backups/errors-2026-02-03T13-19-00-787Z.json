@@ -1,0 +1,2163 @@
+{
+  "version": "1.0.0",
+  "category": "errors",
+  "patterns": [
+    {
+      "id": "7e782bf8c5206495",
+      "subcategory": "async-errors",
+      "name": "Async Errors Detector",
+      "description": "Learns async error handling patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "errors/async-errors",
+          "patternId": "errors/async-errors/unknown"
+        }
+      },
+      "confidence": {
+        "frequency": 1,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 40,
+        "score": 0.77,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/alembic/env.py",
+          "line": 47,
+          "column": 5
+        },
+        {
+          "file": "backend/alembic/env.py",
+          "line": 54,
+          "column": 5
+        },
+        {
+          "file": "backend/alembic/env.py",
+          "line": 48,
+          "column": 9
+        },
+        {
+          "file": "backend/alembic/env.py",
+          "line": 50,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 18,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 82,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 93,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 123,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 31,
+          "column": 18
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 47,
+          "column": 18
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 61,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 99,
+          "column": 16
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 130,
+          "column": 18
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 144,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 148,
+          "column": 12
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 119,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 149,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 205,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 248,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 270,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 84,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 88,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 93,
+          "column": 30
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 124,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 130,
+          "column": 26
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 155,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 165,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 173,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 183,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 184,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 186,
+          "column": 26
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 211,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 226,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 227,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 229,
+          "column": 26
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 253,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 265,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 266,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 278,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 279,
+          "column": 23
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 282,
+          "column": 24
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 288,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 290,
+          "column": 24
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 293,
+          "column": 23
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 296,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 300,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 302,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 303,
+          "column": 24
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 307,
+          "column": 23
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 44,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 54,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 85,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 146,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 99,
+          "column": 24
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 127,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 157,
+          "column": 19
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 167,
+          "column": 24
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 200,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 201,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 203,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 74,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 128,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 141,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 171,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 180,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 40,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 47,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 61,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 62,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 79,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 96,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 116,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 156,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 157,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 175,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 185,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 196,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 197,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 44,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 97,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 127,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 169,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 196,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 206,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 224,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 255,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 267,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 289,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 314,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 345,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 26,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 49,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 75,
+          "column": 18
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 92,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 102,
+          "column": 16
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 120,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 121,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 133,
+          "column": 14
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "4b74877feff66b9d",
+      "subcategory": "exception-hierarchy",
+      "name": "Exception Hierarchy Detector",
+      "description": "Learns exception and error handling patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "errors/exception-hierarchy",
+          "patternId": "errors/exception-hierarchy/unknown"
+        }
+      },
+      "confidence": {
+        "frequency": 1,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 43,
+        "score": 0.77,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 27,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 34,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 39,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 55,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 65,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 70,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 76,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 86,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 138,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 100,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 128,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 159,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 162,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 169,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 177,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 215,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 218,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 221,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 257,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 260,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 263,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 106,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 112,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 152,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 160,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 174,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 180,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 42,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 49,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 86,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 97,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 103,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 109,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 191,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 239,
+          "column": 12
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 281,
+          "column": 12
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 306,
+          "column": 12
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 337,
+          "column": 12
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 361,
+          "column": 12
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 34,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 38,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 57,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 61,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 106,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 141,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 145,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 182,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 186,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 212,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 232,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 240,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 273,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 282,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 298,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 307,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 327,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 338,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 353,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 362,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 239,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 281,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 306,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 337,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 361,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 53,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 57,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 158,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 162,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 178,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 310,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 314,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 457,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 461,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 664,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 710,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 815,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 818,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 821,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 860,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 863,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 913,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 922,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 949,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 28,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 32,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 104,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 108,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 128,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 132,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 163,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 167,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 25,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 72,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 92,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/notifications.py",
+          "line": 48,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/notifications.py",
+          "line": 85,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 62,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 66,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 133,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 154,
+          "column": 9
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "2e5078a03ec5816c",
+      "subcategory": "error-logging",
+      "name": "Error Logging Detector",
+      "description": "Learns error logging patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "errors/error-logging",
+          "patternId": "errors/error-logging/unknown"
+        }
+      },
+      "confidence": {
+        "frequency": 1,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 24,
+        "score": 0.77,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 132,
+          "column": 23
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 133,
+          "column": 28
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 134,
+          "column": 23
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 135,
+          "column": 24
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 136,
+          "column": 27
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 137,
+          "column": 25
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 138,
+          "column": 27
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 139,
+          "column": 27
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 141,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 141,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 95,
+          "column": 93
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 67,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 68,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 124,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 165,
+          "column": 9
+        },
+        {
+          "file": "backend/app/cli/commands/db.py",
+          "line": 36,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/db.py",
+          "line": 65,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/db.py",
+          "line": 93,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/db.py",
+          "line": 120,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/db.py",
+          "line": 121,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 90,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 146,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 147,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 148,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 149,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 150,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 151,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 152,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 153,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 155,
+          "column": 17
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 186,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 198,
+          "column": 9
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 65,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 67,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 94,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 95,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 96,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 97,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 120,
+          "column": 9
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 121,
+          "column": 9
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 122,
+          "column": 9
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 149,
+          "column": 9
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 151,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 154,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/user.py",
+          "line": 91,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/user.py",
+          "line": 92,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/user.py",
+          "line": 151,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/user.py",
+          "line": 190,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/user.py",
+          "line": 193,
+          "column": 21
+        },
+        {
+          "file": "backend/app/cli/commands/user.py",
+          "line": 229,
+          "column": 9
+        },
+        {
+          "file": "backend/app/cli/commands/user.py",
+          "line": 269,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/commands/user.py",
+          "line": 270,
+          "column": 13
+        },
+        {
+          "file": "backend/app/cli/main.py",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "file": "backend/app/cli/main.py",
+          "line": 30,
+          "column": 5
+        },
+        {
+          "file": "backend/app/cli/utils/output.py",
+          "line": 37,
+          "column": 9
+        },
+        {
+          "file": "backend/app/cli/utils/output.py",
+          "line": 30,
+          "column": 9
+        },
+        {
+          "file": "backend/app/cli/utils/output.py",
+          "line": 42,
+          "column": 5
+        },
+        {
+          "file": "backend/app/cli/utils/output.py",
+          "line": 46,
+          "column": 5
+        },
+        {
+          "file": "backend/app/cli/utils/output.py",
+          "line": 57,
+          "column": 5
+        },
+        {
+          "file": "backend/app/cli/utils/output.py",
+          "line": 66,
+          "column": 9
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 23,
+          "column": 1
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 23,
+          "column": 27
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 31,
+          "column": 9
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 39,
+          "column": 13
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 48,
+          "column": 13
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 60,
+          "column": 9
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 78,
+          "column": 9
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 104,
+          "column": 9
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 110,
+          "column": 5
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 117,
+          "column": 5
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 164,
+          "column": 5
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 208,
+          "column": 9
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 46,
+          "column": 17
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 47,
+          "column": 17
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 48,
+          "column": 17
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 50,
+          "column": 17
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 51,
+          "column": 17
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 52,
+          "column": 17
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 53,
+          "column": 20
+        },
+        {
+          "file": "backend/app/websocket/manager.py",
+          "line": 18,
+          "column": 9
+        },
+        {
+          "file": "backend/app/websocket/manager.py",
+          "line": 25,
+          "column": 9
+        },
+        {
+          "file": "backend/app/websocket/manager.py",
+          "line": 36,
+          "column": 17
+        },
+        {
+          "file": "frontend/src/api/auth.ts",
+          "line": 22,
+          "column": 105
+        },
+        {
+          "file": "frontend/src/api/client.ts",
+          "line": 23,
+          "column": 4
+        },
+        {
+          "file": "frontend/src/api/client.ts",
+          "line": 27,
+          "column": 27
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 6,
+          "column": 35
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 18,
+          "column": 10
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 30,
+          "column": 20
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 67,
+          "column": 12
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 69,
+          "column": 52
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 14,
+          "column": 10
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 47,
+          "column": 14
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 49,
+          "column": 18
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 16,
+          "column": 10
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 36,
+          "column": 22
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 61,
+          "column": 14
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 63,
+          "column": 18
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 1129,
+          "column": 15
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 1069,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 1130,
+          "column": 7
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "b6a9168ffea7f87f",
+      "subcategory": "error-codes",
+      "name": "Error Codes Detector",
+      "description": "Learns error code patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "errors/error-codes",
+          "patternId": "errors/error-codes/unknown"
+        }
+      },
+      "confidence": {
+        "frequency": 0.06,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 4,
+        "score": 0.76,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 238,
+          "column": 60
+        },
+        {
+          "file": "backend/app/cli/utils/output.py",
+          "line": 37,
+          "column": 9
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 46,
+          "column": 48
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 48,
+          "column": 47
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 115,
+          "column": 17
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 68,
+          "column": 3
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "c9cc2ec329a1f21b",
+      "subcategory": "try-catch",
+      "name": "Try/Catch Detector",
+      "description": "Learns try/catch patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "errors/try-catch",
+          "patternId": "errors/try-catch/unknown"
+        }
+      },
+      "confidence": {
+        "frequency": 0.67,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 14,
+        "score": 0.77,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/app/cli/utils/output.py",
+          "line": 37,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/api/client.ts",
+          "line": 23,
+          "column": 4
+        },
+        {
+          "file": "frontend/src/api/client.ts",
+          "line": 27,
+          "column": 27
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 6,
+          "column": 35
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 18,
+          "column": 10
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 30,
+          "column": 20
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 67,
+          "column": 12
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 69,
+          "column": 52
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 22,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 26,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 28,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 14,
+          "column": 10
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 47,
+          "column": 14
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 49,
+          "column": 18
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 30,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 42,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 16,
+          "column": 10
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 36,
+          "column": 22
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 61,
+          "column": 14
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 63,
+          "column": 18
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 217,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 997,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 1059,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 232,
+          "column": 13
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 1013,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 1129,
+          "column": 15
+        },
+        {
+          "file": "frontend/src/components/common/ConfirmDialog.tsx",
+          "line": 23,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/components/common/Toast.tsx",
+          "line": 28,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/components/kanban/CardDetailModal.tsx",
+          "line": 275,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/kanban/CardDetailModal.tsx",
+          "line": 291,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/kanban/CardGenerator.tsx",
+          "line": 66,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/components/kanban/CardGenerator.tsx",
+          "line": 94,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/kanban/CardGenerator.tsx",
+          "line": 92,
+          "column": 14
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 73,
+          "column": 24
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 20,
+          "column": 10
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 40,
+          "column": 20
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 52,
+          "column": 20
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 110,
+          "column": 8
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 112,
+          "column": 12
+        },
+        {
+          "file": "frontend/src/hooks/useWebSocket.ts",
+          "line": 212,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/hooks/useWebSocket.ts",
+          "line": 218,
+          "column": 16
+        },
+        {
+          "file": "frontend/src/hooks/useWebSocket.ts",
+          "line": 250,
+          "column": 19
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "c9951c798c332901",
+      "subcategory": "exception-hierarchy",
+      "name": "Exception Hierarchy Detector",
+      "description": "Learns exception and error handling patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "errors/exception-hierarchy",
+          "patternId": "errors/exception-hierarchy/import"
+        }
+      },
+      "confidence": {
+        "frequency": 0.03,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 1,
+        "score": 0.73,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/app/main.py",
+          "line": 13,
+          "column": 14
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "98af6d2e8ad9a3ba",
+      "subcategory": "try-catch",
+      "name": "Try/Catch Detector",
+      "description": "Learns try/catch patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "errors/try-catch",
+          "patternId": "errors/try-catch/import"
+        }
+      },
+      "confidence": {
+        "frequency": 0.02,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 1,
+        "score": 0.7949999999999999,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/app/main.py",
+          "line": 13,
+          "column": 14
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "a17a5e15a71f4b78",
+      "subcategory": "async-errors",
+      "name": "Async Errors Detector",
+      "description": "Learns async error handling patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "errors/async-errors",
+          "patternId": "errors/async-errors/property_access"
+        }
+      },
+      "confidence": {
+        "frequency": 0.02,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 1,
+        "score": 0.7949999999999999,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/api/client.ts",
+          "line": 27,
+          "column": 20
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "53d3cab7cfcd0e97",
+      "subcategory": "error-logging",
+      "name": "Error Logging Detector",
+      "description": "Learns error logging patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "errors/error-logging",
+          "patternId": "errors/error-logging/conditional"
+        }
+      },
+      "confidence": {
+        "frequency": 0.04,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 3,
+        "score": 0.7949999999999999,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/api/client.ts",
+          "line": 24,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 18,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 760,
+          "column": 17
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 762,
+          "column": 24
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "4c7029722b4b229f",
+      "subcategory": "circuit-breaker",
+      "name": "Circuit Breaker Detector",
+      "description": "Learns circuit breaker and resilience patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "errors/circuit-breaker",
+          "patternId": "errors/circuit-breaker/unknown"
+        }
+      },
+      "confidence": {
+        "frequency": 0.08,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 4,
+        "score": 0.6533333333333333,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 29,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUsersPanel.tsx",
+          "line": 17,
+          "column": 10
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 1019,
+          "column": 38
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 784,
+          "column": 34
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 793,
+          "column": 34
+        },
+        {
+          "file": "frontend/src/components/notifications/NotificationPanel.tsx",
+          "line": 29,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/components/notifications/NotificationPanel.tsx",
+          "line": 55,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/notifications/NotificationPanel.tsx",
+          "line": 59,
+          "column": 8
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "903ff57605f0041f",
+      "subcategory": "error-propagation",
+      "name": "Error Propagation Detector",
+      "description": "Learns error propagation patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "errors/error-propagation",
+          "patternId": "errors/error-propagation/unknown"
+        }
+      },
+      "confidence": {
+        "frequency": 0.04,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 2,
+        "score": 0.77,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/common/ConfirmDialog.tsx",
+          "line": 23,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/components/common/Toast.tsx",
+          "line": 28,
+          "column": 5
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    }
+  ],
+  "lastUpdated": "2026-02-03T13:19:00.504Z",
+  "checksum": "1de1c63028fb9168"
+}

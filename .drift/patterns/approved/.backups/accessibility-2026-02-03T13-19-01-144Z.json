@@ -1,0 +1,2246 @@
+{
+  "version": "1.0.0",
+  "category": "accessibility",
+  "patterns": [
+    {
+      "id": "6839619662a387a2",
+      "subcategory": "alt-text",
+      "name": "Alt Text Detector",
+      "description": "Learns alt text patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "accessibility/alt-text",
+          "patternId": "accessibility/alt-text/function_call"
+        }
+      },
+      "confidence": {
+        "frequency": 0.63,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 4,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/alembic/versions/003_change_card_dates_to_datetime.py",
+          "line": 23,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/003_change_card_dates_to_datetime.py",
+          "line": 33,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/003_change_card_dates_to_datetime.py",
+          "line": 45,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/003_change_card_dates_to_datetime.py",
+          "line": 55,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/004_scheduled_cards_datetime.py",
+          "line": 23,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/004_scheduled_cards_datetime.py",
+          "line": 33,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/004_scheduled_cards_datetime.py",
+          "line": 43,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/004_scheduled_cards_datetime.py",
+          "line": 53,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/004_scheduled_cards_datetime.py",
+          "line": 65,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/004_scheduled_cards_datetime.py",
+          "line": 75,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/004_scheduled_cards_datetime.py",
+          "line": 85,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/004_scheduled_cards_datetime.py",
+          "line": 95,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/005_remove_board_link_columns_to_spaces.py",
+          "line": 39,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 22,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 26,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 30,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 34,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 38,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 42,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 46,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 50,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 54,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 58,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 62,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 66,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 70,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 74,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 78,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 82,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 86,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 90,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 94,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 98,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 102,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 106,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 110,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 114,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 118,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 127,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 131,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 135,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 139,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 143,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 147,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 151,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 155,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 159,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 163,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 167,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 171,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 175,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 179,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 183,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 187,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 191,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 195,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 199,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 203,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 207,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 211,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 215,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 219,
+          "column": 8
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 223,
+          "column": 8
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:18:51.434Z",
+        "approvedAt": "2026-02-03T13:18:51.434Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "0cf882bc66775cd5",
+      "subcategory": "alt-text",
+      "name": "Alt Text Detector",
+      "description": "Learns alt text patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "accessibility/alt-text",
+          "patternId": "accessibility/alt-text/assignment"
+        }
+      },
+      "confidence": {
+        "frequency": 0.53,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 25,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 189,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 258,
+          "column": 17
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 407,
+          "column": 17
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 505,
+          "column": 17
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 575,
+          "column": 17
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 773,
+          "column": 17
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 403,
+          "column": 9
+        },
+        {
+          "file": "backend/app/cli/utils/output.py",
+          "line": 49,
+          "column": 18
+        },
+        {
+          "file": "backend/app/cli/utils/output.py",
+          "line": 50,
+          "column": 19
+        },
+        {
+          "file": "backend/app/cli/utils/output.py",
+          "line": 50,
+          "column": 25
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 121,
+          "column": 5
+        },
+        {
+          "file": "backend/app/models/calendar.py",
+          "line": 31,
+          "column": 5
+        },
+        {
+          "file": "backend/app/models/notification.py",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "file": "backend/app/schemas/calendar.py",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "file": "backend/app/schemas/calendar.py",
+          "line": 20,
+          "column": 5
+        },
+        {
+          "file": "backend/app/schemas/calendar.py",
+          "line": 34,
+          "column": 5
+        },
+        {
+          "file": "backend/app/schemas/notification.py",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "file": "backend/app/services/notifications.py",
+          "line": 13,
+          "column": 5
+        },
+        {
+          "file": "backend/app/services/notifications.py",
+          "line": 20,
+          "column": 9
+        },
+        {
+          "file": "backend/app/services/notifications.py",
+          "line": 20,
+          "column": 15
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 8,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 30,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 37,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 45,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 53,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 61,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 69,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 77,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 280,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 315,
+          "column": 19
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 349,
+          "column": 15
+        },
+        {
+          "file": "frontend/src/components/calendar/MonthView.tsx",
+          "line": 23,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/components/calendar/WeekView.tsx",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/components/common/ConfirmDialog.tsx",
+          "line": 7,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/components/kanban/CardDetailModal.tsx",
+          "line": 140,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/kanban/CardDetailModal.tsx",
+          "line": 718,
+          "column": 27
+        },
+        {
+          "file": "frontend/src/components/kanban/CardDetailModal.tsx",
+          "line": 725,
+          "column": 27
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 227,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 778,
+          "column": 29
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 789,
+          "column": 27
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanColumn.tsx",
+          "line": 152,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 411,
+          "column": 31
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 418,
+          "column": 31
+        },
+        {
+          "file": "frontend/src/components/notifications/NotificationPanel.tsx",
+          "line": 110,
+          "column": 27
+        },
+        {
+          "file": "frontend/src/components/notifications/NotificationPanel.tsx",
+          "line": 118,
+          "column": 25
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 332,
+          "column": 21
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 343,
+          "column": 21
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 437,
+          "column": 19
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 72,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/types/index.ts",
+          "line": 117,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/types/index.ts",
+          "line": 132,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/utils/calendar.ts",
+          "line": 6,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/utils/calendar.ts",
+          "line": 45,
+          "column": 5
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:18:51.659Z",
+        "approvedAt": "2026-02-03T13:18:51.659Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "21f717e75fe891d5",
+      "subcategory": "alt-text",
+      "name": "Alt Text Detector",
+      "description": "Learns alt text patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "accessibility/alt-text",
+          "patternId": "accessibility/alt-text/property_access"
+        }
+      },
+      "confidence": {
+        "frequency": 0.38,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 16,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 111,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 111,
+          "column": 26
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 147,
+          "column": 19
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 148,
+          "column": 15
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 148,
+          "column": 34
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 61,
+          "column": 35
+        },
+        {
+          "file": "backend/app/services/notifications.py",
+          "line": 34,
+          "column": 10
+        },
+        {
+          "file": "backend/app/services/notifications.py",
+          "line": 34,
+          "column": 31
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 91,
+          "column": 23
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 96,
+          "column": 60
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 506,
+          "column": 73
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 506,
+          "column": 97
+        },
+        {
+          "file": "frontend/src/components/calendar/EventPopover.tsx",
+          "line": 97,
+          "column": 24
+        },
+        {
+          "file": "frontend/src/components/calendar/MonthView.tsx",
+          "line": 319,
+          "column": 24
+        },
+        {
+          "file": "frontend/src/components/calendar/MonthView.tsx",
+          "line": 359,
+          "column": 22
+        },
+        {
+          "file": "frontend/src/components/calendar/MonthView.tsx",
+          "line": 434,
+          "column": 60
+        },
+        {
+          "file": "frontend/src/components/calendar/MonthView.tsx",
+          "line": 531,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/components/calendar/WeekView.tsx",
+          "line": 670,
+          "column": 73
+        },
+        {
+          "file": "frontend/src/components/calendar/WeekView.tsx",
+          "line": 713,
+          "column": 16
+        },
+        {
+          "file": "frontend/src/components/calendar/WeekView.tsx",
+          "line": 807,
+          "column": 24
+        },
+        {
+          "file": "frontend/src/components/calendar/WeekView.tsx",
+          "line": 839,
+          "column": 22
+        },
+        {
+          "file": "frontend/src/components/calendar/WeekView.tsx",
+          "line": 985,
+          "column": 73
+        },
+        {
+          "file": "frontend/src/components/calendar/WeekView.tsx",
+          "line": 1047,
+          "column": 24
+        },
+        {
+          "file": "frontend/src/components/calendar/WeekView.tsx",
+          "line": 1081,
+          "column": 22
+        },
+        {
+          "file": "frontend/src/components/common/ConfirmDialog.tsx",
+          "line": 87,
+          "column": 36
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 544,
+          "column": 30
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 661,
+          "column": 34
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 164,
+          "column": 80
+        },
+        {
+          "file": "frontend/src/components/layout/Layout.tsx",
+          "line": 148,
+          "column": 30
+        },
+        {
+          "file": "frontend/src/components/layout/Layout.tsx",
+          "line": 240,
+          "column": 30
+        },
+        {
+          "file": "frontend/src/components/notifications/NotificationPanel.tsx",
+          "line": 68,
+          "column": 82
+        },
+        {
+          "file": "frontend/src/components/notifications/NotificationPanel.tsx",
+          "line": 94,
+          "column": 39
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 126,
+          "column": 74
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 69,
+          "column": 22
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 80,
+          "column": 24
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 84,
+          "column": 20
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 98,
+          "column": 71
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 99,
+          "column": 55
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:18:52.087Z",
+        "approvedAt": "2026-02-03T13:18:52.087Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "65cf6bb63238ba68",
+      "subcategory": "aria-roles",
+      "name": "ARIA Roles Detector",
+      "description": "Learns ARIA roles patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "accessibility/aria-roles",
+          "patternId": "accessibility/aria-roles/property_access"
+        }
+      },
+      "confidence": {
+        "frequency": 0.23,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 6,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/v1/search.py",
+          "line": 81,
+          "column": 38
+        },
+        {
+          "file": "backend/app/api/v1/search.py",
+          "line": 81,
+          "column": 71
+        },
+        {
+          "file": "backend/app/api/v1/search.py",
+          "line": 81,
+          "column": 101
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 53,
+          "column": 17
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 53,
+          "column": 24
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 140,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 140,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 184,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 184,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 324,
+          "column": 13
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 324,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 396,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 396,
+          "column": 26
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 416,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 416,
+          "column": 21
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 135,
+          "column": 22
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 135,
+          "column": 31
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 135,
+          "column": 47
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 155,
+          "column": 57
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 525,
+          "column": 70
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 260,
+          "column": 72
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 404,
+          "column": 152
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 278,
+          "column": 55
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:18:52.415Z",
+        "approvedAt": "2026-02-03T13:18:52.415Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "a39a86d3ac8dd522",
+      "subcategory": "aria-roles",
+      "name": "ARIA Roles Detector",
+      "description": "Learns ARIA roles patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "accessibility/aria-roles",
+          "patternId": "accessibility/aria-roles/assignment"
+        }
+      },
+      "confidence": {
+        "frequency": 0.3,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 9,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 98,
+          "column": 9
+        },
+        {
+          "file": "backend/app/models/space.py",
+          "line": 62,
+          "column": 5
+        },
+        {
+          "file": "backend/app/schemas/space.py",
+          "line": 43,
+          "column": 5
+        },
+        {
+          "file": "backend/app/schemas/space.py",
+          "line": 83,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 570,
+          "column": 27
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 584,
+          "column": 27
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 598,
+          "column": 27
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 838,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 181,
+          "column": 41
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 1165,
+          "column": 72
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 21,
+          "column": 21
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 22,
+          "column": 22
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 23,
+          "column": 24
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 24,
+          "column": 23
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 25,
+          "column": 25
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 26,
+          "column": 22
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 55,
+          "column": 37
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 56,
+          "column": 32
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 57,
+          "column": 32
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 58,
+          "column": 40
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 59,
+          "column": 32
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 60,
+          "column": 41
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 61,
+          "column": 34
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 91,
+          "column": 33
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 91,
+          "column": 62
+        },
+        {
+          "file": "frontend/src/stores/settings.ts",
+          "line": 11,
+          "column": 56
+        },
+        {
+          "file": "frontend/src/stores/settings.ts",
+          "line": 12,
+          "column": 26
+        },
+        {
+          "file": "frontend/src/stores/settings.ts",
+          "line": 13,
+          "column": 26
+        },
+        {
+          "file": "frontend/src/stores/settings.ts",
+          "line": 14,
+          "column": 26
+        },
+        {
+          "file": "frontend/src/types/index.ts",
+          "line": 30,
+          "column": 3
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:18:53.455Z",
+        "approvedAt": "2026-02-03T13:18:53.455Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "524c97a72610722b",
+      "subcategory": "semantic-html",
+      "name": "Semantic HTML Detector",
+      "description": "Learns semantic HTML patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "accessibility/semantic-html",
+          "patternId": "accessibility/semantic-html/import"
+        }
+      },
+      "confidence": {
+        "frequency": 0.02,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 2,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/cli/__main__.py",
+          "line": 1,
+          "column": 14
+        },
+        {
+          "file": "frontend/src/App.tsx",
+          "line": 1,
+          "column": 25
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:18:53.712Z",
+        "approvedAt": "2026-02-03T13:18:53.712Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "7951862e6a594ebf",
+      "subcategory": "semantic-html",
+      "name": "Semantic HTML Detector",
+      "description": "Learns semantic HTML patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "accessibility/semantic-html",
+          "patternId": "accessibility/semantic-html/assignment"
+        }
+      },
+      "confidence": {
+        "frequency": 0.37,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 16,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/cli/utils/output.py",
+          "line": 50,
+          "column": 50
+        },
+        {
+          "file": "backend/app/core/security.py",
+          "line": 44,
+          "column": 17
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 38,
+          "column": 17
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 44,
+          "column": 21
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 44,
+          "column": 29
+        },
+        {
+          "file": "frontend/src/api/auth.ts",
+          "line": 17,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/api/client.ts",
+          "line": 8,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 10,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 10,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 1001,
+          "column": 13
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 388,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 396,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/calendar/EventPopover.tsx",
+          "line": 31,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/common/DatePicker.tsx",
+          "line": 126,
+          "column": 17
+        },
+        {
+          "file": "frontend/src/components/common/DatePicker.tsx",
+          "line": 127,
+          "column": 17
+        },
+        {
+          "file": "frontend/src/components/common/DatePicker.tsx",
+          "line": 128,
+          "column": 17
+        },
+        {
+          "file": "frontend/src/components/common/DatePicker.tsx",
+          "line": 129,
+          "column": 17
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 229,
+          "column": 19
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 230,
+          "column": 19
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 231,
+          "column": 19
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 232,
+          "column": 19
+        },
+        {
+          "file": "frontend/src/components/kanban/CardDetailModal.tsx",
+          "line": 279,
+          "column": 13
+        },
+        {
+          "file": "frontend/src/components/layout/Layout.tsx",
+          "line": 32,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 10,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 14,
+          "column": 9
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 118,
+          "column": 17
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 121,
+          "column": 21
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 121,
+          "column": 29
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 150,
+          "column": 17
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 153,
+          "column": 21
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 153,
+          "column": 29
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 221,
+          "column": 17
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 224,
+          "column": 21
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 224,
+          "column": 29
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 249,
+          "column": 13
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 249,
+          "column": 32
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 270,
+          "column": 40
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:18:53.959Z",
+        "approvedAt": "2026-02-03T13:18:53.959Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "11c0dc1b001ec3d1",
+      "subcategory": "semantic-html",
+      "name": "Semantic HTML Detector",
+      "description": "Learns semantic HTML patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "accessibility/semantic-html",
+          "patternId": "accessibility/semantic-html/property_access"
+        }
+      },
+      "confidence": {
+        "frequency": 0.03,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 2,
+        "score": 0.935,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/main.py",
+          "line": 217,
+          "column": 22
+        },
+        {
+          "file": "frontend/src/components/layout/Layout.tsx",
+          "line": 126,
+          "column": 19
+        },
+        {
+          "file": "frontend/src/components/layout/Layout.tsx",
+          "line": 260,
+          "column": 20
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:18:54.628Z",
+        "approvedAt": "2026-02-03T13:18:54.628Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "d2a6e18fabbf710b",
+      "subcategory": "keyboard-nav",
+      "name": "Keyboard Navigation Detector",
+      "description": "Learns keyboard navigation patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "accessibility/keyboard-nav",
+          "patternId": "accessibility/keyboard-nav/assignment"
+        }
+      },
+      "confidence": {
+        "frequency": 0.51,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 11,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 79,
+          "column": 111
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 79,
+          "column": 130
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 89,
+          "column": 111
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 89,
+          "column": 130
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 99,
+          "column": 89
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUsersPanel.tsx",
+          "line": 58,
+          "column": 115
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUsersPanel.tsx",
+          "line": 58,
+          "column": 134
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 61,
+          "column": 126
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 61,
+          "column": 145
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 75,
+          "column": 126
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 75,
+          "column": 145
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 75,
+          "column": 126
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 75,
+          "column": 145
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 89,
+          "column": 126
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 89,
+          "column": 145
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 104,
+          "column": 126
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 104,
+          "column": 145
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 122,
+          "column": 126
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 122,
+          "column": 145
+        },
+        {
+          "file": "frontend/src/components/common/DatePicker.tsx",
+          "line": 81,
+          "column": 113
+        },
+        {
+          "file": "frontend/src/components/common/DatePicker.tsx",
+          "line": 81,
+          "column": 132
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 164,
+          "column": 113
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 164,
+          "column": 132
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 262,
+          "column": 118
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 262,
+          "column": 137
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 275,
+          "column": 118
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 275,
+          "column": 137
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 554,
+          "column": 104
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 554,
+          "column": 123
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 559,
+          "column": 104
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 559,
+          "column": 123
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 576,
+          "column": 104
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 576,
+          "column": 123
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 1050,
+          "column": 115
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 1050,
+          "column": 134
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 1056,
+          "column": 115
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 1056,
+          "column": 134
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanColumn.tsx",
+          "line": 356,
+          "column": 112
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanColumn.tsx",
+          "line": 356,
+          "column": 131
+        },
+        {
+          "file": "frontend/src/components/layout/Layout.tsx",
+          "line": 331,
+          "column": 107
+        },
+        {
+          "file": "frontend/src/components/layout/Layout.tsx",
+          "line": 331,
+          "column": 126
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 157,
+          "column": 121
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 157,
+          "column": 140
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 177,
+          "column": 121
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 177,
+          "column": 140
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 198,
+          "column": 113
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 198,
+          "column": 132
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 388,
+          "column": 119
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 388,
+          "column": 138
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 204,
+          "column": 107
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 204,
+          "column": 126
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:18:55.158Z",
+        "approvedAt": "2026-02-03T13:18:55.158Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "478c28fcd454df01",
+      "subcategory": "focus-management",
+      "name": "Focus Management Detector",
+      "description": "Learns focus management patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "accessibility/focus-management",
+          "patternId": "accessibility/focus-management/assignment"
+        }
+      },
+      "confidence": {
+        "frequency": 0.51,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 11,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 79,
+          "column": 111
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 79,
+          "column": 130
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 89,
+          "column": 111
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 89,
+          "column": 130
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 99,
+          "column": 89
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUsersPanel.tsx",
+          "line": 58,
+          "column": 115
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUsersPanel.tsx",
+          "line": 58,
+          "column": 134
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 61,
+          "column": 126
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 61,
+          "column": 145
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 75,
+          "column": 126
+        },
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 75,
+          "column": 145
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 75,
+          "column": 126
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 75,
+          "column": 145
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 89,
+          "column": 126
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 89,
+          "column": 145
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 104,
+          "column": 126
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 104,
+          "column": 145
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 122,
+          "column": 126
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 122,
+          "column": 145
+        },
+        {
+          "file": "frontend/src/components/common/DatePicker.tsx",
+          "line": 81,
+          "column": 113
+        },
+        {
+          "file": "frontend/src/components/common/DatePicker.tsx",
+          "line": 81,
+          "column": 132
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 164,
+          "column": 113
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 164,
+          "column": 132
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 262,
+          "column": 118
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 262,
+          "column": 137
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 275,
+          "column": 118
+        },
+        {
+          "file": "frontend/src/components/common/DateTimePicker.tsx",
+          "line": 275,
+          "column": 137
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 554,
+          "column": 104
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 554,
+          "column": 123
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 559,
+          "column": 104
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 559,
+          "column": 123
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 576,
+          "column": 104
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 576,
+          "column": 123
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 1050,
+          "column": 115
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 1050,
+          "column": 134
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 1056,
+          "column": 115
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 1056,
+          "column": 134
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanColumn.tsx",
+          "line": 356,
+          "column": 112
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanColumn.tsx",
+          "line": 356,
+          "column": 131
+        },
+        {
+          "file": "frontend/src/components/layout/Layout.tsx",
+          "line": 331,
+          "column": 107
+        },
+        {
+          "file": "frontend/src/components/layout/Layout.tsx",
+          "line": 331,
+          "column": 126
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 157,
+          "column": 121
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 157,
+          "column": 140
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 177,
+          "column": 121
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 177,
+          "column": 140
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 198,
+          "column": 113
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 198,
+          "column": 132
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 388,
+          "column": 119
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 388,
+          "column": 138
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 204,
+          "column": 107
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 204,
+          "column": 126
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:18:55.697Z",
+        "approvedAt": "2026-02-03T13:18:55.697Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "32d3447a517fb157",
+      "subcategory": "semantic-html",
+      "name": "Semantic HTML Detector",
+      "description": "Learns semantic HTML patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "accessibility/semantic-html",
+          "patternId": "accessibility/semantic-html/function_call"
+        }
+      },
+      "confidence": {
+        "frequency": 0.13,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 8,
+        "score": 0.8670588235294118,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/auth/LoginPage.tsx",
+          "line": 25,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/auth/RegisterPage.tsx",
+          "line": 33,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 154,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 157,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 761,
+          "column": 15
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 763,
+          "column": 15
+        },
+        {
+          "file": "frontend/src/components/calendar/EventPopover.tsx",
+          "line": 65,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/layout/Layout.tsx",
+          "line": 95,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/components/layout/Layout.tsx",
+          "line": 112,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 66,
+          "column": 26
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 38,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 66,
+          "column": 5
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 319,
+          "column": 5
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:18:55.928Z",
+        "approvedAt": "2026-02-03T13:18:55.928Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "2b031ae131ee5a8f",
+      "subcategory": "semantic-html",
+      "name": "Semantic HTML Detector",
+      "description": "Learns semantic HTML patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "accessibility/semantic-html",
+          "patternId": "accessibility/semantic-html/conditional"
+        }
+      },
+      "confidence": {
+        "frequency": 0.02,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 1,
+        "score": 0.8670588235294118,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 258,
+          "column": 20
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 258,
+          "column": 30
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:18:56.182Z",
+        "approvedAt": "2026-02-03T13:18:56.182Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "f88498e3bd26025c",
+      "subcategory": "semantic-html",
+      "name": "Semantic HTML Detector",
+      "description": "Learns semantic HTML patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "accessibility/semantic-html",
+          "patternId": "accessibility/semantic-html/function_definition"
+        }
+      },
+      "confidence": {
+        "frequency": 0.01,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 1,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 298,
+          "column": 5
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:18:56.732Z",
+        "approvedAt": "2026-02-03T13:18:56.732Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    }
+  ],
+  "lastUpdated": "2026-02-03T13:19:00.767Z",
+  "checksum": "d1d773ee562b38d7"
+}

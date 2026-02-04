@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "project": {
+    "id": "da3d8910-28b2-4751-a56a-246e702ac4dc",
+    "name": "Kanbot",
+    "initializedAt": "2026-02-03T13:15:58.056Z"
+  },
+  "severity": {},
+  "ignore": [
+    "node_modules/**",
+    "dist/**",
+    "build/**",
+    ".git/**",
+    "coverage/**",
+    "*.min.js",
+    "*.bundle.js",
+    "vendor/**",
+    "__pycache__/**",
+    ".venv/**",
+    "target/**",
+    "bin/**",
+    "obj/**"
+  ],
+  "ci": {
+    "failOn": "error",
+    "reportFormat": "text"
+  },
+  "learning": {
+    "autoApproveThreshold": 0.85,
+    "minOccurrences": 3,
+    "semanticLearning": true
+  },
+  "performance": {
+    "maxWorkers": 4,
+    "cacheEnabled": true,
+    "incrementalAnalysis": true,
+    "cacheTTL": 3600
+  },
+  "features": {
+    "callGraph": true,
+    "boundaries": true,
+    "dna": true,
+    "contracts": true
+  }
+}

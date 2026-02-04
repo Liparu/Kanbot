@@ -1,0 +1,100 @@
+{
+  "version": "0.9.48",
+  "schemaVersion": "2.0.0",
+  "createdAt": "2026-02-03T13:19:07.490Z",
+  "updatedAt": "2026-02-03T13:19:07.495Z",
+  "project": {
+    "id": "f79c5526-4d64-468a-9ace-07fc01cf2cf0",
+    "name": "Kanbot",
+    "rootPath": "/home/jk/Kanbot"
+  },
+  "baseline": {
+    "scanId": "fc6380e6",
+    "scannedAt": "2026-02-03T13:19:07.490Z",
+    "fileCount": 131,
+    "patternCount": 557,
+    "approvedCount": 408,
+    "categories": {
+      "security": 2356,
+      "errors": 2828,
+      "structural": 4863,
+      "logging": 1794,
+      "testing": 627,
+      "data-access": 10309,
+      "config": 2285,
+      "types": 7490,
+      "performance": 2632,
+      "auth": 1487,
+      "styling": 9722,
+      "accessibility": 639,
+      "documentation": 676,
+      "api": 185,
+      "components": 5861
+    },
+    "checksum": "edbc8d1c154918d8"
+  },
+  "features": {
+    "callGraph": {
+      "enabled": true,
+      "builtAt": "2026-02-03T13:19:03.895Z",
+      "stats": {
+        "functions": 403,
+        "callSites": 3995,
+        "resolvedCalls": 453,
+        "entryPoints": 403,
+        "dataAccessors": 150,
+        "filesProcessed": 131
+      }
+    },
+    "testTopology": {
+      "enabled": true,
+      "builtAt": "2026-02-03T13:19:03.903Z",
+      "stats": {
+        "totalTests": 0,
+        "testFiles": 0,
+        "filesAnalyzed": 131
+      }
+    },
+    "coupling": {
+      "enabled": true,
+      "builtAt": "2026-02-03T13:19:03.956Z",
+      "stats": {
+        "modules": 81,
+        "cycles": 0,
+        "hotspots": 0,
+        "healthScore": 100,
+        "filesAnalyzed": 131
+      }
+    },
+    "dna": {
+      "enabled": true,
+      "builtAt": "2026-02-03T13:19:03.965Z",
+      "stats": {
+        "genes": 10,
+        "mutations": 0,
+        "healthScore": 60,
+        "filesAnalyzed": 0,
+        "componentFiles": 0,
+        "backendFiles": 0
+      }
+    },
+    "memory": {
+      "enabled": true,
+      "builtAt": "2026-02-03T13:19:07.488Z",
+      "stats": {
+        "initialized": 1
+      }
+    }
+  },
+  "settings": {
+    "autoApproveThreshold": 0.85,
+    "autoApproveEnabled": true
+  },
+  "history": [
+    {
+      "action": "setup_complete",
+      "timestamp": "2026-02-03T13:19:07.490Z",
+      "details": "Initial setup: 557 patterns, 408 approved"
+    }
+  ]
+}

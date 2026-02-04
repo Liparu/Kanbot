@@ -44,6 +44,7 @@ class Card(Base):
     history: Mapped[list["CardHistory"]] = relationship("CardHistory", back_populates="card", cascade="all, delete-orphan", order_by="CardHistory.created_at.desc()")
     
     assignees: Mapped[list["User"]] = relationship("User", secondary=card_assignees, backref="assigned_cards")
+    creator: Mapped["User"] = relationship("User", foreign_keys=[created_by], backref="created_cards")
     
     blocked_by: Mapped[list["CardDependency"]] = relationship(
         "CardDependency",

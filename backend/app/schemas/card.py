@@ -121,6 +121,7 @@ class CardResponse(BaseModel):
     updated_at: datetime
     tags: List[CardTagResponse] = Field(default_factory=list)
     assignees: List[SimpleUserResponse] = Field(default_factory=list)
+    creator: Optional[SimpleUserResponse] = None
 
     class Config:
         from_attributes = True

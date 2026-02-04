@@ -1,0 +1,1460 @@
+{
+  "version": "1.0.0",
+  "category": "api",
+  "patterns": [
+    {
+      "id": "6771fb093731a4b0",
+      "subcategory": "route-structure",
+      "name": "Route Structure Detector",
+      "description": "Detects route URL structure patterns and flags inconsistencies",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/route-structure",
+          "patternId": "api/route-structure/restful"
+        }
+      },
+      "confidence": {
+        "frequency": 0.17,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 17,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 14,
+          "column": 47
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 66,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 43,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 37,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 43,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 288,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 86,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 62,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/notifications.py",
+          "line": 33,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 120,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/search.py",
+          "line": 47,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 159,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/tags.py",
+          "line": 108,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/users.py",
+          "line": 35,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 72,
+          "column": 2
+        },
+        {
+          "file": "backend/app/core/config.py",
+          "line": 10,
+          "column": 23
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 171,
+          "column": 2
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:46.098Z",
+        "approvedAt": "2026-02-03T13:16:46.098Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "44d1bcfb3282039e",
+      "subcategory": "route-structure",
+      "name": "Route Structure Detector",
+      "description": "Detects route URL structure patterns and flags inconsistencies",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/route-structure",
+          "patternId": "api/route-structure/versioning"
+        }
+      },
+      "confidence": {
+        "frequency": 0.03,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 3,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 14,
+          "column": 48
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 56,
+          "column": 35
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 120,
+          "column": 40
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:46.669Z",
+        "approvedAt": "2026-02-03T13:16:46.669Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "3319f6edf2fbd53a",
+      "subcategory": "route-structure",
+      "name": "Route Structure Detector",
+      "description": "Detects route URL structure patterns and flags inconsistencies",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/route-structure",
+          "patternId": "api/route-structure/versioned-api"
+        }
+      },
+      "confidence": {
+        "frequency": 0.03,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 3,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 14,
+          "column": 48
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 56,
+          "column": 35
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 120,
+          "column": 40
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:46.745Z",
+        "approvedAt": "2026-02-03T13:16:46.745Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "6e4fa3cd05375863",
+      "subcategory": "route-structure",
+      "name": "Route Structure Detector",
+      "description": "Detects route URL structure patterns and flags inconsistencies",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/route-structure",
+          "patternId": "api/route-structure/restful-route"
+        }
+      },
+      "confidence": {
+        "frequency": 0.03,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 3,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 14,
+          "column": 47
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 56,
+          "column": 34
+        },
+        {
+          "file": "backend/app/core/config.py",
+          "line": 10,
+          "column": 23
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:47.104Z",
+        "approvedAt": "2026-02-03T13:16:47.104Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "2c0a39ec96994452",
+      "subcategory": "route-structure",
+      "name": "Route Structure Detector",
+      "description": "Detects route URL structure patterns and flags inconsistencies",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/route-structure",
+          "patternId": "api/route-structure/express-route"
+        }
+      },
+      "confidence": {
+        "frequency": 0.15,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 15,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 66,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 43,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 37,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 43,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 288,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 86,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 62,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/notifications.py",
+          "line": 33,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 120,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/search.py",
+          "line": 47,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 159,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/tags.py",
+          "line": 108,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/users.py",
+          "line": 35,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 72,
+          "column": 2
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 171,
+          "column": 2
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:47.623Z",
+        "approvedAt": "2026-02-03T13:16:47.623Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "94f752de562d677e",
+      "subcategory": "http-methods",
+      "name": "HTTP Methods Detector",
+      "description": "Detects HTTP method usage patterns and flags RESTful convention violations",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/http-methods",
+          "patternId": "api/http-methods/express-handler"
+        }
+      },
+      "confidence": {
+        "frequency": 0.15,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 15,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 66,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 43,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 37,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 43,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 288,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 86,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 62,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/notifications.py",
+          "line": 33,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 120,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/search.py",
+          "line": 47,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 159,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/tags.py",
+          "line": 108,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/users.py",
+          "line": 35,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 72,
+          "column": 2
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 171,
+          "column": 2
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:48.264Z",
+        "approvedAt": "2026-02-03T13:16:48.264Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "a5580a4e983ddaa3",
+      "subcategory": "http-methods",
+      "name": "HTTP Methods Detector",
+      "description": "Detects HTTP method usage patterns and flags RESTful convention violations",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/http-methods",
+          "patternId": "api/http-methods/method-get"
+        }
+      },
+      "confidence": {
+        "frequency": 0.25,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 25,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 66,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 43,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 170,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 43,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 288,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 86,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 120,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/search.py",
+          "line": 47,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 159,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/users.py",
+          "line": 35,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 120,
+          "column": 2
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 171,
+          "column": 2
+        },
+        {
+          "file": "frontend/src/api/admin.ts",
+          "line": 18,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/auth.ts",
+          "line": 45,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 6,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 74,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/filterTemplates.ts",
+          "line": 14,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/notifications.ts",
+          "line": 6,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/spaces.ts",
+          "line": 11,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 186,
+          "column": 26
+        },
+        {
+          "file": "frontend/src/components/kanban/CardDetailModal.tsx",
+          "line": 85,
+          "column": 25
+        },
+        {
+          "file": "frontend/src/components/kanban/CardGenerator.tsx",
+          "line": 49,
+          "column": 26
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 170,
+          "column": 26
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 62,
+          "column": 26
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 14,
+          "column": 26
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:48.675Z",
+        "approvedAt": "2026-02-03T13:16:48.675Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "50f566251615cfea",
+      "subcategory": "http-methods",
+      "name": "HTTP Methods Detector",
+      "description": "Detects HTTP method usage patterns and flags RESTful convention violations",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/http-methods",
+          "patternId": "api/http-methods/method-patch"
+        }
+      },
+      "confidence": {
+        "frequency": 0.15,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 15,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 148,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 126,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 319,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 113,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 62,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 140,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 280,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/tags.py",
+          "line": 108,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/users.py",
+          "line": 40,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 72,
+          "column": 2
+        },
+        {
+          "file": "frontend/src/api/admin.ts",
+          "line": 28,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 16,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 93,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/filterTemplates.ts",
+          "line": 24,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/spaces.ts",
+          "line": 40,
+          "column": 28
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:48.911Z",
+        "approvedAt": "2026-02-03T13:16:48.911Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "641474a2e0b5bb0e",
+      "subcategory": "http-methods",
+      "name": "HTTP Methods Detector",
+      "description": "Detects HTTP method usage patterns and flags RESTful convention violations",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/http-methods",
+          "patternId": "api/http-methods/method-post"
+        }
+      },
+      "confidence": {
+        "frequency": 0.17,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 17,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 204,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 145,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 37,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 96,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 437,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/notifications.py",
+          "line": 33,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 212,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 362,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/users.py",
+          "line": 75,
+          "column": 2
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 41,
+          "column": 34
+        },
+        {
+          "file": "frontend/src/api/admin.ts",
+          "line": 37,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/auth.ts",
+          "line": 16,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 11,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 88,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/filterTemplates.ts",
+          "line": 19,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/notifications.ts",
+          "line": 11,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/spaces.ts",
+          "line": 35,
+          "column": 28
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:49.097Z",
+        "approvedAt": "2026-02-03T13:16:49.097Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "51199d06525b8f07",
+      "subcategory": "http-methods",
+      "name": "HTTP Methods Detector",
+      "description": "Detects HTTP method usage patterns and flags RESTful convention violations",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/http-methods",
+          "patternId": "api/http-methods/method-delete"
+        }
+      },
+      "confidence": {
+        "frequency": 0.22,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 22,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 247,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 179,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 168,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 549,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 149,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 83,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/notifications.py",
+          "line": 70,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 191,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 343,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/tags.py",
+          "line": 161,
+          "column": 2
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 102,
+          "column": 2
+        },
+        {
+          "file": "frontend/src/api/admin.ts",
+          "line": 33,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/api/auth.ts",
+          "line": 50,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 21,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 98,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/api/filterTemplates.ts",
+          "line": 29,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/api/notifications.ts",
+          "line": 20,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/api/spaces.ts",
+          "line": 45,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/components/kanban/CardDetailModal.tsx",
+          "line": 126,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 208,
+          "column": 40
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanColumn.tsx",
+          "line": 136,
+          "column": 30
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 83,
+          "column": 47
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:49.383Z",
+        "approvedAt": "2026-02-03T13:16:49.383Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "c83a5470b0dacf19",
+      "subcategory": "http-methods",
+      "name": "HTTP Methods Detector",
+      "description": "Detects HTTP method usage patterns and flags RESTful convention violations",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/http-methods",
+          "patternId": "api/http-methods/http-client"
+        }
+      },
+      "confidence": {
+        "frequency": 0.15,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 15,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 41,
+          "column": 34
+        },
+        {
+          "file": "frontend/src/api/admin.ts",
+          "line": 18,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/auth.ts",
+          "line": 16,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 6,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 74,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/filterTemplates.ts",
+          "line": 14,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/notifications.ts",
+          "line": 6,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/spaces.ts",
+          "line": 11,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 186,
+          "column": 26
+        },
+        {
+          "file": "frontend/src/components/kanban/CardDetailModal.tsx",
+          "line": 85,
+          "column": 25
+        },
+        {
+          "file": "frontend/src/components/kanban/CardGenerator.tsx",
+          "line": 49,
+          "column": 26
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 170,
+          "column": 26
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanColumn.tsx",
+          "line": 136,
+          "column": 30
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 62,
+          "column": 26
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 14,
+          "column": 26
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:50.000Z",
+        "approvedAt": "2026-02-03T13:16:50.000Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "d92475b64b7bfcad",
+      "subcategory": "response-envelope",
+      "name": "Response Envelope Detector",
+      "description": "Detects response envelope patterns and flags inconsistencies",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/response-envelope",
+          "patternId": "api/response-envelope/format-standard"
+        }
+      },
+      "confidence": {
+        "frequency": 0.12,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 12,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 113,
+          "column": 85
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 6,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 226,
+          "column": 15
+        },
+        {
+          "file": "frontend/src/components/common/Toast.tsx",
+          "line": 15,
+          "column": 10
+        },
+        {
+          "file": "frontend/src/components/kanban/CardDetailModal.tsx",
+          "line": 83,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/kanban/CardGenerator.tsx",
+          "line": 41,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 162,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanCard.tsx",
+          "line": 164,
+          "column": 41
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 48,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 36,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 12,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 23,
+          "column": 9
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:50.554Z",
+        "approvedAt": "2026-02-03T13:16:50.554Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "45ad129f77830065",
+      "subcategory": "response-envelope",
+      "name": "Response Envelope Detector",
+      "description": "Detects response envelope patterns and flags inconsistencies",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/response-envelope",
+          "patternId": "api/response-envelope/envelope-structure"
+        }
+      },
+      "confidence": {
+        "frequency": 0.14,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 14,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 113,
+          "column": 85
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 6,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 226,
+          "column": 15
+        },
+        {
+          "file": "frontend/src/components/calendar/WeekView.tsx",
+          "line": 218,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/components/common/Toast.tsx",
+          "line": 15,
+          "column": 10
+        },
+        {
+          "file": "frontend/src/components/kanban/CardDetailModal.tsx",
+          "line": 83,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/kanban/CardGenerator.tsx",
+          "line": 41,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 162,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 48,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 36,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/spaces/SpaceDashboard.tsx",
+          "line": 12,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/components/spaces/SpacesPage.tsx",
+          "line": 23,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/stores/boards.ts",
+          "line": 49,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/stores/notifications.ts",
+          "line": 29,
+          "column": 7
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:50.919Z",
+        "approvedAt": "2026-02-03T13:16:50.919Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "ec29b15450d6d97b",
+      "subcategory": "response-envelope",
+      "name": "Response Envelope Detector",
+      "description": "Detects response envelope patterns and flags inconsistencies",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/response-envelope",
+          "patternId": "api/response-envelope/pagination-cursor"
+        }
+      },
+      "confidence": {
+        "frequency": 0.01,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 1,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 380,
+          "column": 5
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:51.018Z",
+        "approvedAt": "2026-02-03T13:16:51.018Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "015e97394592f0af",
+      "subcategory": "response-envelope",
+      "name": "Response Envelope Detector",
+      "description": "Detects response envelope patterns and flags inconsistencies",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/response-envelope",
+          "patternId": "api/response-envelope/pagination-metadata"
+        }
+      },
+      "confidence": {
+        "frequency": 0.03,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 3,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 766,
+          "column": 18
+        },
+        {
+          "file": "frontend/src/components/kanban/CardGenerator.tsx",
+          "line": 273,
+          "column": 99
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanCard.tsx",
+          "line": 164,
+          "column": 41
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:51.175Z",
+        "approvedAt": "2026-02-03T13:16:51.175Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "4f5b2f70de11fa86",
+      "subcategory": "response-envelope",
+      "name": "Response Envelope Detector",
+      "description": "Detects response envelope patterns and flags inconsistencies",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/response-envelope",
+          "patternId": "api/response-envelope/format-custom"
+        }
+      },
+      "confidence": {
+        "frequency": 0.03,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 3,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/calendar/WeekView.tsx",
+          "line": 218,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/stores/boards.ts",
+          "line": 49,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/stores/notifications.ts",
+          "line": 29,
+          "column": 7
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:51.385Z",
+        "approvedAt": "2026-02-03T13:16:51.385Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "7b5ca744316c47c8",
+      "subcategory": "response-envelope",
+      "name": "Response Envelope Detector",
+      "description": "Detects response envelope patterns and flags inconsistencies",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/response-envelope",
+          "patternId": "api/response-envelope/pagination-offset"
+        }
+      },
+      "confidence": {
+        "frequency": 0.02,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 2,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/kanban/CardGenerator.tsx",
+          "line": 273,
+          "column": 99
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanCard.tsx",
+          "line": 164,
+          "column": 41
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:52.072Z",
+        "approvedAt": "2026-02-03T13:16:52.072Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    }
+  ],
+  "lastUpdated": "2026-02-03T13:19:00.110Z",
+  "checksum": "db0b94189b449024"
+}

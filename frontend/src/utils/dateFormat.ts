@@ -12,16 +12,27 @@ const TIME_FORMAT_12H = 'h:mm a'
 const TIME_FORMAT_24H = 'HH:mm'
 
 /**
- * Parse a datetime string without timezone shifts.
- * Our ISO strings are stored as 'yyyy-MM-ddTHH:mm:ss' without timezone info,
- * representing local wall-clock time. We parse them to avoid UTC shifts.
+ * Parse an ISO datetime string treating it as local wall-clock time.
+ * This strips any timezone info (Z, +00:00, etc.) and parses the datetime
+ * as local time to avoid UTC conversion shifts.
+ * 
+ * Examples:
+ *   "2026-02-04T14:00:00" -> local Date at 14:00
+ *   "2026-02-04T14:00:00Z" -> local Date at 14:00 (NOT 15:00)
+ *   "2026-02-04T14:00:00+00:00" -> local Date at 14:00 (NOT 15:00)
  */
-function parseLocalDateTime(dateTimeStr: string): Date {
-  // Parse manually to avoid timezone issues
-  // Format: yyyy-MM-ddTHH:mm:ss or yyyy-MM-ddTHH:mm:ss.SSSZ
-  const match = dateTimeStr.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/)
+export function parseISOLocal(dateTimeStr: string): Date {
+  // Strip timezone info if present (Z, +00:00, -05:00, etc.)
+  // Match patterns like: 2026-02-04T14:00:00Z or 2026-02-04T14:00:00+00:00 or 2026-02-04T14:00:00.000Z
+  const cleaned = dateTimeStr.replace(/\.?\d{0,3}(Z|[+-]\d{2}:?\d{2})$/, '')
+  
+  // Parse the cleaned string manually to avoid timezone issues
+  // Format: yyyy-MM-ddTHH:mm:ss or yyyy-MM-ddTHH:mm:ss.SSS
+  const match = cleaned.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/)
   if (!match) {
-    return parseISO(dateTimeStr)
+    // Fallback: try parseISO but this may cause timezone shifts
+    // This should rarely happen with valid ISO strings
+    return parseISO(cleaned)
   }
   
   const [, year, month, day, hour, minute, second] = match
@@ -34,6 +45,16 @@ function parseLocalDateTime(dateTimeStr: string): Date {
     parseInt(minute, 10),
     parseInt(second, 10)
   )
+}
+
+/**
+ * Parse a datetime string without timezone shifts.
+ * Our ISO strings are stored as 'yyyy-MM-ddTHH:mm:ss' without timezone info,
+ * representing local wall-clock time. We parse them to avoid UTC shifts.
+ * @deprecated Use parseISOLocal instead
+ */
+function parseLocalDateTime(dateTimeStr: string): Date {
+  return parseISOLocal(dateTimeStr)
 }
 
 export function formatDate(isoDate: string | undefined | null, dateFormat: DateFormat): string {
@@ -135,7 +156,7 @@ export function toDateTimeInputValue(date: Date | null): string {
  */
 export function isoToLocalInputValue(isoString: string | null): string {
   if (!isoString) return ''
-  const date = parseISO(isoString)
+  const date = parseISOLocal(isoString)
   if (!isValid(date)) return ''
   return toDateTimeInputValue(date)
 }
@@ -200,12 +221,12 @@ export function getDurationMinutes(
   endIso: string | null
 ): number | null {
   if (!startIso || !endIso) return null
-  
-  const start = parseISO(startIso)
-  const end = parseISO(endIso)
-  
+
+  const start = parseISOLocal(startIso)
+  const end = parseISOLocal(endIso)
+
   if (!isValid(start) || !isValid(end)) return null
-  
+
   return Math.round((end.getTime() - start.getTime()) / (1000 * 60))
 }
 

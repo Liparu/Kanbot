@@ -1,13 +1,17 @@
+import { useState } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { useQuery } from '@tanstack/react-query'
-import { LayoutGrid, Users, Calendar, Tag, AlertTriangle, Inbox, Clock, ClipboardCheck, Archive } from 'lucide-react'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { LayoutGrid, Users, Calendar, Tag, AlertTriangle, Inbox, Clock, ClipboardCheck, Archive, Edit2, Check, X } from 'lucide-react'
 import { spacesApi } from '@/api/spaces'
 
 export default function SpaceDashboard() {
   const { t } = useTranslation()
   const { spaceId } = useParams<{ spaceId: string }>()
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
+  const [isEditingName, setIsEditingName] = useState(false)
+  const [editedName, setEditedName] = useState('')
 
   const { data: space, isLoading: spaceLoading } = useQuery({
     queryKey: ['space', spaceId],
@@ -20,6 +24,36 @@ export default function SpaceDashboard() {
     queryFn: () => spacesApi.stats(spaceId!),
     enabled: !!spaceId,
   })
+
+  const updateSpaceMutation = useMutation({
+    mutationFn: (data: { name: string }) => spacesApi.update(spaceId!, data),
+    onSuccess: (updatedSpace) => {
+      queryClient.invalidateQueries({ queryKey: ['space', spaceId] })
+      queryClient.invalidateQueries({ queryKey: ['spaces'] })
+      setIsEditingName(false)
+      setEditedName('')
+    },
+  })
+
+  const handleStartEdit = () => {
+    if (space) {
+      setEditedName(space.name)
+      setIsEditingName(true)
+    }
+  }
+
+  const handleCancelEdit = () => {
+    setIsEditingName(false)
+    setEditedName('')
+  }
+
+  const handleSaveName = () => {
+    if (editedName.trim() && editedName.trim() !== space?.name) {
+      updateSpaceMutation.mutate({ name: editedName.trim() })
+    } else {
+      setIsEditingName(false)
+    }
+  }
 
   if (spaceLoading) {
     return (
@@ -42,7 +76,47 @@ export default function SpaceDashboard() {
       <div className="mb-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-dark-100">{space.name}</h1>
+            {isEditingName ? (
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={editedName}
+                  onChange={(e) => setEditedName(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleSaveName()
+                    if (e.key === 'Escape') handleCancelEdit()
+                  }}
+                  className="text-2xl font-bold bg-dark-700 border border-dark-600 rounded-lg px-3 py-1 text-dark-100 focus:outline-none focus:border-primary-500"
+                  autoFocus
+                />
+                <button
+                  onClick={handleSaveName}
+                  disabled={updateSpaceMutation.isPending || !editedName.trim()}
+                  className="p-2 bg-primary-600 hover:bg-primary-500 disabled:bg-dark-600 text-white rounded-lg transition-colors"
+                  title={t('common.save')}
+                >
+                  <Check className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={handleCancelEdit}
+                  className="p-2 bg-dark-700 hover:bg-dark-600 text-dark-300 rounded-lg transition-colors"
+                  title={t('common.cancel')}
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 group">
+                <h1 className="text-2xl font-bold text-dark-100">{space.name}</h1>
+                <button
+                  onClick={handleStartEdit}
+                  className="p-2 text-dark-400 hover:text-dark-200 hover:bg-dark-700 rounded-lg transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
+                  title={t('common.edit')}
+                >
+                  <Edit2 className="w-4 h-4" />
+                </button>
+              </div>
+            )}
             <p className="text-dark-400 mt-1">
               {space.type === 'personal' ? t('spaces.personal') : space.type === 'agent' ? t('spaces.agent') : t('spaces.company')} · {space.members?.length || 0}{' '}
               {t('spaces.members').toLowerCase()}

@@ -1,0 +1,93 @@
+{
+  "version": "1.0.0",
+  "category": "api",
+  "patterns": [
+    {
+      "id": "4f5b2f70de11fa86",
+      "subcategory": "response-envelope",
+      "name": "Response Envelope Detector",
+      "description": "Detects response envelope patterns and flags inconsistencies",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/response-envelope",
+          "patternId": "api/response-envelope/format-custom"
+        }
+      },
+      "confidence": {
+        "frequency": 0.03,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 3,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/calendar/WeekView.tsx",
+          "line": 218,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/stores/boards.ts",
+          "line": 49,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/stores/notifications.ts",
+          "line": 29,
+          "column": 7
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "7b5ca744316c47c8",
+      "subcategory": "response-envelope",
+      "name": "Response Envelope Detector",
+      "description": "Detects response envelope patterns and flags inconsistencies",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "api/response-envelope",
+          "patternId": "api/response-envelope/pagination-offset"
+        }
+      },
+      "confidence": {
+        "frequency": 0.02,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 2,
+        "score": 0.95,
+        "level": "high"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/kanban/CardGenerator.tsx",
+          "line": 273,
+          "column": 99
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanCard.tsx",
+          "line": 164,
+          "column": 41
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    }
+  ],
+  "lastUpdated": "2026-02-03T13:16:51.182Z",
+  "checksum": "13e2d3a6b51bfb37"
+}

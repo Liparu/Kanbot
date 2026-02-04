@@ -1,0 +1,1315 @@
+{
+  "modules": {
+    "frontend/src/utils/avatarColor.ts": {
+      "path": "frontend/src/utils/avatarColor.ts",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/alembic/versions/8563361832a7_add_agent_space_type.py": {
+      "path": "backend/alembic/versions/8563361832a7_add_agent_space_type.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/alembic/versions/add_account_lockout.py": {
+      "path": "backend/alembic/versions/add_account_lockout.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "frontend/src/components/common/ColorPicker.tsx": {
+      "path": "frontend/src/components/common/ColorPicker.tsx",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/deps.py": {
+      "path": "backend/app/api/deps.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "frontend/src/hooks/useWebSocket.ts": {
+      "path": "frontend/src/hooks/useWebSocket.ts",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/v1/filter_templates.py": {
+      "path": "backend/app/api/v1/filter_templates.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "frontend/src/components/common/DateTimePicker.tsx": {
+      "path": "frontend/src/components/common/DateTimePicker.tsx",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/v1/scheduled_cards.py": {
+      "path": "backend/app/api/v1/scheduled_cards.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "frontend/src/utils/dateFormat.ts": {
+      "path": "frontend/src/utils/dateFormat.ts",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/v1/agents.py": {
+      "path": "backend/app/api/v1/agents.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "frontend/src/utils/calendar.ts": {
+      "path": "frontend/src/utils/calendar.ts",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/core/sanitize.py": {
+      "path": "backend/app/core/sanitize.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/v1/search.py": {
+      "path": "backend/app/api/v1/search.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/core/config.py": {
+      "path": "backend/app/core/config.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/services/notifications.py": {
+      "path": "backend/app/services/notifications.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/v1/notifications.py": {
+      "path": "backend/app/api/v1/notifications.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/services/webhooks.py": {
+      "path": "backend/app/services/webhooks.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/v1/users.py": {
+      "path": "backend/app/api/v1/users.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/v1/auth.py": {
+      "path": "backend/app/api/v1/auth.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/services/google_calendar.py": {
+      "path": "backend/app/services/google_calendar.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/schemas/notification.py": {
+      "path": "backend/app/schemas/notification.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/schemas/tag.py": {
+      "path": "backend/app/schemas/tag.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/schemas/filter_template.py": {
+      "path": "backend/app/schemas/filter_template.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/v1/webhooks.py": {
+      "path": "backend/app/api/v1/webhooks.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/schemas/card.py": {
+      "path": "backend/app/schemas/card.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/schemas/webhook.py": {
+      "path": "backend/app/schemas/webhook.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/v1/tags.py": {
+      "path": "backend/app/api/v1/tags.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/schemas/scheduled_card.py": {
+      "path": "backend/app/schemas/scheduled_card.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/schemas/user.py": {
+      "path": "backend/app/schemas/user.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/schemas/column.py": {
+      "path": "backend/app/schemas/column.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/schemas/space.py": {
+      "path": "backend/app/schemas/space.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/schemas/calendar.py": {
+      "path": "backend/app/schemas/calendar.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/websocket/manager.py": {
+      "path": "backend/app/websocket/manager.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/main.py": {
+      "path": "backend/app/main.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/cli/utils/db.py": {
+      "path": "backend/app/cli/utils/db.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/cli/utils/output.py": {
+      "path": "backend/app/cli/utils/output.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/v1/cards.py": {
+      "path": "backend/app/api/v1/cards.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/cli/commands/apikey.py": {
+      "path": "backend/app/cli/commands/apikey.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/cli/commands/db.py": {
+      "path": "backend/app/cli/commands/db.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/v1/calendar.py": {
+      "path": "backend/app/api/v1/calendar.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "frontend/src/components/kanban/ScheduledCards.tsx": {
+      "path": "frontend/src/components/kanban/ScheduledCards.tsx",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/cli/commands/user.py": {
+      "path": "backend/app/cli/commands/user.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/v1/admin.py": {
+      "path": "backend/app/api/v1/admin.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/cli/commands/space.py": {
+      "path": "backend/app/cli/commands/space.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/v1/columns.py": {
+      "path": "backend/app/api/v1/columns.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/cli/commands/system.py": {
+      "path": "backend/app/cli/commands/system.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/cli/main.py": {
+      "path": "backend/app/cli/main.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/models/scheduled_card.py": {
+      "path": "backend/app/models/scheduled_card.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/models/user.py": {
+      "path": "backend/app/models/user.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/api/v1/spaces.py": {
+      "path": "backend/app/api/v1/spaces.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/models/column.py": {
+      "path": "backend/app/models/column.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/models/notification.py": {
+      "path": "backend/app/models/notification.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/models/tag.py": {
+      "path": "backend/app/models/tag.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/models/filter_template.py": {
+      "path": "backend/app/models/filter_template.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/models/space.py": {
+      "path": "backend/app/models/space.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/models/calendar.py": {
+      "path": "backend/app/models/calendar.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/core/security.py": {
+      "path": "backend/app/core/security.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/core/i18n.py": {
+      "path": "backend/app/core/i18n.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/models/card.py": {
+      "path": "backend/app/models/card.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/core/database.py": {
+      "path": "backend/app/core/database.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/app/models/webhook.py": {
+      "path": "backend/app/models/webhook.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "scripts/verify_multiprofile.py": {
+      "path": "scripts/verify_multiprofile.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/alembic/env.py": {
+      "path": "backend/alembic/env.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/alembic/versions/033e2f6844e6_add_timezone_to_space_created_at.py": {
+      "path": "backend/alembic/versions/033e2f6844e6_add_timezone_to_space_created_at.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/alembic/versions/003_change_card_dates_to_datetime.py": {
+      "path": "backend/alembic/versions/003_change_card_dates_to_datetime.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/alembic/versions/004_scheduled_cards_datetime.py": {
+      "path": "backend/alembic/versions/004_scheduled_cards_datetime.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/alembic/versions/69afc0502192_add_comment_edit_delete_fields.py": {
+      "path": "backend/alembic/versions/69afc0502192_add_comment_edit_delete_fields.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/alembic/versions/002_add_location_to_scheduled_cards.py": {
+      "path": "backend/alembic/versions/002_add_location_to_scheduled_cards.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/alembic/versions/005_remove_board_link_columns_to_spaces.py": {
+      "path": "backend/alembic/versions/005_remove_board_link_columns_to_spaces.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py": {
+      "path": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/alembic/versions/add_admin_fields.py": {
+      "path": "backend/alembic/versions/add_admin_fields.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "frontend/src/components/admin/AdminUserEditModal.tsx": {
+      "path": "frontend/src/components/admin/AdminUserEditModal.tsx",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/alembic/versions/add_space_color.py": {
+      "path": "backend/alembic/versions/add_space_color.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "backend/alembic/versions/001_create_scheduled_cards.py": {
+      "path": "backend/alembic/versions/001_create_scheduled_cards.py",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "frontend/src/components/calendar/CalendarPage.tsx": {
+      "path": "frontend/src/components/calendar/CalendarPage.tsx",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "frontend/src/components/kanban/KanbanCard.tsx": {
+      "path": "frontend/src/components/kanban/KanbanCard.tsx",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "frontend/src/components/common/DatePicker.tsx": {
+      "path": "frontend/src/components/common/DatePicker.tsx",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "frontend/src/components/common/ConfirmDialog.tsx": {
+      "path": "frontend/src/components/common/ConfirmDialog.tsx",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "frontend/src/components/common/Toast.tsx": {
+      "path": "frontend/src/components/common/Toast.tsx",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    },
+    "frontend/src/components/calendar/EventPopover.tsx": {
+      "path": "frontend/src/components/calendar/EventPopover.tsx",
+      "imports": [],
+      "importedBy": [],
+      "exports": [],
+      "metrics": {
+        "Ca": 0,
+        "Ce": 0,
+        "instability": 0,
+        "abstractness": 0,
+        "distance": 1
+      },
+      "role": "balanced",
+      "isEntryPoint": false,
+      "isLeaf": true
+    }
+  },
+  "edges": [],
+  "cycles": [],
+  "metrics": {
+    "totalModules": 81,
+    "totalEdges": 0,
+    "cycleCount": 0,
+    "avgInstability": 0,
+    "avgDistance": 1,
+    "zoneOfPain": [],
+    "zoneOfUselessness": [],
+    "hotspots": [],
+    "isolatedModules": []
+  },
+  "generatedAt": "2026-02-03T13:19:03.955Z",
+  "projectRoot": "/home/jk/Kanbot"
+}

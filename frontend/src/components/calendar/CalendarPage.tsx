@@ -22,7 +22,7 @@ import {
   Check,
 } from 'lucide-react'
 import { format, startOfWeek, addDays, addMonths, subMonths, addWeeks, subWeeks, parseISO, addHours, isSameMonth, isToday, isSameDay } from 'date-fns'
-import { dateToLocalISOString } from '@/utils/dateFormat'
+import { dateToLocalISOString, parseISOLocal } from '@/utils/dateFormat'
 import { columnsApi, cardsApi, tagsApi } from '@/api/boards'
 import { spacesApi } from '@/api/spaces'
 import { useToast } from '@/components/common/Toast'
@@ -307,8 +307,8 @@ export default function CalendarPage() {
             if (isArchiveColumn(column)) return
             column.cards?.forEach((card) => {
               if (card.start_date || card.end_date) {
-                const start = card.start_date ? parseISO(card.start_date) : parseISO(card.end_date!)
-                const end = card.end_date ? parseISO(card.end_date) : start
+                const start = card.start_date ? parseISOLocal(card.start_date) : parseISOLocal(card.end_date!)
+                const end = card.end_date ? parseISOLocal(card.end_date) : start
                 const tagColor = card.tags?.[0]?.tag?.color || overlay.color || '#3b82f6'
                 const hasTime = card.start_date?.includes('T') && !(start.getHours() === 0 && start.getMinutes() === 0)
                 allEvents.push({
@@ -341,8 +341,8 @@ export default function CalendarPage() {
         if (isArchiveColumn(column)) return
         column.cards?.forEach((card) => {
           if (card.start_date || card.end_date) {
-            const start = card.start_date ? parseISO(card.start_date) : parseISO(card.end_date!)
-            const end = card.end_date ? parseISO(card.end_date) : start
+            const start = card.start_date ? parseISOLocal(card.start_date) : parseISOLocal(card.end_date!)
+            const end = card.end_date ? parseISOLocal(card.end_date) : start
             const tagColor = card.tags?.[0]?.tag?.color || '#3b82f6'
             const hasTime = card.start_date?.includes('T') && !(start.getHours() === 0 && start.getMinutes() === 0)
             allEvents.push({

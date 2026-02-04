@@ -1,0 +1,1628 @@
+{
+  "version": "1.0.0",
+  "category": "performance",
+  "patterns": [
+    {
+      "id": "65ec93bb35324f57",
+      "subcategory": "code-splitting",
+      "name": "Code Splitting Detector",
+      "description": "Learns code splitting patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "performance/code-splitting",
+          "patternId": "performance/code-splitting/unknown"
+        }
+      },
+      "confidence": {
+        "frequency": 1,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 90,
+        "score": 0.77,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/alembic/env.py",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "file": "backend/alembic/versions/001_create_scheduled_cards.py",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "file": "backend/alembic/versions/002_add_location_to_scheduled_cards.py",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "file": "backend/alembic/versions/003_change_card_dates_to_datetime.py",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "file": "backend/alembic/versions/004_scheduled_cards_datetime.py",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "file": "backend/alembic/versions/005_remove_board_link_columns_to_spaces.py",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "file": "backend/alembic/versions/033e2f6844e6_add_timezone_to_space_created_at.py",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "file": "backend/alembic/versions/68bf324427c9_add_timezone_to_space_created_at.py",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "file": "backend/alembic/versions/69afc0502192_add_comment_edit_delete_fields.py",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "file": "backend/alembic/versions/8563361832a7_add_agent_space_type.py",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "file": "backend/alembic/versions/add_account_lockout.py",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "file": "backend/alembic/versions/add_admin_fields.py",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "file": "backend/alembic/versions/add_space_color.py",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/users.py",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/commands/db.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/commands/db.py",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/commands/db.py",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/commands/user.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/commands/user.py",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/commands/user.py",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/main.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/utils/output.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/cli/utils/output.py",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "backend/app/core/config.py",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "file": "backend/app/core/config.py",
+          "line": 4,
+          "column": 1
+        },
+        {
+          "file": "backend/app/core/i18n.py",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "backend/app/core/i18n.py",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "file": "backend/app/core/sanitize.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/core/sanitize.py",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "backend/app/core/security.py",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "file": "backend/app/core/security.py",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "file": "backend/app/core/security.py",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 216,
+          "column": 5
+        },
+        {
+          "file": "backend/app/models/calendar.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/models/card.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/models/card.py",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "file": "backend/app/models/column.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/models/column.py",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "file": "backend/app/models/filter_template.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/models/notification.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/models/scheduled_card.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/models/space.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/models/space.py",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "file": "backend/app/models/tag.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/models/user.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/models/webhook.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/schemas/space.py",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "file": "backend/app/schemas/user.py",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "file": "backend/app/services/google_calendar.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/services/google_calendar.py",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 4,
+          "column": 1
+        },
+        {
+          "file": "backend/app/websocket/manager.py",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "file": "backend/app/websocket/manager.py",
+          "line": 4,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/App.tsx",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/App.tsx",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/App.tsx",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/App.tsx",
+          "line": 4,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/App.tsx",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/App.tsx",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/App.tsx",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/App.tsx",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/App.tsx",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/api/admin.ts",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/api/admin.ts",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/api/auth.ts",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/api/auth.ts",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/api/client.ts",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/api/client.ts",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/api/client.ts",
+          "line": 4,
+          "column": 17
+        },
+        {
+          "file": "frontend/src/api/filterTemplates.ts",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/api/notifications.ts",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/api/notifications.ts",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/api/spaces.ts",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/api/spaces.ts",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 4,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUserEditModal.tsx",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUsersPanel.tsx",
+          "line": 1,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUsersPanel.tsx",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUsersPanel.tsx",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUsersPanel.tsx",
+          "line": 4,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUsersPanel.tsx",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "file": "frontend/src/components/admin/AdminUsersPanel.tsx",
+          "line": 7,
+          "column": 1
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "4958feb6d4e1b7c8",
+      "subcategory": "lazy-loading",
+      "name": "Lazy Loading Detector",
+      "description": "Learns lazy loading patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "performance/lazy-loading",
+          "patternId": "performance/lazy-loading/import"
+        }
+      },
+      "confidence": {
+        "frequency": 0.86,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 20,
+        "score": 0.8144444444444444,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/alembic/env.py",
+          "line": 4,
+          "column": 21
+        },
+        {
+          "file": "backend/alembic/env.py",
+          "line": 4,
+          "column": 36
+        },
+        {
+          "file": "backend/alembic/env.py",
+          "line": 6,
+          "column": 8
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 4,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 4,
+          "column": 36
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 8,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 8,
+          "column": 36
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 2,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 2,
+          "column": 36
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 4,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 4,
+          "column": 36
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 2,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 2,
+          "column": 36
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 2,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 2,
+          "column": 36
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 2,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 2,
+          "column": 36
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 2,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 2,
+          "column": 36
+        },
+        {
+          "file": "backend/app/api/v1/notifications.py",
+          "line": 2,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/notifications.py",
+          "line": 2,
+          "column": 36
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 2,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 2,
+          "column": 36
+        },
+        {
+          "file": "backend/app/api/v1/search.py",
+          "line": 2,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/search.py",
+          "line": 2,
+          "column": 36
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 2,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 2,
+          "column": 36
+        },
+        {
+          "file": "backend/app/api/v1/tags.py",
+          "line": 2,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/tags.py",
+          "line": 2,
+          "column": 36
+        },
+        {
+          "file": "backend/app/api/v1/users.py",
+          "line": 2,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/users.py",
+          "line": 2,
+          "column": 36
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 2,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 2,
+          "column": 36
+        },
+        {
+          "file": "backend/app/core/database.py",
+          "line": 1,
+          "column": 21
+        },
+        {
+          "file": "backend/app/core/database.py",
+          "line": 1,
+          "column": 36
+        },
+        {
+          "file": "backend/app/core/database.py",
+          "line": 1,
+          "column": 71
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 1,
+          "column": 24
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 9,
+          "column": 8
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 16,
+          "column": 45
+        },
+        {
+          "file": "backend/app/services/notifications.py",
+          "line": 4,
+          "column": 21
+        },
+        {
+          "file": "backend/app/services/notifications.py",
+          "line": 4,
+          "column": 36
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 6,
+          "column": 21
+        },
+        {
+          "file": "backend/app/services/webhooks.py",
+          "line": 6,
+          "column": 36
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "dd1347a5728e9b2b",
+      "subcategory": "lazy-loading",
+      "name": "Lazy Loading Detector",
+      "description": "Learns lazy loading patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "performance/lazy-loading",
+          "patternId": "performance/lazy-loading/unknown"
+        }
+      },
+      "confidence": {
+        "frequency": 1,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 25,
+        "score": 0.77,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/alembic/env.py",
+          "line": 47,
+          "column": 5
+        },
+        {
+          "file": "backend/alembic/env.py",
+          "line": 54,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 18,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 82,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 93,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 123,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 119,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 149,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 205,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 248,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/admin.py",
+          "line": 270,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 44,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 54,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 85,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/agents.py",
+          "line": 146,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 74,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 128,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 141,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 171,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 180,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 44,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 67,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 97,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 127,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 169,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 196,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 206,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 224,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 255,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 267,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 289,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 314,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 345,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 62,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 63,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 81,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 142,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 289,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 320,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 438,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 550,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 604,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 650,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 697,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 728,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 799,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 845,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 887,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 903,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 932,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 54,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 87,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 114,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 150,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 29,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 44,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 63,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 84,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/notifications.py",
+          "line": 17,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/notifications.py",
+          "line": 34,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/notifications.py",
+          "line": 58,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/notifications.py",
+          "line": 71,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 72,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 90,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 121,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 141,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 192,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 213,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 236,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 271,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 271,
+          "column": 41
+        },
+        {
+          "file": "backend/app/api/v1/search.py",
+          "line": 48,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 34,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 74,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 160,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 204,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 281,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 344,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 363,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/spaces.py",
+          "line": 431,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/tags.py",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/tags.py",
+          "line": 54,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/tags.py",
+          "line": 109,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/tags.py",
+          "line": 162,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/users.py",
+          "line": 36,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/users.py",
+          "line": 41,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/users.py",
+          "line": 76,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/users.py",
+          "line": 94,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 52,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 73,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 103,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 121,
+          "column": 1
+        },
+        {
+          "file": "backend/app/core/database.py",
+          "line": 20,
+          "column": 1
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 29,
+          "column": 1
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 63,
+          "column": 1
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 82,
+          "column": 1
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 109,
+          "column": 1
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "351455aed7d6e86e",
+      "subcategory": "lazy-loading",
+      "name": "Lazy Loading Detector",
+      "description": "Learns lazy loading patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "performance/lazy-loading",
+          "patternId": "performance/lazy-loading/conditional"
+        }
+      },
+      "confidence": {
+        "frequency": 0.28,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 7,
+        "score": 0.8095833333333333,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 25,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 25,
+          "column": 69
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/cards.py",
+          "line": 38,
+          "column": 61
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 19,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/columns.py",
+          "line": 19,
+          "column": 63
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 17,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/filter_templates.py",
+          "line": 17,
+          "column": 63
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 53,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/scheduled_cards.py",
+          "line": 53,
+          "column": 63
+        },
+        {
+          "file": "backend/app/api/v1/tags.py",
+          "line": 19,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/tags.py",
+          "line": 19,
+          "column": 63
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 19,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/webhooks.py",
+          "line": 19,
+          "column": 63
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "a6e56ab8e7ed14d6",
+      "subcategory": "debounce-throttle",
+      "name": "Debounce Throttle Detector",
+      "description": "Learns debounce and throttle patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "performance/debounce-throttle",
+          "patternId": "performance/debounce-throttle/unknown"
+        }
+      },
+      "confidence": {
+        "frequency": 0.12,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 6,
+        "score": 0.77,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/app/cli/commands/space.py",
+          "line": 46,
+          "column": 31
+        },
+        {
+          "file": "backend/app/cli/commands/user.py",
+          "line": 110,
+          "column": 31
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 130,
+          "column": 27
+        },
+        {
+          "file": "frontend/src/api/notifications.ts",
+          "line": 5,
+          "column": 50
+        },
+        {
+          "file": "frontend/src/components/admin/AdminStatsPanel.tsx",
+          "line": 148,
+          "column": 71
+        },
+        {
+          "file": "frontend/src/hooks/useWebSocket.ts",
+          "line": 244,
+          "column": 12
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "a07bc66e26c14db9",
+      "subcategory": "caching-patterns",
+      "name": "Caching Patterns Detector",
+      "description": "Learns caching patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "performance/caching-patterns",
+          "patternId": "performance/caching-patterns/assignment"
+        }
+      },
+      "confidence": {
+        "frequency": 0.02,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 1,
+        "score": 0.76,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 267,
+          "column": 11
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "851f50f77275d029",
+      "subcategory": "caching-patterns",
+      "name": "Caching Patterns Detector",
+      "description": "Learns caching patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "performance/caching-patterns",
+          "patternId": "performance/caching-patterns/conditional"
+        }
+      },
+      "confidence": {
+        "frequency": 0.02,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 1,
+        "score": 0.76,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 268,
+          "column": 9
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "693c5617a1acecd4",
+      "subcategory": "caching-patterns",
+      "name": "Caching Patterns Detector",
+      "description": "Learns caching patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "performance/caching-patterns",
+          "patternId": "performance/caching-patterns/unknown"
+        }
+      },
+      "confidence": {
+        "frequency": 0.06,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 2,
+        "score": 0.6533333333333333,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 269,
+          "column": 27
+        },
+        {
+          "file": "frontend/src/components/kanban/KanbanBoard.tsx",
+          "line": 270,
+          "column": 59
+        },
+        {
+          "file": "frontend/src/components/settings/SettingsPage.tsx",
+          "line": 317,
+          "column": 66
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "3ededd58cc68d275",
+      "subcategory": "caching-patterns",
+      "name": "Caching Patterns Detector",
+      "description": "Learns caching patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "performance/caching-patterns",
+          "patternId": "performance/caching-patterns/function_call"
+        }
+      },
+      "confidence": {
+        "frequency": 0.04,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 2,
+        "score": 0.7949999999999999,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/stores/auth.ts",
+          "line": 15,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/stores/settings.ts",
+          "line": 18,
+          "column": 3
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    }
+  ],
+  "lastUpdated": "2026-02-03T13:19:00.805Z",
+  "checksum": "9cb09eeab4e5d418"
+}

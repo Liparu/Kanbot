@@ -1,0 +1,903 @@
+{
+  "version": "1.0.0",
+  "category": "documentation",
+  "patterns": [
+    {
+      "id": "765f1f8d2e3d7d7c",
+      "subcategory": "readme-structure",
+      "name": "Readme Structure Detector",
+      "description": "Learns README structure patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "documentation/readme-structure",
+          "patternId": "documentation/readme-structure/unknown"
+        }
+      },
+      "confidence": {
+        "frequency": 1,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 17,
+        "score": 0.77,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 46,
+          "column": 33
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 48,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 49,
+          "column": 35
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 50,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 60,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 63,
+          "column": 16
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 99,
+          "column": 46
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 129,
+          "column": 33
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 131,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 132,
+          "column": 35
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 133,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/deps.py",
+          "line": 143,
+          "column": 9
+        },
+        {
+          "file": "backend/app/api/v1/__init__.py",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/__init__.py",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/__init__.py",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/__init__.py",
+          "line": 10,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/__init__.py",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/__init__.py",
+          "line": 12,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/__init__.py",
+          "line": 13,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/__init__.py",
+          "line": 14,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/__init__.py",
+          "line": 15,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/__init__.py",
+          "line": 16,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/__init__.py",
+          "line": 17,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/__init__.py",
+          "line": 18,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/__init__.py",
+          "line": 19,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/__init__.py",
+          "line": 20,
+          "column": 1
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 27,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 28,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 142,
+          "column": 15
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 155,
+          "column": 12
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 157,
+          "column": 22
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 160,
+          "column": 12
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 161,
+          "column": 14
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 162,
+          "column": 21
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 163,
+          "column": 18
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 164,
+          "column": 20
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 165,
+          "column": 19
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 175,
+          "column": 38
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 175,
+          "column": 52
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 186,
+          "column": 16
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 186,
+          "column": 30
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 186,
+          "column": 51
+        },
+        {
+          "file": "backend/app/api/v1/auth.py",
+          "line": 196,
+          "column": 21
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 52,
+          "column": 21
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 54,
+          "column": 25
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 57,
+          "column": 23
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 58,
+          "column": 21
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 61,
+          "column": 27
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 85,
+          "column": 24
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 92,
+          "column": 33
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 147,
+          "column": 41
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 147,
+          "column": 55
+        },
+        {
+          "file": "backend/app/cli/commands/apikey.py",
+          "line": 159,
+          "column": 24
+        },
+        {
+          "file": "backend/app/core/security.py",
+          "line": 62,
+          "column": 27
+        },
+        {
+          "file": "backend/app/core/security.py",
+          "line": 66,
+          "column": 25
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 212,
+          "column": 20
+        },
+        {
+          "file": "backend/app/main.py",
+          "line": 212,
+          "column": 48
+        },
+        {
+          "file": "backend/app/schemas/__init__.py",
+          "line": 7,
+          "column": 5
+        },
+        {
+          "file": "backend/app/schemas/__init__.py",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/api/admin.ts",
+          "line": 18,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/admin.ts",
+          "line": 23,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/admin.ts",
+          "line": 28,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/admin.ts",
+          "line": 33,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/api/admin.ts",
+          "line": 37,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/admin.ts",
+          "line": 42,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/auth.ts",
+          "line": 16,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/auth.ts",
+          "line": 23,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/auth.ts",
+          "line": 33,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/api/auth.ts",
+          "line": 39,
+          "column": 47
+        },
+        {
+          "file": "frontend/src/api/auth.ts",
+          "line": 44,
+          "column": 34
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 6,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 11,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 16,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 21,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 27,
+          "column": 9
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 41,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 46,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 60,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 65,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 70,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 75,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 79,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 84,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 89,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 93,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 98,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 103,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 108,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 115,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 120,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 125,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 130,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 173,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 178,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 183,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 188,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 193,
+          "column": 11
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 197,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 202,
+          "column": 28
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "68373071da4a2619",
+      "subcategory": "jsdoc-patterns",
+      "name": "JSDoc Patterns Detector",
+      "description": "Learns JSDoc documentation patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "documentation/jsdoc-patterns",
+          "patternId": "documentation/jsdoc-patterns/unknown"
+        }
+      },
+      "confidence": {
+        "frequency": 0.41,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 15,
+        "score": 0.77,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/app/api/v1/calendar.py",
+          "line": 334,
+          "column": 59
+        },
+        {
+          "file": "backend/app/services/google_calendar.py",
+          "line": 140,
+          "column": 13
+        },
+        {
+          "file": "backend/app/services/google_calendar.py",
+          "line": 143,
+          "column": 17
+        },
+        {
+          "file": "backend/app/services/google_calendar.py",
+          "line": 145,
+          "column": 17
+        },
+        {
+          "file": "backend/app/services/google_calendar.py",
+          "line": 148,
+          "column": 46
+        },
+        {
+          "file": "backend/app/services/google_calendar.py",
+          "line": 151,
+          "column": 21
+        },
+        {
+          "file": "backend/app/services/google_calendar.py",
+          "line": 153,
+          "column": 21
+        },
+        {
+          "file": "backend/app/services/google_calendar.py",
+          "line": 154,
+          "column": 50
+        },
+        {
+          "file": "frontend/src/api/admin.ts",
+          "line": 18,
+          "column": 54
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 34,
+          "column": 16
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 41,
+          "column": 48
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 53,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/api/boards.ts",
+          "line": 161,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 78,
+          "column": 22
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 83,
+          "column": 58
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 130,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 135,
+          "column": 65
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 9,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 31,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 41,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 64,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/api/calendar.ts",
+          "line": 144,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/api/notifications.ts",
+          "line": 5,
+          "column": 16
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 286,
+          "column": 7
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 947,
+          "column": 10
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 1231,
+          "column": 24
+        },
+        {
+          "file": "frontend/src/components/calendar/MonthView.tsx",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/components/calendar/WeekView.tsx",
+          "line": 35,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/components/kanban/CardGenerator.tsx",
+          "line": 33,
+          "column": 10
+        },
+        {
+          "file": "frontend/src/components/kanban/CardGenerator.tsx",
+          "line": 54,
+          "column": 59
+        },
+        {
+          "file": "frontend/src/components/kanban/CardGenerator.tsx",
+          "line": 203,
+          "column": 26
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 38,
+          "column": 10
+        },
+        {
+          "file": "frontend/src/components/kanban/ScheduledCards.tsx",
+          "line": 232,
+          "column": 28
+        },
+        {
+          "file": "frontend/src/types/index.ts",
+          "line": 52,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/types/index.ts",
+          "line": 118,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/utils/avatarColor.ts",
+          "line": 37,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/utils/avatarColor.ts",
+          "line": 4,
+          "column": 4
+        },
+        {
+          "file": "frontend/src/utils/avatarColor.ts",
+          "line": 38,
+          "column": 5
+        },
+        {
+          "file": "frontend/src/utils/calendar.ts",
+          "line": 12,
+          "column": 3
+        },
+        {
+          "file": "frontend/src/utils/calendar.ts",
+          "line": 51,
+          "column": 5
+        },
+        {
+          "file": "scripts/verify_multiprofile.py",
+          "line": 257,
+          "column": 25
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "efee6df3afe2c91a",
+      "subcategory": "readme-structure",
+      "name": "Readme Structure Detector",
+      "description": "Learns README structure patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "documentation/readme-structure",
+          "patternId": "documentation/readme-structure/property_access"
+        }
+      },
+      "confidence": {
+        "frequency": 0.06,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 1,
+        "score": 0.83,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 47,
+          "column": 22
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 49,
+          "column": 22
+        },
+        {
+          "file": "backend/app/cli/commands/system.py",
+          "line": 51,
+          "column": 18
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "be92ff350fc42ec1",
+      "subcategory": "jsdoc-patterns",
+      "name": "JSDoc Patterns Detector",
+      "description": "Learns JSDoc documentation patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "documentation/jsdoc-patterns",
+          "patternId": "documentation/jsdoc-patterns/conditional"
+        }
+      },
+      "confidence": {
+        "frequency": 0.03,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 2,
+        "score": 0.7949999999999999,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "backend/app/services/google_calendar.py",
+          "line": 197,
+          "column": 12
+        },
+        {
+          "file": "backend/app/services/google_calendar.py",
+          "line": 239,
+          "column": 12
+        },
+        {
+          "file": "frontend/src/api/notifications.ts",
+          "line": 6,
+          "column": 56
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    },
+    {
+      "id": "bf7bc1ac3983708a",
+      "subcategory": "jsdoc-patterns",
+      "name": "JSDoc Patterns Detector",
+      "description": "Learns JSDoc documentation patterns from your codebase",
+      "detector": {
+        "type": "regex",
+        "config": {
+          "detectorId": "documentation/jsdoc-patterns",
+          "patternId": "documentation/jsdoc-patterns/function_call"
+        }
+      },
+      "confidence": {
+        "frequency": 0.02,
+        "consistency": 0.9,
+        "age": 0,
+        "spread": 1,
+        "score": 0.7658333333333334,
+        "level": "medium"
+      },
+      "locations": [
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 99,
+          "column": 23
+        },
+        {
+          "file": "frontend/src/components/calendar/CalendarPage.tsx",
+          "line": 99,
+          "column": 67
+        }
+      ],
+      "outliers": [],
+      "metadata": {
+        "firstSeen": "2026-02-03T13:16:08.338Z",
+        "lastSeen": "2026-02-03T13:16:08.338Z"
+      },
+      "severity": "warning",
+      "autoFixable": false
+    }
+  ],
+  "lastUpdated": "2026-02-03T13:19:01.224Z",
+  "checksum": "3e328c271a1934ef"
+}

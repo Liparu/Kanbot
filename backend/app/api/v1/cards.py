@@ -45,6 +45,7 @@ async def verify_card_access(card_id: UUID, user: User, db: AsyncSession) -> Car
             .selectinload(Space.members),
             selectinload(Card.assignees),
             selectinload(Card.tags).selectinload(CardTag.tag),
+            selectinload(Card.creator),
         )
     )
     card = result.scalar_one_or_none()
@@ -102,6 +103,7 @@ async def list_cards(
         .options(
             selectinload(Card.tags).selectinload(CardTag.tag),
             selectinload(Card.assignees),
+            selectinload(Card.creator),
         )
     )
     
@@ -216,6 +218,7 @@ async def create_card(
         .options(
             selectinload(Card.tags).selectinload(CardTag.tag),
             selectinload(Card.assignees),
+            selectinload(Card.creator),
             selectinload(Card.column)
             .selectinload(Column.space)
             .selectinload(Space.members),
@@ -299,6 +302,7 @@ async def get_card(
             selectinload(Card.assignees),
             selectinload(Card.tasks),
             selectinload(Card.comments),
+            selectinload(Card.creator),
             selectinload(Card.column)
             .selectinload(Column.space)
             .selectinload(Space.members),
@@ -541,6 +545,7 @@ async def move_card(
         .options(
             selectinload(Card.tags).selectinload(CardTag.tag),
             selectinload(Card.assignees),
+            selectinload(Card.creator),
         )
     )
     return result.scalar_one()

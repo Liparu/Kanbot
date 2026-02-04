@@ -383,6 +383,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
                 <textarea
                   value={editedDescription}
                   onChange={(e) => setEditedDescription(e.target.value)}
+                  onBlur={handleSaveDescription}
                   rows={4}
                   className="w-full px-3 py-2 bg-dark-700 border border-dark-600 rounded-lg text-dark-100 text-sm"
                   placeholder={t('cards.description')}
