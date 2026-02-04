@@ -69,6 +69,7 @@ async def create_tag(
         )
         existing = existing_result.scalar_one_or_none()
         if existing:
+            # Return existing tag - response_model will handle serialization
             return existing
     
     result = await db.execute(

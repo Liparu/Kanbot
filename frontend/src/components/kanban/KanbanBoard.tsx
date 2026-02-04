@@ -199,8 +199,10 @@ export default function KanbanBoard({ spaceId }: KanbanBoardProps) {
       queryClient.invalidateQueries({ queryKey: ['tags', spaceId] })
       toast.success(t('tags.created'))
     },
-    onError: () => {
-      toast.error(t('common.operationFailed'))
+    onError: (error: any) => {
+      const errorMessage = error?.response?.data?.detail || error?.message || t('common.operationFailed')
+      toast.error(errorMessage)
+      console.error('Tag creation error:', error)
     },
   })
 
