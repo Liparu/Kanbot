@@ -7,8 +7,9 @@ from sqlalchemy.orm import selectinload
 from uuid import UUID
 import logging
 import asyncio
+import time
 
-from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
@@ -24,6 +25,81 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 limiter = Limiter(key_func=get_remote_address)
+
+# Rate limit backoff tracking: {client_key: (count, last_retry_at)}
+# count: number of consecutive 429s, last_retry_at: timestamp of last request
+_rate_limit_backoff_cache = {}
+_MAX_BACKOFF_MINUTES = 30
+_BACKOFF_MULTIPLIER = 2  # Exponential: 1, 2, 4, 8, 16, 30...
+
+
+def _get_backoff_minutes(retry_count: int) -> int:
+    """Calculate exponential backoff minutes: 1, 2, 4, 8, 16, 30..."""
+    minutes = _BACKOFF_MULTIPLIER ** retry_count
+    return min(minutes, _MAX_BACKOFF_MINUTES)
+
+
+async def custom_rate_limit_handler(request: Request, exc: RateLimitExceeded):
+    """
+    Custom rate limit handler with exponential backoff guidance.
+    Returns 429 with Retry-After header based on exponential backoff.
+    """
+    client_key = get_remote_address(request)
+    now = time.time()
+    
+    # Get or initialize backoff state
+    if client_key in _rate_limit_backoff_cache:
+        count, last_retry = _rate_limit_backoff_cache[client_key]
+        # Reset if enough time has passed (they waited properly)
+        backoff_mins = _get_backoff_minutes(count)
+        if now - last_retry > backoff_mins * 60 * 2:  # 2x grace period
+            count = 0
+    else:
+        count = 0
+        last_retry = now
+    
+    # Update state
+    count += 1
+    _rate_limit_backoff_cache[client_key] = (count, now)
+    
+    # Calculate backoff
+    backoff_minutes = _get_backoff_minutes(count - 1)  # 0-indexed: first 429 = 1min
+    retry_after_seconds = backoff_minutes * 60
+    
+    # Quiet logging - only log every 3rd occurrence to avoid spam
+    if count <= 3 or count % 5 == 0:
+        logger.warning(
+            f"Rate limit hit for {client_key}: attempt {count}, "
+            f"backoff: {backoff_minutes}min"
+        )
+    
+    # Clean old entries occasionally
+    if len(_rate_limit_backoff_cache) > 1000:
+        _cleanup_backoff_cache(now)
+    
+    return JSONResponse(
+        status_code=429,
+        content={
+            "detail": f"Rate limit exceeded. Retry after {backoff_minutes} minutes.",
+            "retry_after_minutes": backoff_minutes,
+            "retry_after_seconds": retry_after_seconds,
+        },
+        headers={
+            "Retry-After": str(retry_after_seconds),
+            "X-RateLimit-Backoff-Minutes": str(backoff_minutes),
+        }
+    )
+
+
+def _cleanup_backoff_cache(now: float):
+    """Remove old backoff entries to prevent memory leak."""
+    cutoff = now - (_MAX_BACKOFF_MINUTES * 60 * 2)  # 2x max backoff
+    keys_to_remove = [
+        k for k, (_, last_retry) in _rate_limit_backoff_cache.items()
+        if last_retry < cutoff
+    ]
+    for k in keys_to_remove:
+        del _rate_limit_backoff_cache[k]
 
 
 async def seed_admin():
@@ -127,7 +203,7 @@ app = FastAPI(
 )
 
 app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+app.add_exception_handler(RateLimitExceeded, custom_rate_limit_handler)
 
 
 @app.middleware("http")
