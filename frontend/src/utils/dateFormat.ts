@@ -24,7 +24,8 @@ const TIME_FORMAT_24H = 'HH:mm'
 export function parseISOLocal(dateTimeStr: string): Date {
   // Strip timezone info if present (Z, +00:00, -05:00, etc.)
   // Match patterns like: 2026-02-04T14:00:00Z or 2026-02-04T14:00:00+00:00 or 2026-02-04T14:00:00.000Z
-  const cleaned = dateTimeStr.replace(/\.?\d{0,3}(Z|[+-]\d{2}:?\d{2})$/, '')
+  // Note: (\.\d{1,3})? matches optional milliseconds (must start with dot)
+  const cleaned = dateTimeStr.replace(/(\.\d{1,3})?(Z|[+-]\d{2}:?\d{2})$/, '')
   
   // Parse the cleaned string manually to avoid timezone issues
   // Format: yyyy-MM-ddTHH:mm:ss or yyyy-MM-ddTHH:mm:ss.SSS
