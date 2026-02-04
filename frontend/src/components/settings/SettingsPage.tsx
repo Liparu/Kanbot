@@ -82,10 +82,38 @@ export default function SettingsPage() {
   }
 
   const handleCopyKey = async () => {
-    if (createdKey) {
-      await navigator.clipboard.writeText(createdKey)
+    if (!createdKey) return
+
+    try {
+      // Try modern clipboard API first
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(createdKey)
+      } else {
+        // Fallback for non-secure contexts or older browsers
+        const textArea = document.createElement('textarea')
+        textArea.value = createdKey
+        textArea.style.position = 'fixed'
+        textArea.style.left = '-999999px'
+        textArea.style.top = '-999999px'
+        document.body.appendChild(textArea)
+        textArea.focus()
+        textArea.select()
+
+        try {
+          const successful = document.execCommand('copy')
+          if (!successful) {
+            throw new Error('execCommand copy failed')
+          }
+        } finally {
+          textArea.remove()
+        }
+      }
+
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
+    } catch (error) {
+      console.error('Failed to copy API key:', error)
+      // Could add toast notification here in the future
     }
   }
 
