@@ -25,6 +25,8 @@ import { getAvatarColor } from '@/utils/avatarColor'
 import DateTimePicker from '@/components/common/DateTimePicker'
 import { useToast } from '@/components/common/Toast'
 import { useConfirm } from '@/components/common/ConfirmDialog'
+import { formatDateTime } from '@/utils/dateFormat'
+import { useSettingsStore } from '@/stores/settings'
 import type { Card, Task, Tag as TagType, SpaceMember } from '@/types'
 
 interface CardDetailModalProps {
@@ -40,6 +42,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
   const toast = useToast()
   const confirm = useConfirm()
   const { updateCard: updateCardInStore, removeCard } = useBoardStore()
+  const { dateFormat } = useSettingsStore()
 
   const assigneeDropdownRef = useRef<HTMLDivElement>(null)
   const tagDropdownRef = useRef<HTMLDivElement>(null)
@@ -434,7 +437,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
             <div className="flex items-center gap-2">
               <Clock className="w-4 h-4" />
               <span>{t('cards.createdAt')}</span>
-              <span className="text-dark-200">{new Date(card.created_at).toLocaleString()}</span>
+              <span className="text-dark-200">{formatDateTime(card.created_at, dateFormat, true)}</span>
             </div>
           </div>
 
@@ -719,7 +722,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
                       </div>
                       <span className="text-sm font-medium text-dark-200">{comment.actor_name}</span>
                       <span className="text-xs text-dark-500">
-                        {new Date(comment.created_at).toLocaleString()}
+                        {formatDateTime(comment.created_at, dateFormat, true)}
                       </span>
                       {comment.is_edited && !comment.is_deleted && (
                         <span className="text-xs text-dark-500 italic">
