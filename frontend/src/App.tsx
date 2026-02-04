@@ -7,6 +7,7 @@ import SpacesPage from './components/spaces/SpacesPage'
 import BoardPage from './components/kanban/BoardPage'
 import CalendarPage from './components/calendar/CalendarPage'
 import SettingsPage from './components/settings/SettingsPage'
+import DashboardPage from './components/dashboard/DashboardPage'
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuthStore()
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/spaces/:spaceId/calendar" element={<CalendarPage />} />
                 <Route path="/calendar" element={<CalendarPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
               </Routes>
             </Layout>
           </PrivateRoute>
