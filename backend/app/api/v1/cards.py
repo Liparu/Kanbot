@@ -611,6 +611,11 @@ async def delete_card(
     column_id = card.column_id
     space_id = str(card.column.space.id)
     
+    # Capture card data BEFORE deletion for webhook
+    card_name = card.name
+    card_start_date = card.start_date.isoformat() if card.start_date else None
+    card_end_date = card.end_date.isoformat() if card.end_date else None
+    
     await db.delete(card)
     await db.commit()
     
@@ -628,7 +633,7 @@ async def delete_card(
                 user_id=user_id,
                 notification_type="agent_card_deleted",
                 title=f"{actor.actor_display_name} deleted a card",
-                message=card.name,
+                message=card_name,
                 data={
                     "card_id": str(card.id),
                     "column_id": str(column_id),
@@ -651,7 +656,13 @@ async def delete_card(
         db,
         space_id,
         "card_deleted",
-        {"card_id": str(card_id), "column_id": str(column_id)},
+        {
+            "card_id": str(card_id),
+            "column_id": str(column_id),
+            "card_name": card_name,
+            "start_date": card_start_date,
+            "end_date": card_end_date,
+        },
     )
 
 
