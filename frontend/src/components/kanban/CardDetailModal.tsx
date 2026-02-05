@@ -48,6 +48,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
   const tagDropdownRef = useRef<HTMLDivElement>(null)
   const locationRef = useRef<HTMLDivElement>(null)
   const isLocationUserEditRef = useRef(false)
+  const lastSavedDescriptionRef = useRef<string>('')
 
   const [editedName, setEditedName] = useState('')
   const [editedDescription, setEditedDescription] = useState('')
@@ -106,8 +107,11 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
   useEffect(() => {
     if (card) {
       setEditedName(card.name)
-      if (!isDescriptionDirty) {
+      // Only overwrite description if it's different from last saved value
+      // This prevents race conditions where stale data overwrites user input
+      if (card.description !== lastSavedDescriptionRef.current) {
         setEditedDescription(card.description || '')
+        lastSavedDescriptionRef.current = card.description || ''
       }
       setEditedStartDate(card.start_date || '')
       setEditedEndDate(card.end_date || '')
@@ -247,6 +251,8 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
 
   const handleSaveDescription = () => {
     if (editedDescription !== (card?.description || '')) {
+      // Update ref BEFORE mutation to prevent race conditions
+      lastSavedDescriptionRef.current = editedDescription
       updateMutation.mutate({ description: editedDescription })
     } else {
       // No change to save, reset dirty state immediately
@@ -399,7 +405,10 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
                   value={editedDescription}
                   onChange={(e) => {
                     setEditedDescription(e.target.value)
-                    setIsDescriptionDirty(true)
+                    // Mark as dirty immediately on first keystroke
+                    if (!isDescriptionDirty) {
+                      setIsDescriptionDirty(true)
+                    }
                   }}
                   onBlur={handleSaveDescription}
                   rows={4}
