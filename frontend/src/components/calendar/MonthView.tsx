@@ -359,7 +359,7 @@ const EventBar = memo(function EventBar({
               {event.title}
             </div>
             
-            {!event.isAllDay && (
+            {!event.isAllDay && !(event.start.getHours() === 0 && event.start.getMinutes() === 0) && (
               <div className="flex items-center gap-1 text-[10px] mt-1 opacity-80" style={{ color: event.color }}>
                 <Clock className="w-3 h-3" />
                 <span>{format(event.start, 'HH:mm')}</span>
@@ -424,7 +424,7 @@ const EventBar = memo(function EventBar({
             />
           )}
           
-          {!event.isAllDay && event.isFirstDay && (
+          {!event.isAllDay && event.isFirstDay && !(event.start.getHours() === 0 && event.start.getMinutes() === 0) && (
             <span className="text-[9px] opacity-70 font-medium flex-shrink-0 tabular-nums">
               {format(event.start, 'HH:mm')}
             </span>
@@ -532,7 +532,7 @@ function MoreEventsPopover({
                   </div>
                   
                   <div className="flex flex-wrap items-center gap-2 mt-1 text-xs text-dark-400">
-                    {event.isAllDay ? (
+                    {event.isAllDay || (event.start.getHours() === 0 && event.start.getMinutes() === 0) ? (
                       <span className="bg-dark-700 px-2 py-0.5 rounded-full text-[10px]">
                         {t('calendar.allDay')}
                       </span>
