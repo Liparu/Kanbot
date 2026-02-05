@@ -207,6 +207,30 @@ async def create_card(
             card_tag = CardTag(card_id=card.id, tag_id=tag_id)
             db.add(card_tag)
     
+    # Handle tag_names: find or create tags by name
+    if card_data.tag_names:
+        space_id = column.space.id
+        for tag_name in card_data.tag_names:
+            # Check if tag exists in this space
+            result = await db.execute(
+                select(Tag).where(and_(Tag.space_id == space_id, Tag.name == tag_name))
+            )
+            tag = result.scalar_one_or_none()
+            
+            if not tag:
+                # Create new tag
+                tag = Tag(space_id=space_id, name=tag_name, color="#6366f1")
+                db.add(tag)
+                await db.flush()
+            
+            # Link tag to card (avoid duplicates)
+            existing = await db.execute(
+                select(CardTag).where(and_(CardTag.card_id == card.id, CardTag.tag_id == tag.id))
+            )
+            if not existing.scalar_one_or_none():
+                card_tag = CardTag(card_id=card.id, tag_id=tag.id)
+                db.add(card_tag)
+    
     await log_card_action(db, card, "created", {"name": card.name}, actor)
     
     await db.commit()
@@ -365,6 +389,30 @@ async def update_card(
         )
         if card_data.tag_ids:
             db.add_all([CardTag(card_id=card.id, tag_id=tag_id) for tag_id in card_data.tag_ids])
+    
+    # Handle tag_names: find or create tags by name
+    if card_data.tag_names is not None:
+        space_id = card.column.space.id
+        for tag_name in card_data.tag_names:
+            # Check if tag exists in this space
+            result = await db.execute(
+                select(Tag).where(and_(Tag.space_id == space_id, Tag.name == tag_name))
+            )
+            tag = result.scalar_one_or_none()
+            
+            if not tag:
+                # Create new tag
+                tag = Tag(space_id=space_id, name=tag_name, color="#6366f1")
+                db.add(tag)
+                await db.flush()
+            
+            # Link tag to card (avoid duplicates)
+            existing = await db.execute(
+                select(CardTag).where(and_(CardTag.card_id == card.id, CardTag.tag_id == tag.id))
+            )
+            if not existing.scalar_one_or_none():
+                card_tag = CardTag(card_id=card.id, tag_id=tag.id)
+                db.add(card_tag)
     
     if changes:
         await log_card_action(db, card, "updated", changes, actor)

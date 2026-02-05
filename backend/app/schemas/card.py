@@ -64,6 +64,7 @@ class CardCreate(BaseModel):
     waiting_on: Optional[str] = Field(None, max_length=500)
     assignee_ids: Optional[List[UUID]] = None
     tag_ids: Optional[List[UUID]] = None
+    tag_names: Optional[List[str]] = None  # Create/find tags by name
 
 
 class CardUpdate(BaseModel):
@@ -78,6 +79,7 @@ class CardUpdate(BaseModel):
     approver_id: Optional[UUID] = None
     assignee_ids: Optional[List[UUID]] = None
     tag_ids: Optional[List[UUID]] = None
+    tag_names: Optional[List[str]] = None  # Create/find tags by name
 
 
 class CardMove(BaseModel):
