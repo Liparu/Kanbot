@@ -3,8 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Check, Trash2, ExternalLink } from 'lucide-react'
 import type { Notification } from '@/types'
-import { parseISOLocal } from '@/utils/dateFormat'
-
 interface NotificationPanelProps {
   open: boolean
   onClose: () => void
@@ -17,7 +15,8 @@ interface NotificationPanelProps {
 }
 
 const formatDate = (value: string) => {
-  const date = parseISOLocal(value)
+  // Notifications use UTC timestamps — convert to local time naturally
+  const date = new Date(value)
   if (Number.isNaN(date.getTime())) {
     return ''
   }

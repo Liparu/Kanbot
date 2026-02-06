@@ -105,11 +105,14 @@ export function isAllDay(dateTimeStr: string | null | undefined): boolean {
 export function formatDateTime(
   isoDateTime: string | undefined | null,
   dateFormat: DateFormat,
-  use24Hour = true
+  use24Hour = true,
+  utc = false
 ): string {
   if (!isoDateTime) return ''
   
-  const date = parseLocalDateTime(isoDateTime)
+  // Use standard Date for UTC timestamps (e.g. comments, notifications)
+  // Use parseLocalDateTime for local timestamps (e.g. card dates)
+  const date = utc ? new Date(isoDateTime) : parseLocalDateTime(isoDateTime)
   if (!isValid(date)) return isoDateTime
   
   const datePart = format(date, FORMAT_MAP[dateFormat])

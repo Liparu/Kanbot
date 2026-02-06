@@ -41,7 +41,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
   const queryClient = useQueryClient()
   const toast = useToast()
   const confirm = useConfirm()
-  const { updateCard: updateCardInStore, removeCard } = useBoardStore()
+  const { columns, updateCard: updateCardInStore, removeCard } = useBoardStore()
   const { dateFormat } = useSettingsStore()
 
   const assigneeDropdownRef = useRef<HTMLDivElement>(null)
@@ -362,6 +362,15 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
           style={{ backgroundColor: primaryTag?.color ? `${primaryTag.color}20` : undefined }}
         >
           <div className="flex-1 mr-4">
+            {/* Column location badge */}
+            {(() => {
+              const col = columns.find((c) => c.id === columnId)
+              return col ? (
+                <div className="text-xs text-primary-400 font-medium mb-1">
+                  📍 {col.name}
+                </div>
+              ) : null
+            })()}
             {isEditingName ? (
               <input
                 value={editedName}
@@ -459,7 +468,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
             <div className="flex items-center gap-2">
               <Clock className="w-4 h-4" />
               <span>{t('cards.createdAt')}</span>
-              <span className="text-dark-200">{formatDateTime(card.created_at, dateFormat, true)}</span>
+              <span className="text-dark-200">{formatDateTime(card.created_at, dateFormat, true, true)}</span>
             </div>
           </div>
 
@@ -744,7 +753,7 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
                       </div>
                       <span className="text-sm font-medium text-dark-200">{comment.actor_name}</span>
                       <span className="text-xs text-dark-500">
-                        {formatDateTime(comment.created_at, dateFormat, true)}
+                        {formatDateTime(comment.created_at, dateFormat, true, true)}
                       </span>
                       {comment.is_edited && !comment.is_deleted && (
                         <span className="text-xs text-dark-500 italic">
