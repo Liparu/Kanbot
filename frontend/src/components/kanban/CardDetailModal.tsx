@@ -747,7 +747,10 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
                     <div className="flex items-center gap-2">
                       <div
                         className="w-6 h-6 rounded-full flex items-center justify-center text-xs text-white"
-                        style={{ backgroundColor: getAvatarColor(comment.actor_name || 'Unknown') }}
+                        style={{ backgroundColor: getAvatarColor(
+                          // Use username (matching kanban board) instead of actor_name for consistent colors
+                          spaceMembers.find(m => m.user_id === comment.user_id)?.username || comment.actor_name || 'Unknown'
+                        ) }}
                       >
                         {comment.actor_name?.[0]?.toUpperCase() || 'U'}
                       </div>
