@@ -855,8 +855,8 @@ async def add_comment(
                 db,
                 user_id=user_id,
                 notification_type="agent_comment_added",
-                title=f"{actor.actor_display_name} commented on {card.name}",
-                message="",
+                title=f"{actor.actor_display_name} commented on a card",
+                message=card.name,
                 data={
                     "card_id": str(card.id),
                     "column_id": str(card.column_id),
