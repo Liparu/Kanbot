@@ -811,6 +811,21 @@ async def add_comment(
     await db.commit()
     await db.refresh(comment)
 
+    # Dispatch webhook for comment
+    await dispatch_webhooks(
+        db,
+        space_id,
+        "comment_created",
+        {
+            "card_id": str(card_id),
+            "card_name": card.name,
+            "comment_id": str(comment.id),
+            "content": comment.content[:200],
+            "actor_id": str(actor.user.id),
+            "actor_name": actor.actor_display_name,
+        },
+    )
+
     comment_data_ws = {
         "id": str(comment.id),
         "card_id": str(comment.card_id),

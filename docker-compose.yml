@@ -50,6 +50,7 @@ services:
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
       ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@kanbot.local}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:?ADMIN_PASSWORD required}
+      WEBHOOK_URL: http://kanbot-webhook-receiver:9999/webhook
     volumes:
       - ./backend:/app
     ports:

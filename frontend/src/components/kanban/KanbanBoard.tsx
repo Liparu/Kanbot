@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
@@ -78,6 +78,7 @@ export default function KanbanBoard({ spaceId }: KanbanBoardProps) {
   const [archiveTag, setArchiveTag] = useState<string>('')
   const [archiveYear, setArchiveYear] = useState<string>('')
   const [selectedCard, setSelectedCard] = useState<{ id: string; columnId: string } | null>(null)
+  const [searchParams, setSearchParams] = useSearchParams()
   const [showTagsDropdown, setShowTagsDropdown] = useState(false)
   const [newTagName, setNewTagName] = useState('')
   const [newTagColor, setNewTagColor] = useState('#ef4444')
@@ -120,6 +121,24 @@ export default function KanbanBoard({ spaceId }: KanbanBoardProps) {
       queryClient.invalidateQueries({ queryKey: ['tags', spaceId] })
     },
   })
+
+  // Handle opening card from URL param (e.g., from notification click)
+  useEffect(() => {
+    const cardIdParam = searchParams.get('card')
+    if (cardIdParam && cards && !selectedCard) {
+      // Find the card's column
+      for (const [columnId, columnCards] of Object.entries(cards)) {
+        const foundCard = columnCards.find((c) => c.id === cardIdParam)
+        if (foundCard) {
+          setSelectedCard({ id: cardIdParam, columnId })
+          // Clear the param from URL
+          searchParams.delete('card')
+          setSearchParams(searchParams, { replace: true })
+          break
+        }
+      }
+    }
+  }, [searchParams, cards, selectedCard, setSearchParams])
 
   const sensors = useSensors(
     useSensor(PointerSensor, {

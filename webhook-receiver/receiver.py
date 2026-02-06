@@ -48,6 +48,12 @@ def handle_webhook():
             "space_id": space_id,
         }
         
+        # For comment events, capture comment content and actor
+        if event == "comment_created":
+            event_data["comment_content"] = payload.get("content", "")[:200]
+            event_data["actor_id"] = payload.get("actor_id", "")
+            event_data["actor_name"] = payload.get("actor_name", "")
+        
         os.makedirs(EVENTS_DIR, exist_ok=True)
         event_file = os.path.join(EVENTS_DIR, f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{card_id[:8]}.json")
         

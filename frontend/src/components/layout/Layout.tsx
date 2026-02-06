@@ -291,6 +291,11 @@ export default function Layout({ children }: LayoutProps) {
                 onMarkRead={(notificationId) => markReadMutation.mutate(notificationId)}
                 onMarkAllRead={() => markAllReadMutation.mutate()}
                 onRemove={(notificationId) => deleteMutation.mutate(notificationId)}
+                onCardClick={(cardId, spaceId) => {
+                  if (spaceId) {
+                    navigate(`/spaces/${spaceId}?card=${cardId}`)
+                  }
+                }}
                 isLoading={notificationsLoading}
               />
             </div>
