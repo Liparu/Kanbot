@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { LayoutGrid, Users, Calendar, Tag, AlertTriangle, Inbox, Clock, ClipboardCheck, Archive, Edit2, Check, X } from 'lucide-react'
 import { spacesApi } from '@/api/spaces'
+import ScheduleTimeline from './ScheduleTimeline'
+import SubAgentWidget from './SubAgentWidget'
+import AddAgentModal from './AddAgentModal'
 
 export default function SpaceDashboard() {
   const { t } = useTranslation()
@@ -12,6 +15,7 @@ export default function SpaceDashboard() {
   const queryClient = useQueryClient()
   const [isEditingName, setIsEditingName] = useState(false)
   const [editedName, setEditedName] = useState('')
+  const [isAddAgentModalOpen, setIsAddAgentModalOpen] = useState(false)
 
   const { data: space, isLoading: spaceLoading } = useQuery({
     queryKey: ['space', spaceId],
@@ -134,6 +138,24 @@ export default function SpaceDashboard() {
         <StatCard icon={ClipboardCheck} label={t('stats.review')} value={stats?.review_cards || 0} />
         <StatCard icon={Archive} label={t('stats.archive')} value={stats?.archive_cards || 0} />
       </div>
+
+      {/* Agent Dashboard Widgets - shown for agent spaces */}
+      {space?.name?.toLowerCase().includes('qratos') && (
+        <div className="mb-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <ScheduleTimeline />
+          <SubAgentWidget 
+            spaceId={spaceId!}
+            onAddAgent={() => setIsAddAgentModalOpen(true)}
+          />
+        </div>
+      )}
+
+      {/* Add Agent Modal */}
+      <AddAgentModal
+        spaceId={spaceId!}
+        isOpen={isAddAgentModalOpen}
+        onClose={() => setIsAddAgentModalOpen(false)}
+      />
 
       <div className="flex flex-wrap items-center gap-4 mb-4">
         <button

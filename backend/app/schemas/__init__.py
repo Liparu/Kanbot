@@ -36,3 +36,11 @@ from app.schemas.calendar import (
 from app.schemas.webhook import WebhookCreate, WebhookUpdate, WebhookResponse
 from app.schemas.notification import NotificationResponse
 from app.schemas.filter_template import FilterTemplateCreate, FilterTemplateResponse
+from app.schemas.agent import (
+    AgentCreate,
+    AgentUpdate,
+    AgentResponse,
+    AgentListResponse,
+    AgentRunResponse,
+    AgentStatsResponse,
+)

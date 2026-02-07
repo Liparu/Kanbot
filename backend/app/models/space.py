@@ -48,6 +48,7 @@ class Space(Base):
     webhooks: Mapped[list["Webhook"]] = relationship("Webhook", back_populates="space", cascade="all, delete-orphan")
     filter_templates: Mapped[list["FilterTemplate"]] = relationship("FilterTemplate", back_populates="space", cascade="all, delete-orphan")
     scheduled_cards: Mapped[list["ScheduledCard"]] = relationship("ScheduledCard", back_populates="space", cascade="all, delete-orphan")
+    agents: Mapped[list["Agent"]] = relationship("Agent", back_populates="space", cascade="all, delete-orphan")
     
     @property
     def effective_color(self) -> str:
@@ -74,3 +75,4 @@ from app.models.calendar import Calendar
 from app.models.webhook import Webhook
 from app.models.filter_template import FilterTemplate
 from app.models.scheduled_card import ScheduledCard
+from app.models.agent import Agent

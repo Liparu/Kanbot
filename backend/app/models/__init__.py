@@ -8,6 +8,7 @@ from app.models.calendar import Calendar, CalendarEvent
 from app.models.webhook import Webhook, WebhookLog
 from app.models.notification import Notification
 from app.models.filter_template import FilterTemplate
+from app.models.agent import Agent, AgentRun
 
 __all__ = [
     "Base",
@@ -29,4 +30,6 @@ __all__ = [
     "WebhookLog",
     "Notification",
     "FilterTemplate",
+    "Agent",
+    "AgentRun",
 ]

@@ -58,47 +58,113 @@ class DashboardStats(BaseModel):
 
 
 def get_cron_status() -> List[CronJobStatus]:
-    """Read cron job status from state files"""
+    """Read cron job status - returns actual Qratos schedule"""
     cron_jobs = []
     
-    # Define cron jobs and their schedules
+    # Actual Qratos cron schedule (updated 2026-02-07)
     cron_configs = [
-        {"name": "kanbot-watcher", "schedule": "*/5 * * * *", "state_file": ".kanbot-watcher-state.json"},
-        {"name": "kanbot-proactive", "schedule": "0 */6 * * *", "state_file": ".kanbot-proactive-state.json"},
-        {"name": "calendar-sync", "schedule": "*/10 * * * *", "state_file": ".calendar-sync-state.json"},
-        {"name": "nas-pipeline", "schedule": "0 2 * * *", "state_file": ".nas-pipeline-state.json"},
-        {"name": "rate-limit-watchdog", "schedule": "*/15 * * * *", "state_file": None},
-        {"name": "email-check", "schedule": "*/3 * * * *", "state_file": None},
+        # Sub-agents
+        {"name": "🔭 Sentinel Patrol", "schedule": "*/15 * * * *"},
+        {"name": "📣 Marketer Daily", "schedule": "0 18 * * *"},
+        # Daytime recurring
+        {"name": "💻 Hourly Coder", "schedule": "0,30 6-23 * * *"},
+        {"name": "⏰ Delegation Check", "schedule": "0,30 6-23 * * *"},
+        # Daily jobs
+        {"name": "☀️ Morning Briefing", "schedule": "0 6 * * *"},
+        {"name": "📅 Morning Calendar", "schedule": "30 6 * * *"},
+        {"name": "📋 Morning Activity", "schedule": "0 7 * * *"},
+        {"name": "📁 NAS Pipeline", "schedule": "0 7,19 * * *"},
+        {"name": "⚡ Friction Check", "schedule": "0 14 * * *"},
+        {"name": "🎯 Qratos Proactive", "schedule": "0 15 * * *"},
+        {"name": "📋 Meeting Prep", "schedule": "0 20 * * *"},
+        {"name": "📊 Evening Digest", "schedule": "0 20 * * *"},
+        {"name": "🧠 Evening Ideation", "schedule": "30 21 * * *"},
+        {"name": "🗓️ Memory Summary", "schedule": "0 22 * * *"},
+        # Nightly jobs
+        {"name": "🔍 Moltbook Intel", "schedule": "0 0 * * *"},
+        {"name": "🌙 Night Coder", "schedule": "0,20,40 0-5 * * *"},
+        {"name": "🔍 Discovery Hunt", "schedule": "0 1 * * *"},
+        {"name": "🔍 GitHub Scout", "schedule": "0 2 * * *"},
+        {"name": "👁️ Code Review", "schedule": "45 2 * * *"},
+        {"name": "📚 KB Reindex", "schedule": "0 3 * * *"},
+        {"name": "💾 Daily Backup", "schedule": "0 4 * * *"},
     ]
     
-    workspace_path = "/home/jk/.openclaw/workspace/scripts"
+    now = datetime.now(timezone.utc)
     
     for config in cron_configs:
-        status = "unknown"
-        last_run = None
-        next_run = None
-        
-        if config["state_file"]:
-            state_path = os.path.join(workspace_path, config["state_file"])
-            if os.path.exists(state_path):
-                try:
-                    with open(state_path, 'r') as f:
-                        state = json.load(f)
-                    last_run = state.get('last_run')
-                    next_run = state.get('next_run')
-                    status = state.get('status', 'unknown')
-                except Exception:
-                    status = "error"
+        # Calculate next run time based on cron schedule
+        next_run = calculate_next_cron_run(config["schedule"], now)
         
         cron_jobs.append(CronJobStatus(
             name=config["name"],
-            status=status,
-            last_run=last_run,
-            next_run=next_run,
+            status="pending",  # Will be enhanced later with real status
+            last_run=None,
+            next_run=next_run.isoformat() if next_run else None,
             schedule=config["schedule"]
         ))
     
+    # Sort by next run time
+    cron_jobs.sort(key=lambda j: j.next_run or "9999")
+    
     return cron_jobs
+
+
+def calculate_next_cron_run(schedule: str, now: datetime) -> Optional[datetime]:
+    """Simple cron schedule parser - returns next run time today"""
+    try:
+        parts = schedule.split()
+        if len(parts) < 5:
+            return None
+        
+        minute, hour, *_ = parts
+        
+        # Handle simple cases
+        if hour == "*":
+            # Runs every hour at specified minute(s)
+            if minute.startswith("*/"):
+                interval = int(minute[2:])
+                next_min = ((now.minute // interval) + 1) * interval
+                if next_min >= 60:
+                    return now.replace(hour=now.hour + 1, minute=0, second=0, microsecond=0)
+                return now.replace(minute=next_min, second=0, microsecond=0)
+            elif "," in minute:
+                mins = [int(m) for m in minute.split(",")]
+                for m in mins:
+                    if m > now.minute:
+                        return now.replace(minute=m, second=0, microsecond=0)
+                return now.replace(hour=now.hour + 1, minute=mins[0], second=0, microsecond=0)
+        
+        # Handle specific hours
+        if "-" in hour:
+            start_h, end_h = map(int, hour.split("-"))
+            hours = list(range(start_h, end_h + 1))
+        elif "," in hour:
+            hours = [int(h) for h in hour.split(",")]
+        elif hour != "*":
+            hours = [int(hour)]
+        else:
+            hours = list(range(24))
+        
+        # Find next valid time
+        for h in hours:
+            if h > now.hour or (h == now.hour and minute != "*"):
+                target_min = 0
+                if minute.startswith("*/"):
+                    target_min = 0
+                elif "," in minute:
+                    target_min = int(minute.split(",")[0])
+                elif minute != "*":
+                    target_min = int(minute)
+                
+                if h > now.hour or target_min > now.minute:
+                    return now.replace(hour=h, minute=target_min, second=0, microsecond=0)
+        
+        # Default: next occurrence tomorrow
+        first_hour = hours[0] if hours else 0
+        return (now + timedelta(days=1)).replace(hour=first_hour, minute=0, second=0, microsecond=0)
+    except Exception:
+        return None
 
 
 def get_system_errors() -> List[SystemError]:
@@ -189,7 +255,7 @@ async def get_dashboard_status(
     
     # Get recent tasks (card history from agents)
     recent_tasks_query = select(CardHistory).where(
-        CardHistory.actor_type.in_(["agent", "automation"])
+        CardHistory.actor_type == "agent"
     ).order_by(desc(CardHistory.created_at)).limit(20)
     
     recent_tasks_result = await db.execute(recent_tasks_query)

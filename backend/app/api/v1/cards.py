@@ -800,6 +800,24 @@ async def delete_task(
     )
 
 
+@router.get("/{card_id}/comments", response_model=List[CommentResponse])
+async def list_comments(
+    card_id: UUID,
+    actor: ActorInfo = Depends(get_actor_info),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get all comments for a card."""
+    card = await verify_card_access(card_id, actor.user, db)
+    
+    result = await db.execute(
+        select(Comment)
+        .where(Comment.card_id == card_id, Comment.is_deleted == False)
+        .order_by(Comment.created_at.asc())
+    )
+    comments = result.scalars().all()
+    return comments
+
+
 @router.post("/{card_id}/comments", response_model=CommentResponse, status_code=status.HTTP_201_CREATED)
 async def add_comment(
     card_id: UUID,

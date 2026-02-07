@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, func, Integer
 from sqlalchemy.orm import selectinload
 from typing import List, Optional
 from uuid import UUID
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from pydantic import BaseModel
 
 from app.core.database import get_db
@@ -12,6 +12,15 @@ from app.models.user import User
 from app.models.space import Space
 from app.models.column import Column
 from app.models.card import Card, CardHistory
+from app.models.agent import Agent, AgentRun
+from app.schemas.agent import (
+    AgentCreate,
+    AgentUpdate,
+    AgentResponse,
+    AgentListResponse,
+    AgentRunResponse,
+    AgentStatsResponse,
+)
 from app.services.notifications import create_notification, serialize_notification
 from app.api.deps import get_current_user, get_actor_info, ActorInfo
 from app.websocket import manager as ws_manager
@@ -211,3 +220,194 @@ async def delegate_task(
         "card_id": str(delegate_data.card_id),
         "notification_id": str(notification.id),
     }
+
+
+# =============================================================================
+# Sub-Agent Registry CRUD Operations
+# =============================================================================
+
+async def verify_space_member(space_id: UUID, user: User, db: AsyncSession) -> Space:
+    """Verify user is a member of the space."""
+    result = await db.execute(
+        select(Space)
+        .where(Space.id == space_id)
+        .options(selectinload(Space.members))
+    )
+    space = result.scalar_one_or_none()
+    
+    if not space:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Space not found")
+    
+    is_member = any(m.user_id == user.id for m in space.members)
+    if not is_member:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not a member of this space")
+    
+    return space
+
+
+@router.get("/registry", response_model=List[AgentListResponse])
+async def list_agents(
+    space_id: UUID,
+    enabled_only: bool = False,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """List all agents in a space."""
+    await verify_space_member(space_id, current_user, db)
+    
+    query = select(Agent).where(Agent.space_id == space_id)
+    if enabled_only:
+        query = query.where(Agent.enabled == True)
+    query = query.order_by(Agent.name)
+    
+    result = await db.execute(query)
+    return result.scalars().all()
+
+
+@router.post("/registry", response_model=AgentResponse, status_code=status.HTTP_201_CREATED)
+async def create_agent(
+    agent_data: AgentCreate,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Create a new agent in a space."""
+    await verify_space_member(agent_data.space_id, current_user, db)
+    
+    agent = Agent(
+        space_id=agent_data.space_id,
+        name=agent_data.name,
+        description=agent_data.description,
+        model=agent_data.model,
+        schedule_type=agent_data.schedule_type,
+        schedule_value=agent_data.schedule_value,
+        agent_files_path=agent_data.agent_files_path,
+        settings=agent_data.settings,
+    )
+    db.add(agent)
+    await db.commit()
+    await db.refresh(agent)
+    
+    return agent
+
+
+@router.get("/registry/{agent_id}", response_model=AgentResponse)
+async def get_agent(
+    agent_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get agent details."""
+    result = await db.execute(select(Agent).where(Agent.id == agent_id))
+    agent = result.scalar_one_or_none()
+    
+    if not agent:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Agent not found")
+    
+    await verify_space_member(agent.space_id, current_user, db)
+    return agent
+
+
+@router.patch("/registry/{agent_id}", response_model=AgentResponse)
+async def update_agent(
+    agent_id: UUID,
+    agent_data: AgentUpdate,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Update an agent."""
+    result = await db.execute(select(Agent).where(Agent.id == agent_id))
+    agent = result.scalar_one_or_none()
+    
+    if not agent:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Agent not found")
+    
+    await verify_space_member(agent.space_id, current_user, db)
+    
+    update_data = agent_data.model_dump(exclude_unset=True)
+    for field, value in update_data.items():
+        setattr(agent, field, value)
+    
+    agent.updated_at = datetime.now(timezone.utc)
+    await db.commit()
+    await db.refresh(agent)
+    
+    return agent
+
+
+@router.delete("/registry/{agent_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_agent(
+    agent_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Delete an agent."""
+    result = await db.execute(select(Agent).where(Agent.id == agent_id))
+    agent = result.scalar_one_or_none()
+    
+    if not agent:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Agent not found")
+    
+    await verify_space_member(agent.space_id, current_user, db)
+    
+    await db.delete(agent)
+    await db.commit()
+
+
+@router.get("/registry/{agent_id}/runs", response_model=List[AgentRunResponse])
+async def get_agent_runs(
+    agent_id: UUID,
+    limit: int = 50,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get recent runs for an agent."""
+    result = await db.execute(select(Agent).where(Agent.id == agent_id))
+    agent = result.scalar_one_or_none()
+    
+    if not agent:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Agent not found")
+    
+    await verify_space_member(agent.space_id, current_user, db)
+    
+    result = await db.execute(
+        select(AgentRun)
+        .where(AgentRun.agent_id == agent_id)
+        .order_by(AgentRun.started_at.desc())
+        .limit(limit)
+    )
+    return result.scalars().all()
+
+
+@router.get("/stats", response_model=AgentStatsResponse)
+async def get_agent_stats(
+    space_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get aggregate stats for agents in a space."""
+    await verify_space_member(space_id, current_user, db)
+    
+    # Count agents by status
+    result = await db.execute(
+        select(
+            func.count(Agent.id).label("total"),
+            func.sum(func.cast(Agent.enabled, Integer)).label("active"),
+            func.sum(func.cast(Agent.status == "healthy", Integer)).label("healthy"),
+            func.sum(func.cast(Agent.status == "warning", Integer)).label("warning"),
+            func.sum(func.cast(Agent.status == "error", Integer)).label("error"),
+            func.sum(Agent.run_count_24h).label("runs_24h"),
+            func.sum(Agent.error_count_24h).label("errors_24h"),
+        )
+        .where(Agent.space_id == space_id)
+    )
+    row = result.one()
+    
+    return AgentStatsResponse(
+        total_agents=row.total or 0,
+        active_agents=row.active or 0,
+        healthy_agents=row.healthy or 0,
+        warning_agents=row.warning or 0,
+        error_agents=row.error or 0,
+        total_runs_24h=row.runs_24h or 0,
+        total_errors_24h=row.errors_24h or 0,
+    )
