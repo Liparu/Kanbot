@@ -8,8 +8,16 @@ import type { Card } from '@/types'
 import { getAvatarColor } from '@/utils/avatarColor'
 
 // Get aging indicator color based on days in column
-function getAgingColor(ageDays: number | undefined): { color: string; label: string } | null {
+// Skip aging for cards with future start_date (they're scheduled, not stale)
+function getAgingColor(ageDays: number | undefined, startDate: string | null | undefined): { color: string; label: string } | null {
   if (ageDays === undefined || ageDays < 1) return null
+  
+  // Don't show aging for cards scheduled for the future
+  if (startDate) {
+    const start = new Date(startDate)
+    if (start > new Date()) return null
+  }
+  
   if (ageDays < 3) return { color: '#eab308', label: 'Getting stale' } // yellow
   if (ageDays < 7) return { color: '#f97316', label: 'Stale' } // orange
   return { color: '#ef4444', label: 'Very stale' } // red
@@ -53,7 +61,7 @@ export default function KanbanCard({ card, isDragging, onClick, onToggleTask }: 
   const hasAssignees = card.assignees?.length > 0
   const tasksPreview = card.tasks?.slice(0, 5) || []
   const hiddenTasksCount = (card.tasks?.length || 0) - tasksPreview.length
-  const agingInfo = getAgingColor(card.age_days)
+  const agingInfo = getAgingColor(card.age_days, card.start_date)
 
   const handleClick = (_e: React.MouseEvent) => {
     if (!isSortableDragging && onClick) {
