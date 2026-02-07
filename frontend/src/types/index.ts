@@ -63,6 +63,8 @@ export interface Card {
   created_by?: string
   created_at: string
   updated_at: string
+  column_entered_at: string
+  age_days?: number
   tags: CardTag[]
   assignees: SimpleUser[]
   creator?: SimpleUser

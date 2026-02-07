@@ -11,7 +11,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 
 revision: str = 'backfill_card_created_by'
-down_revision: Union[str, None] = '005_remove_board_link_columns_to_spaces'
+down_revision: Union[str, None] = '005'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

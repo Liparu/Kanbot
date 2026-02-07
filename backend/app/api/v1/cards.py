@@ -4,11 +4,12 @@ from sqlalchemy import select, and_, or_
 from sqlalchemy.orm import selectinload
 from typing import List, Optional
 from uuid import UUID
-from datetime import date
+from datetime import date, datetime, timezone
 
 from app.core.database import get_db
 from app.core.sanitize import sanitize_text
 from app.models.user import User
+from app.services.card_age import compute_card_age_days
 from app.models.space import Space, SpaceMember
 from app.models.column import Column, ColumnCategory
 from app.models.card import Card, Task, Comment, CardTag, CardDependency, CardHistory
@@ -193,6 +194,7 @@ async def create_card(
         metadata_json=card_data.metadata_json or {},
         waiting_on=sanitize_text(card_data.waiting_on),
         created_by=actor.user.id,
+        column_entered_at=datetime.now(timezone.utc),
     )
     db.add(card)
     await db.flush()
@@ -517,13 +519,17 @@ async def move_card(
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not a member of target space")
     
     old_column_id = card.column_id
-    
+
     if target_column.category == ColumnCategory.ARCHIVE:
         card.last_column_id = card.column_id
-    
+
     if target_column.category == ColumnCategory.IN_PROGRESS and not card.start_date:
         card.start_date = date.today()
-    
+
+    # Update column_entered_at when card moves to a different column
+    if old_column_id != move_data.column_id:
+        card.column_entered_at = datetime.now(timezone.utc)
+
     card.column_id = move_data.column_id
     if move_data.position is not None:
         card.position = move_data.position

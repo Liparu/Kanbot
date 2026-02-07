@@ -1,7 +1,7 @@
-from pydantic import BaseModel, Field
-from typing import Optional, List
+from pydantic import BaseModel, Field, model_validator
+from typing import Optional, List, Any
 from uuid import UUID
-from datetime import datetime
+from datetime import datetime, timezone
 from app.schemas.tag import TagResponse
 from app.schemas.user import UserResponse
 
@@ -121,9 +121,41 @@ class CardResponse(BaseModel):
     created_by: Optional[UUID] = None
     created_at: datetime
     updated_at: datetime
+    column_entered_at: datetime
+    age_days: Optional[int] = None
     tags: List[CardTagResponse] = Field(default_factory=list)
     assignees: List[SimpleUserResponse] = Field(default_factory=list)
     creator: Optional[SimpleUserResponse] = None
+
+    @model_validator(mode='before')
+    @classmethod
+    def compute_age_days(cls, data: Any) -> Any:
+        """Compute age_days from column_entered_at"""
+        if isinstance(data, dict):
+            column_entered_at = data.get('column_entered_at')
+        else:
+            # Handle SQLAlchemy model objects
+            column_entered_at = getattr(data, 'column_entered_at', None)
+
+        if column_entered_at:
+            now = datetime.now(timezone.utc)
+            if column_entered_at.tzinfo is None:
+                column_entered_at = column_entered_at.replace(tzinfo=timezone.utc)
+            delta = now - column_entered_at
+            age_days = max(0, int(delta.total_seconds() // 86400))
+
+            if isinstance(data, dict):
+                data['age_days'] = age_days
+            else:
+                # For SQLAlchemy objects, we'll set via dict conversion
+                data_dict = {c.name: getattr(data, c.name) for c in data.__table__.columns}
+                data_dict['age_days'] = age_days
+                data_dict['tags'] = data.tags
+                data_dict['assignees'] = data.assignees
+                data_dict['creator'] = data.creator
+                return data_dict
+
+        return data
 
     class Config:
         from_attributes = True

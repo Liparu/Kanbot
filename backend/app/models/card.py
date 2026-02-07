@@ -36,6 +36,7 @@ class Card(Base):
     created_by: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+    column_entered_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
     
     column: Mapped["Column"] = relationship("Column", back_populates="cards", foreign_keys=[column_id])
     tasks: Mapped[list["Task"]] = relationship("Task", back_populates="card", cascade="all, delete-orphan", order_by="Task.position")

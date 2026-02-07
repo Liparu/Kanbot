@@ -2,10 +2,18 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { CheckSquare, ChevronDown, ChevronUp } from 'lucide-react'
+import { CheckSquare, ChevronDown, ChevronUp, Clock } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Card } from '@/types'
 import { getAvatarColor } from '@/utils/avatarColor'
+
+// Get aging indicator color based on days in column
+function getAgingColor(ageDays: number | undefined): { color: string; label: string } | null {
+  if (ageDays === undefined || ageDays < 1) return null
+  if (ageDays < 3) return { color: '#eab308', label: 'Getting stale' } // yellow
+  if (ageDays < 7) return { color: '#f97316', label: 'Stale' } // orange
+  return { color: '#ef4444', label: 'Very stale' } // red
+}
 
 interface KanbanCardProps {
   card: Card
@@ -45,6 +53,7 @@ export default function KanbanCard({ card, isDragging, onClick, onToggleTask }: 
   const hasAssignees = card.assignees?.length > 0
   const tasksPreview = card.tasks?.slice(0, 5) || []
   const hiddenTasksCount = (card.tasks?.length || 0) - tasksPreview.length
+  const agingInfo = getAgingColor(card.age_days)
 
   const handleClick = (_e: React.MouseEvent) => {
     if (!isSortableDragging && onClick) {
@@ -168,6 +177,20 @@ export default function KanbanCard({ card, isDragging, onClick, onToggleTask }: 
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Aging indicator */}
+      {agingInfo && (
+        <div className="absolute bottom-2 right-2 group">
+          <div
+            className="w-2 h-2 rounded-full opacity-70"
+            style={{ backgroundColor: agingInfo.color }}
+          />
+          <div className="absolute bottom-4 right-0 bg-dark-800 border border-dark-600 text-[10px] text-dark-100 rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-30 shadow-lg flex items-center gap-1">
+            <Clock className="w-3 h-3" style={{ color: agingInfo.color }} />
+            <span>{agingInfo.label} ({card.age_days}d)</span>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
