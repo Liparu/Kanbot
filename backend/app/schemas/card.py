@@ -153,6 +153,9 @@ class CardResponse(BaseModel):
                 data_dict['tags'] = data.tags
                 data_dict['assignees'] = data.assignees
                 data_dict['creator'] = data.creator
+                # Also copy tasks and comments for CardDetailResponse
+                data_dict['tasks'] = getattr(data, 'tasks', [])
+                data_dict['comments'] = getattr(data, 'comments', [])
                 return data_dict
 
         return data
