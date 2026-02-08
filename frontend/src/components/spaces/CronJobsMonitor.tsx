@@ -1,17 +1,26 @@
 import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { Clock, CheckCircle, XCircle, Loader2, RefreshCw, AlertCircle, PlayCircle, ExternalLink } from 'lucide-react'
+import { 
+  Clock, CheckCircle, XCircle, Loader2, RefreshCw, AlertCircle, 
+  ExternalLink, ChevronDown, ChevronRight, Play, 
+  Pause, Settings, Trash2, Plus, Power
+} from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
 import api from '@/api/client'
 import { useAuthStore } from '@/stores/auth'
 
 interface CronJob {
+  id?: string
   name: string
-  status: 'running' | 'success' | 'error' | 'pending'
+  status: 'running' | 'success' | 'error' | 'pending' | 'disabled'
   last_run: string | null
-  next_run: string
+  next_run: string | null
   schedule: string
+  enabled?: boolean
+  description?: string
+  model?: string
+  card_id?: string
 }
 
 async function fetchCronJobs(): Promise<CronJob[]> {
@@ -27,6 +36,8 @@ function getStatusIcon(status: string) {
       return <CheckCircle className="w-4 h-4 text-green-400" />
     case 'error':
       return <XCircle className="w-4 h-4 text-red-400" />
+    case 'disabled':
+      return <Pause className="w-4 h-4 text-dark-500" />
     default:
       return <Clock className="w-4 h-4 text-dark-400" />
   }
@@ -37,6 +48,7 @@ function getStatusColor(status: string) {
     case 'running': return 'bg-blue-500/20 text-blue-400'
     case 'success': return 'bg-green-500/20 text-green-400'
     case 'error': return 'bg-red-500/20 text-red-400'
+    case 'disabled': return 'bg-dark-700 text-dark-500'
     default: return 'bg-dark-600 text-dark-300'
   }
 }
@@ -49,13 +61,198 @@ function getTimeFromJob(job: CronJob): string {
   return '--:--'
 }
 
-// Extract clean card name from job name (remove emoji prefixes)
 function extractCardName(jobName: string): string {
-  return jobName.replace(/^[📋💻🌙🔍📊⏰🔭📣🎯☀️📅📁🔧💾🗓️👁️📚🧠⚡🔄]/g, '').trim()
+  return jobName.replace(/^[📋💻🌙🔍📊⏰🔭📣🎯☀️📅📁🔧💾🗓️👁️📚🧠⚡🔄🔬]/g, '').trim()
+}
+
+function parseCronSchedule(schedule: string): string {
+  const parts = schedule.split(' ')
+  if (parts.length < 5) return schedule
+  
+  const [min, hour, day, month, dow] = parts
+  
+  // Common patterns
+  if (min.includes('/') && hour === '*') {
+    const interval = min.split('/')[1]
+    return `Every ${interval} minutes`
+  }
+  if (min === '0' && hour.includes('-')) {
+    const [start, end] = hour.split('-')
+    return `Hourly ${start}:00-${end}:00`
+  }
+  if (min === '0,30' && hour.includes('-')) {
+    const [start, end] = hour.split('-')
+    return `Every 30min ${start}:00-${end}:00`
+  }
+  if (min !== '*' && hour !== '*' && day === '*' && month === '*' && dow === '*') {
+    return `Daily at ${hour.padStart(2, '0')}:${min.padStart(2, '0')}`
+  }
+  if (hour.includes('-') && (min === '0' || min === '0,20,40' || min === '0,30')) {
+    const [start, end] = hour.split('-')
+    return `${start}:00-${end}:00 window`
+  }
+  
+  return schedule
+}
+
+interface JobRowProps {
+  job: CronJob
+  isExpanded: boolean
+  onToggle: () => void
+  onNavigate: (name: string) => void
+  isPast: boolean
+  isNext: boolean
+}
+
+function JobRow({ job, isExpanded, onToggle, onNavigate, isPast, isNext }: JobRowProps) {
+  const [actionLoading, setActionLoading] = useState<string | null>(null)
+  
+  const handleAction = async (action: string) => {
+    setActionLoading(action)
+    // TODO: Connect to OpenClaw cron API
+    await new Promise(resolve => setTimeout(resolve, 500))
+    setActionLoading(null)
+    alert(`Action "${action}" will be connected to OpenClaw cron API.\nJob: ${job.name}`)
+  }
+
+  return (
+    <div className={`rounded-lg overflow-hidden transition-all ${
+      isNext ? 'ring-1 ring-primary-500/50' : ''
+    } ${isPast ? 'opacity-60' : ''}`}>
+      {/* Main row */}
+      <div
+        onClick={onToggle}
+        className={`flex items-center justify-between p-3 cursor-pointer transition-colors ${
+          isExpanded ? 'bg-dark-650' : 'bg-dark-700 hover:bg-dark-650'
+        }`}
+      >
+        <div className="flex items-center gap-3">
+          {isExpanded ? (
+            <ChevronDown className="w-4 h-4 text-dark-400" />
+          ) : (
+            <ChevronRight className="w-4 h-4 text-dark-400" />
+          )}
+          {getStatusIcon(job.status)}
+          <div>
+            <div className="text-sm font-medium text-white flex items-center gap-2">
+              {job.name}
+              {isNext && (
+                <span className="text-xs bg-primary-500/30 text-primary-300 px-1.5 py-0.5 rounded">
+                  Next
+                </span>
+              )}
+            </div>
+            <div className="text-xs text-dark-400">{parseCronSchedule(job.schedule)}</div>
+          </div>
+        </div>
+        
+        <div className="flex items-center gap-4">
+          <div className="text-right hidden sm:block">
+            <div className="text-xs text-dark-500">Next</div>
+            <div className="text-sm text-dark-300 font-mono">
+              {job.next_run ? getTimeFromJob(job) : '--:--'}
+            </div>
+          </div>
+          
+          <span className={`px-2 py-0.5 text-xs rounded-full ${getStatusColor(job.status)}`}>
+            {job.status}
+          </span>
+        </div>
+      </div>
+      
+      {/* Expanded details */}
+      {isExpanded && (
+        <div className="bg-dark-750 border-t border-dark-600 p-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+            <div>
+              <div className="text-xs text-dark-500 mb-1">Schedule</div>
+              <div className="text-sm text-dark-200 font-mono">{job.schedule}</div>
+            </div>
+            <div>
+              <div className="text-xs text-dark-500 mb-1">Next Run</div>
+              <div className="text-sm text-dark-200">
+                {job.next_run 
+                  ? formatDistanceToNow(new Date(job.next_run), { addSuffix: true })
+                  : 'Not scheduled'}
+              </div>
+            </div>
+            <div>
+              <div className="text-xs text-dark-500 mb-1">Last Run</div>
+              <div className="text-sm text-dark-200">
+                {job.last_run 
+                  ? formatDistanceToNow(new Date(job.last_run), { addSuffix: true })
+                  : 'Never'}
+              </div>
+            </div>
+            <div>
+              <div className="text-xs text-dark-500 mb-1">Status</div>
+              <div className="text-sm text-dark-200 flex items-center gap-1.5">
+                {getStatusIcon(job.status)}
+                <span className="capitalize">{job.status}</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Action buttons */}
+          <div className="flex items-center gap-2 pt-3 border-t border-dark-600">
+            <button
+              onClick={(e) => { e.stopPropagation(); handleAction('run'); }}
+              disabled={actionLoading === 'run'}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-primary-600 hover:bg-primary-500 text-white rounded-lg transition-colors disabled:opacity-50"
+            >
+              {actionLoading === 'run' ? (
+                <Loader2 className="w-3 h-3 animate-spin" />
+              ) : (
+                <Play className="w-3 h-3" />
+              )}
+              Run Now
+            </button>
+            
+            <button
+              onClick={(e) => { e.stopPropagation(); handleAction('toggle'); }}
+              disabled={actionLoading === 'toggle'}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-dark-600 hover:bg-dark-500 text-dark-200 rounded-lg transition-colors disabled:opacity-50"
+            >
+              <Power className="w-3 h-3" />
+              {job.enabled === false ? 'Enable' : 'Disable'}
+            </button>
+            
+            <button
+              onClick={(e) => { e.stopPropagation(); onNavigate(job.name); }}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-dark-600 hover:bg-dark-500 text-dark-200 rounded-lg transition-colors"
+            >
+              <ExternalLink className="w-3 h-3" />
+              Find Card
+            </button>
+            
+            <div className="flex-1" />
+            
+            <button
+              onClick={(e) => { e.stopPropagation(); handleAction('edit'); }}
+              className="p-1.5 text-dark-400 hover:text-white hover:bg-dark-600 rounded-lg transition-colors"
+              title="Edit"
+            >
+              <Settings className="w-4 h-4" />
+            </button>
+            
+            <button
+              onClick={(e) => { e.stopPropagation(); handleAction('delete'); }}
+              className="p-1.5 text-dark-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+              title="Delete"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default function CronJobsMonitor() {
   const [filter, setFilter] = useState<'all' | 'running' | 'error'>('all')
+  const [expandedJob, setExpandedJob] = useState<string | null>(null)
+  const [_showAddModal, setShowAddModal] = useState(false)
   const { isAuthenticated } = useAuthStore()
   const navigate = useNavigate()
 
@@ -67,19 +264,17 @@ export default function CronJobsMonitor() {
   const { data: cronJobs = [], isLoading, error, refetch } = useQuery({
     queryKey: ['cron-jobs'],
     queryFn: fetchCronJobs,
-    refetchInterval: 30000, // Refresh every 30 seconds
-    enabled: isAuthenticated, // Only fetch when authenticated
-    retry: 3, // Retry up to 3 times on failure
-    retryDelay: 1000, // Wait 1 second between retries
+    refetchInterval: 30000,
+    enabled: isAuthenticated,
+    retry: 3,
+    retryDelay: 1000,
   })
 
-  // Current time for timeline
   const now = new Date()
   const currentHour = now.getHours()
   const currentMinute = now.getMinutes()
   const currentTimeStr = `${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`
 
-  // Find next upcoming job
   const nextJob = useMemo(() => {
     const upcoming = cronJobs
       .filter(job => {
@@ -91,12 +286,11 @@ export default function CronJobsMonitor() {
     return upcoming[0] || null
   }, [cronJobs, currentTimeStr])
 
-  // Get today's jobs sorted by time
   const todaysJobs = useMemo(() => {
     return [...cronJobs]
-      .filter(job => job.next_run) // Only jobs with scheduled times
+      .filter(job => job.next_run)
       .sort((a, b) => getTimeFromJob(a).localeCompare(getTimeFromJob(b)))
-      .slice(0, 8) // Show max 8 in mini timeline
+      .slice(0, 10)
   }, [cronJobs])
   
   const filteredJobs = cronJobs.filter(job => {
@@ -150,16 +344,24 @@ export default function CronJobsMonitor() {
 
   return (
     <div className="bg-dark-800 rounded-lg p-4">
-      {/* Header with current time */}
+      {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold text-white flex items-center gap-2">
           <Clock className="w-5 h-5" />
           Scheduled Jobs
+          <span className="text-sm font-normal text-dark-400">({cronJobs.length})</span>
         </h3>
-        <div className="flex items-center gap-3">
-          <span className="text-sm text-dark-400">
-            Now: <span className="font-mono text-dark-200">{currentTimeStr}</span>
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-dark-400 hidden sm:inline">
+            <span className="font-mono text-dark-200">{currentTimeStr}</span>
           </span>
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="p-1.5 text-primary-400 hover:text-primary-300 hover:bg-primary-500/10 rounded-lg transition-colors"
+            title="Add Job"
+          >
+            <Plus className="w-4 h-4" />
+          </button>
           <button
             onClick={() => refetch()}
             className="p-1.5 text-dark-400 hover:text-white hover:bg-dark-700 rounded-lg transition-colors"
@@ -170,44 +372,29 @@ export default function CronJobsMonitor() {
         </div>
       </div>
 
-      {/* Next Up highlight */}
-      {nextJob && (
-        <div className="mb-4 px-3 py-2 bg-primary-900/20 border border-primary-500/30 rounded-lg flex items-center justify-between">
-          <div>
-            <div className="text-xs text-primary-400 uppercase tracking-wide flex items-center gap-1">
-              <PlayCircle className="w-3 h-3" /> Next Up
-            </div>
-            <div className="text-dark-100 font-medium">{nextJob.name}</div>
-          </div>
-          <div className="text-right">
-            <div className="text-sm text-dark-400">at</div>
-            <div className="font-mono text-dark-200">{getTimeFromJob(nextJob)}</div>
-          </div>
-        </div>
-      )}
-
-      {/* Mini Timeline */}
+      {/* Timeline bar */}
       {todaysJobs.length > 0 && (
-        <div className="mb-4 flex gap-1 overflow-x-auto pb-2">
+        <div className="mb-4 flex gap-1 overflow-x-auto pb-2 scrollbar-thin">
           {todaysJobs.map((job, idx) => {
             const jobTime = getTimeFromJob(job)
             const isPast = jobTime < currentTimeStr
             const isNext = nextJob && job.name === nextJob.name
             
             return (
-              <div
+              <button
                 key={idx}
-                className={`flex-shrink-0 px-2 py-1 rounded text-xs font-mono ${
+                onClick={() => setExpandedJob(expandedJob === job.name ? null : job.name)}
+                className={`flex-shrink-0 px-2 py-1 rounded text-xs font-mono transition-colors ${
                   isNext 
-                    ? 'bg-primary-500/30 text-primary-300 border border-primary-500/50' 
+                    ? 'bg-primary-500/30 text-primary-300 ring-1 ring-primary-500/50' 
                     : isPast 
-                      ? 'bg-dark-700 text-dark-500' 
-                      : 'bg-dark-600 text-dark-300'
+                      ? 'bg-dark-700 text-dark-500 hover:bg-dark-600' 
+                      : 'bg-dark-600 text-dark-300 hover:bg-dark-500'
                 }`}
                 title={job.name}
               >
                 {jobTime}
-              </div>
+              </button>
             )
           })}
         </div>
@@ -222,7 +409,7 @@ export default function CronJobsMonitor() {
               filter === 'all' ? 'bg-dark-600 text-white' : 'text-dark-400 hover:text-white'
             }`}
           >
-            All ({cronJobs.length})
+            All
           </button>
           <button
             onClick={() => setFilter('running')}
@@ -241,63 +428,40 @@ export default function CronJobsMonitor() {
             Errors
           </button>
         </div>
+        <div className="text-xs text-dark-500">
+          Click job to expand
+        </div>
       </div>
 
       {/* Jobs list */}
-      <div className="space-y-2 max-h-64 overflow-y-auto">
+      <div className="space-y-2 max-h-[400px] overflow-y-auto">
         {filteredJobs.length === 0 ? (
           <div className="text-dark-400 text-center py-4 text-sm">
             No scheduled jobs found
           </div>
         ) : (
-          filteredJobs.map((job, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-between p-3 bg-dark-700 rounded-lg hover:bg-dark-650 transition-colors"
-            >
-              <div className="flex items-center gap-3">
-                {getStatusIcon(job.status)}
-                <div>
-                  <button
-                    onClick={() => handleJobClick(job.name)}
-                    className="text-sm font-medium text-white hover:text-primary-400 transition-colors flex items-center gap-1.5 text-left"
-                    title="Click to find related card"
-                  >
-                    {job.name}
-                    <ExternalLink className="w-3 h-3 opacity-50" />
-                  </button>
-                  <div className="text-xs text-dark-400 font-mono">{job.schedule}</div>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-4">
-                <div className="text-right">
-                  <div className="text-xs text-dark-400">Next run</div>
-                  <div className="text-sm text-dark-200">
-                    {job.next_run ? formatDistanceToNow(new Date(job.next_run), { addSuffix: true }) : '-'}
-                  </div>
-                </div>
-                
-                <div className="text-right min-w-[80px]">
-                  <div className="text-xs text-dark-400">Last run</div>
-                  <div className="text-sm text-dark-200">
-                    {job.last_run 
-                      ? formatDistanceToNow(new Date(job.last_run), { addSuffix: true })
-                      : 'Never'}
-                  </div>
-                </div>
-
-                <span className={`px-2 py-0.5 text-xs rounded-full ${getStatusColor(job.status)}`}>
-                  {job.status}
-                </span>
-              </div>
-            </div>
-          ))
+          filteredJobs.map((job, index) => {
+            const jobTime = getTimeFromJob(job)
+            const isPast = jobTime < currentTimeStr
+            const isNext = nextJob && job.name === nextJob.name
+            
+            return (
+              <JobRow
+                key={job.id || index}
+                job={job}
+                isExpanded={expandedJob === job.name}
+                onToggle={() => setExpandedJob(expandedJob === job.name ? null : job.name)}
+                onNavigate={handleJobClick}
+                isPast={isPast}
+                isNext={isNext}
+              />
+            )
+          })
         )}
       </div>
       
       <div className="mt-3 text-xs text-dark-500 text-center">
-        Auto-refreshes every 30 seconds
+        Auto-refreshes every 30s • Actions will connect to OpenClaw API
       </div>
     </div>
   )
