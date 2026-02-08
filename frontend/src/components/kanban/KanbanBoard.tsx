@@ -564,13 +564,15 @@ export default function KanbanBoard({ spaceId }: KanbanBoardProps) {
                 <Calendar className="w-3 h-3" />
                 {t('calendar.title')}
               </Link>
-              <Link
-                to={`/spaces/${spaceId}/dashboard`}
-                className="px-2 py-1 text-xs rounded-lg bg-dark-800 border border-dark-700 text-dark-300 hover:text-white flex items-center gap-1"
-              >
-                <Bot className="w-3 h-3" />
-                Dashboard
-              </Link>
+              {space?.type === 'agent' && (
+                <Link
+                  to={`/spaces/${spaceId}/dashboard`}
+                  className="px-2 py-1 text-xs rounded-lg bg-dark-800 border border-dark-700 text-dark-300 hover:text-white flex items-center gap-1"
+                >
+                  <Bot className="w-3 h-3" />
+                  Dashboard
+                </Link>
+              )}
               </div>
             )}
           </div>

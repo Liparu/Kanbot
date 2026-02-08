@@ -411,3 +411,23 @@ async def get_agent_stats(
         total_runs_24h=row.runs_24h or 0,
         total_errors_24h=row.errors_24h or 0,
     )
+
+
+@router.get("/by-card/{card_id}", response_model=Optional[AgentResponse])
+async def get_agent_by_card(
+    card_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get agent associated with a specific card (if any)."""
+    query = select(Agent).where(Agent.card_id == card_id)
+    result = await db.execute(query)
+    agent = result.scalar_one_or_none()
+    
+    if not agent:
+        return None
+    
+    # Verify user has access to the space
+    await verify_space_member(agent.space_id, current_user, db)
+    
+    return agent

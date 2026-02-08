@@ -1,12 +1,30 @@
-import { useParams } from 'react-router-dom'
+import { useParams, Navigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Bot } from 'lucide-react'
+import { useQuery } from '@tanstack/react-query'
+import { ArrowLeft, Bot, Loader2, AlertCircle } from 'lucide-react'
+import api from '@/api/client'
 import SubAgentWidget from './SubAgentWidget'
-import ScheduleTimeline from './ScheduleTimeline'
 import CronJobsMonitor from './CronJobsMonitor'
+import EventStream from './EventStream'
+import ScheduleTimeline from './ScheduleTimeline'
+
+interface Space {
+  id: string
+  name: string
+  type: 'personal' | 'company' | 'agent'
+}
 
 export default function AgentDashboard() {
   const { spaceId } = useParams<{ spaceId: string }>()
+
+  const { data: space, isLoading, error } = useQuery({
+    queryKey: ['space', spaceId],
+    queryFn: async () => {
+      const response = await api.get<Space>(`/spaces/${spaceId}`)
+      return response.data
+    },
+    enabled: !!spaceId,
+  })
 
   if (!spaceId) {
     return (
@@ -14,6 +32,30 @@ export default function AgentDashboard() {
         <div className="text-dark-400">Space not found</div>
       </div>
     )
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="w-6 h-6 animate-spin text-dark-400" />
+      </div>
+    )
+  }
+
+  if (error || !space) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-red-400 flex items-center gap-2">
+          <AlertCircle className="w-5 h-5" />
+          Failed to load space
+        </div>
+      </div>
+    )
+  }
+
+  // Only show dashboard for agent spaces
+  if (space.type !== 'agent') {
+    return <Navigate to={`/spaces/${spaceId}`} replace />
   }
 
   return (
@@ -41,6 +83,7 @@ export default function AgentDashboard() {
         {/* Right Column */}
         <div className="space-y-6">
           <SubAgentWidget spaceId={spaceId} />
+          <EventStream />
         </div>
       </div>
     </div>

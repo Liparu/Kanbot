@@ -1,3 +1,4 @@
+from __future__ import annotations
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func, desc
@@ -11,7 +12,7 @@ from app.core.database import get_db
 from app.models.user import User
 from app.models.card import Card, CardHistory
 from app.models.space import Space
-from app.api.deps import get_current_admin
+from app.api.deps import get_current_admin, get_current_user
 
 router = APIRouter()
 
@@ -201,6 +202,14 @@ def get_system_errors() -> List[SystemError]:
     return errors[-10:]  # Return last 10 errors
 
 
+@router.get("/cron-jobs", response_model=List[CronJobStatus])
+async def get_cron_jobs(
+    current_user: User = Depends(get_current_user),
+):
+    """Get cron job status - accessible to all authenticated users"""
+    return get_cron_status()
+
+
 @router.get("/status", response_model=DashboardStats)
 async def get_dashboard_status(
     current_user: User = Depends(get_current_admin),
@@ -308,3 +317,104 @@ async def get_dashboard_status(
         errors=errors,
         system_health=system_health
     )
+
+
+# Event Stream endpoint
+class EventStreamItem(BaseModel):
+    id: int
+    event_type: str
+    card_id: str
+    card_name: Optional[str] = None
+    space_id: Optional[str] = None
+    space_name: Optional[str] = None
+    actor_id: Optional[str] = None
+    actor_type: Optional[str] = None
+    event_data: Optional[str] = None
+    is_urgent: bool = False
+    created_at: str
+
+
+EVENTS_DB_PATH = "/workspace-data/calendar-sync.db"
+
+
+def get_recent_events(limit: int = 50) -> List[EventStreamItem]:
+    """Read recent events from the kanbot_event_queue SQLite database."""
+    import sqlite3
+    
+    if not os.path.exists(EVENTS_DB_PATH):
+        return []
+    
+    events = []
+    try:
+        conn = sqlite3.connect(EVENTS_DB_PATH)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        
+        # Get recent events (both queue and archive for history)
+        cursor.execute("""
+            SELECT id, event_type, card_id, card_name, space_id, space_name,
+                   actor_id, actor_type, event_data, is_urgent, created_at
+            FROM kanbot_event_queue
+            ORDER BY created_at DESC
+            LIMIT ?
+        """, (limit,))
+        
+        for row in cursor.fetchall():
+            events.append(EventStreamItem(
+                id=row['id'],
+                event_type=row['event_type'],
+                card_id=row['card_id'],
+                card_name=row['card_name'],
+                space_id=row['space_id'],
+                space_name=row['space_name'],
+                actor_id=row['actor_id'],
+                actor_type=row['actor_type'],
+                event_data=row['event_data'],
+                is_urgent=bool(row['is_urgent']),
+                created_at=row['created_at'] or ""
+            ))
+        
+        # If we don't have enough from queue, also check archive
+        if len(events) < limit:
+            remaining = limit - len(events)
+            cursor.execute("""
+                SELECT id, event_type, card_id, card_name, space_id, space_name,
+                       actor_id, actor_type, event_data, is_urgent, created_at
+                FROM kanbot_event_archive
+                ORDER BY created_at DESC
+                LIMIT ?
+            """, (remaining,))
+            
+            for row in cursor.fetchall():
+                events.append(EventStreamItem(
+                    id=row['id'] + 1000000,  # Offset to avoid ID collision
+                    event_type=row['event_type'],
+                    card_id=row['card_id'],
+                    card_name=row['card_name'],
+                    space_id=row['space_id'],
+                    space_name=row['space_name'],
+                    actor_id=row['actor_id'],
+                    actor_type=row['actor_type'],
+                    event_data=row['event_data'],
+                    is_urgent=bool(row['is_urgent']),
+                    created_at=row['created_at'] or ""
+                ))
+        
+        conn.close()
+        
+        # Sort by created_at descending
+        events.sort(key=lambda e: e.created_at, reverse=True)
+        
+    except Exception as e:
+        print(f"Error reading events: {e}")
+    
+    return events[:limit]
+
+
+@router.get("/events", response_model=List[EventStreamItem])
+async def get_event_stream(
+    limit: int = 50,
+    current_user: User = Depends(get_current_user),
+):
+    """Get recent agent/card events for the event stream dashboard widget."""
+    return get_recent_events(limit)

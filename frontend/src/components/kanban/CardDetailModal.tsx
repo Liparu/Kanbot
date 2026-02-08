@@ -17,6 +17,8 @@ import {
   ChevronDown,
   User,
   Clock,
+  Bot,
+  Timer,
 } from 'lucide-react'
 import { cardsApi, tagsApi } from '@/api/boards'
 import { spacesApi } from '@/api/spaces'
@@ -102,6 +104,19 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
     queryKey: ['tags', spaceId],
     queryFn: () => tagsApi.list(spaceId),
     enabled: !!spaceId,
+  })
+
+  // Check if this card has an associated agent (for scheduled cards)
+  const { data: cardAgent } = useQuery({
+    queryKey: ['agent-by-card', cardId],
+    queryFn: async () => {
+      const response = await fetch(`/api/v1/agents/by-card/${cardId}`, {
+        headers: { 'X-API-Key': localStorage.getItem('apiKey') || '' },
+      })
+      if (!response.ok) return null
+      return response.json()
+    },
+    enabled: !!cardId,
   })
 
   useEffect(() => {
@@ -494,6 +509,48 @@ export default function CardDetailModal({ cardId, columnId, spaceId, onClose }: 
               />
             </div>
           </div>
+
+          {/* Agent Schedule Info (for scheduled cards) */}
+          {cardAgent && (
+            <div className="bg-primary-900/20 border border-primary-500/30 rounded-lg p-4">
+              <label className="text-sm font-medium text-primary-400 mb-3 flex items-center gap-2">
+                <Bot className="w-4 h-4" />
+                Scheduled Agent
+              </label>
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span className="text-dark-400">Model:</span>
+                  <span className="ml-2 text-dark-200">{cardAgent.model?.split('/').pop() || 'Unknown'}</span>
+                </div>
+                <div>
+                  <span className="text-dark-400">Schedule:</span>
+                  <span className="ml-2 text-dark-200 font-mono">{cardAgent.schedule_value || 'N/A'}</span>
+                </div>
+                {cardAgent.last_run && (
+                  <div>
+                    <span className="text-dark-400">Last run:</span>
+                    <span className="ml-2 text-dark-200">
+                      {new Date(cardAgent.last_run).toLocaleString()}
+                    </span>
+                  </div>
+                )}
+                {cardAgent.next_run && (
+                  <div>
+                    <span className="text-dark-400">Next run:</span>
+                    <span className="ml-2 text-dark-200">
+                      {new Date(cardAgent.next_run).toLocaleString()}
+                    </span>
+                  </div>
+                )}
+              </div>
+              {cardAgent.enabled === false && (
+                <div className="mt-2 text-xs text-yellow-400 flex items-center gap-1">
+                  <Timer className="w-3 h-3" />
+                  Agent is currently disabled
+                </div>
+              )}
+            </div>
+          )}
 
           <div className="relative" ref={locationRef}>
             <label className="text-sm font-medium text-dark-300 mb-2 flex items-center gap-2">

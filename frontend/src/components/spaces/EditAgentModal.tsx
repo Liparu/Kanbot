@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { X, Bot, Loader2 } from 'lucide-react'
-import { apiClient } from '@/api/client'
+import api from '@/api/client'
 
 interface Agent {
   id: string
@@ -47,7 +47,7 @@ export default function EditAgentModal({ agent, spaceId, isOpen, onClose }: Edit
 
   const updateMutation = useMutation({
     mutationFn: async (data: Partial<Agent>) => {
-      return apiClient.patch(`/agents/registry/${agent?.id}`, data)
+      return api.patch(`/agents/registry/${agent?.id}`, data)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['agents', spaceId] })

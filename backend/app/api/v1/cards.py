@@ -31,7 +31,8 @@ from app.schemas.card import (
 from app.api.deps import get_current_user, get_actor_info, ActorInfo
 from app.websocket import manager as ws_manager
 from app.services.webhooks import dispatch_webhooks
-from app.services.notifications import create_notification, serialize_notification
+from app.services.notifications import create_notification, serialize_notification, notify_mentions
+from app.services.duplicates import find_similar_cards, calculate_similarity
 
 router = APIRouter()
 
@@ -839,6 +840,18 @@ async def add_comment(
     await db.commit()
     await db.refresh(comment)
 
+    # Handle @mentions in comment
+    await notify_mentions(
+        db=db,
+        content=comment.content,
+        card_id=card_id,
+        card_name=card.name,
+        author_id=actor.user.id,
+        author_name=actor.actor_display_name,
+        comment_id=comment.id,
+    )
+    await db.commit()
+
     # Dispatch webhook for comment
     await dispatch_webhooks(
         db,
@@ -1060,3 +1073,220 @@ async def remove_dependency(
     
     await db.delete(dependency)
     await db.commit()
+
+
+@router.get("/check-duplicates", response_model=List[dict])
+async def check_duplicates(
+    name: str,
+    space_id: UUID,
+    threshold: float = 0.7,
+    actor: ActorInfo = Depends(get_actor_info),
+    db: AsyncSession = Depends(get_db),
+):
+    """Check for potential duplicate cards before creating a new one.
+    
+    Returns a list of similar cards with their similarity scores.
+    """
+    similar = await find_similar_cards(
+        db=db,
+        name=name,
+        space_id=space_id,
+        threshold=threshold,
+        limit=5,
+    )
+    
+    return [
+        {
+            "id": str(card.id),
+            "name": card.name,
+            "similarity": round(score, 2),
+            "column_id": str(card.column_id),
+        }
+        for card, score in similar
+    ]
+
+
+@router.get("/{card_id}/stats")
+async def get_card_stats(
+    card_id: UUID,
+    actor: ActorInfo = Depends(get_actor_info),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get quick stats for a card.
+    
+    Returns timing info, comment count, task completion, and dependencies.
+    """
+    from app.services.card_age import compute_card_age_days
+    from datetime import datetime, timezone
+    
+    card = await verify_card_access(card_id, actor.user, db)
+    now = datetime.now(timezone.utc)
+    
+    # Time in current column
+    column_age = None
+    if card.column_entered_at:
+        column_age = compute_card_age_days(card.column_entered_at, now)
+    
+    # Total time since creation
+    total_age = None
+    if card.created_at:
+        total_age = compute_card_age_days(card.created_at, now)
+    
+    # Comment count
+    comment_count = len(card.comments) if card.comments else 0
+    
+    # Task completion
+    tasks = card.tasks or []
+    total_tasks = len(tasks)
+    completed_tasks = sum(1 for t in tasks if t.completed)
+    
+    # Dependencies
+    dependencies = card.blocked_by if hasattr(card, 'blocked_by') else []
+    blocking = card.blocking if hasattr(card, 'blocking') else []
+    
+    return {
+        "card_id": str(card.id),
+        "name": card.name,
+        "column_name": card.column.name if card.column else None,
+        "days_in_column": column_age,
+        "days_since_created": total_age,
+        "comment_count": comment_count,
+        "tasks": {
+            "total": total_tasks,
+            "completed": completed_tasks,
+            "pending": total_tasks - completed_tasks,
+        },
+        "dependencies": {
+            "blocked_by_count": len(dependencies),
+            "blocking_count": len(blocking),
+        },
+        "has_due_date": card.due_date is not None,
+        "is_overdue": card.due_date is not None and card.due_date < now,
+    }
+
+
+@router.get("/{card_id}/related", response_model=List[dict])
+async def get_related_cards(
+    card_id: UUID,
+    threshold: float = 0.4,
+    limit: int = 5,
+    actor: ActorInfo = Depends(get_actor_info),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get cards related to this one based on name similarity.
+    
+    Uses a lower threshold than duplicate detection to find
+    potentially related but not duplicate cards.
+    """
+    card = await verify_card_access(card_id, actor.user, db)
+    space_id = card.column.space_id
+    
+    similar = await find_similar_cards(
+        db=db,
+        name=card.name,
+        space_id=space_id,
+        threshold=threshold,
+        limit=limit + 1,  # +1 to account for self
+        exclude_card_id=card_id,
+    )
+    
+    return [
+        {
+            "id": str(related_card.id),
+            "name": related_card.name,
+            "similarity": round(score, 2),
+            "column_id": str(related_card.column_id),
+        }
+        for related_card, score in similar[:limit]
+    ]
+
+
+@router.get("/export")
+async def export_cards(
+    space_id: UUID,
+    include_comments: bool = True,
+    include_tasks: bool = True,
+    include_history: bool = False,
+    actor: ActorInfo = Depends(get_actor_info),
+    db: AsyncSession = Depends(get_db),
+):
+    """Export all cards in a space as JSON.
+    
+    Useful for backups, migrations, and data analysis.
+    """
+    from app.models.column import Column
+    
+    # Get all cards in space
+    query = (
+        select(Card)
+        .join(Column)
+        .where(Column.space_id == space_id)
+        .options(
+            selectinload(Card.column),
+            selectinload(Card.tags).selectinload(CardTag.tag),
+            selectinload(Card.assignees),
+        )
+    )
+    
+    if include_comments:
+        query = query.options(selectinload(Card.comments))
+    if include_tasks:
+        query = query.options(selectinload(Card.tasks))
+    
+    result = await db.execute(query)
+    cards = result.scalars().all()
+    
+    exported = []
+    for card in cards:
+        card_data = {
+            "id": str(card.id),
+            "name": card.name,
+            "description": card.description,
+            "column_id": str(card.column_id),
+            "column_name": card.column.name if card.column else None,
+            "position": card.position,
+            "priority": card.priority,
+            "start_date": card.start_date.isoformat() if card.start_date else None,
+            "end_date": card.end_date.isoformat() if card.end_date else None,
+            "due_date": card.due_date.isoformat() if card.due_date else None,
+            "created_at": card.created_at.isoformat() if card.created_at else None,
+            "updated_at": card.updated_at.isoformat() if card.updated_at else None,
+            "tags": [
+                {"id": str(ct.tag.id), "name": ct.tag.name}
+                for ct in (card.tags or [])
+            ],
+            "assignees": [
+                {"id": str(u.id), "username": u.username}
+                for u in (card.assignees or [])
+            ],
+        }
+        
+        if include_comments and card.comments:
+            card_data["comments"] = [
+                {
+                    "id": str(c.id),
+                    "content": c.content,
+                    "actor_name": c.actor_name,
+                    "created_at": c.created_at.isoformat() if c.created_at else None,
+                }
+                for c in card.comments
+            ]
+        
+        if include_tasks and card.tasks:
+            card_data["tasks"] = [
+                {
+                    "id": str(t.id),
+                    "title": t.title,
+                    "completed": t.completed,
+                }
+                for t in card.tasks
+            ]
+        
+        exported.append(card_data)
+    
+    return {
+        "space_id": str(space_id),
+        "exported_at": datetime.now(timezone.utc).isoformat(),
+        "card_count": len(exported),
+        "cards": exported,
+    }

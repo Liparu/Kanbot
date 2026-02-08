@@ -53,6 +53,7 @@ services:
       WEBHOOK_URL: http://kanbot-webhook-receiver:9999/webhook
     volumes:
       - ./backend:/app
+      - /home/jk/.openclaw/workspace/data:/workspace-data:ro
     ports:
       - "8000:8000"
     depends_on:

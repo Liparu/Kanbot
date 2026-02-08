@@ -108,6 +108,23 @@ export const cardsApi = {
     const response = await api.get(`/cards/${cardId}/history`)
     return response.data
   },
+
+  // Card dependencies
+  addDependency: async (cardId: string, blockedById: string): Promise<void> => {
+    await api.post(`/cards/${cardId}/dependencies/${blockedById}`)
+  },
+
+  removeDependency: async (cardId: string, blockedById: string): Promise<void> => {
+    await api.delete(`/cards/${cardId}/dependencies/${blockedById}`)
+  },
+
+  // Search cards in a space
+  search: async (spaceId: string, query: string): Promise<{ data: Card[] }> => {
+    const response = await api.get('/cards', { 
+      params: { space_id: spaceId, search: query, limit: 20 } 
+    })
+    return { data: response.data }
+  },
 }
 
 export const tagsApi = {

@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Bot, Plus, Settings, Trash2, FileText, CheckCircle, AlertCircle, Clock, Activity, RefreshCw, Loader2 } from 'lucide-react'
-import { apiClient } from '@/api/client'
+import api from '@/api/client'
 import EditAgentModal from './EditAgentModal'
+import AddAgentModal from './AddAgentModal'
 
 interface AgentFromAPI {
   id: string
@@ -49,24 +50,44 @@ const transformAgent = (agent: AgentFromAPI): SubAgent => ({
 interface SubAgentWidgetProps {
   spaceId: string
   className?: string
-  onAddAgent?: () => void
 }
 
-export default function SubAgentWidget({ spaceId, className = '', onAddAgent }: SubAgentWidgetProps) {
+interface AgentRun {
+  id: string
+  started_at: string
+  completed_at: string | null
+  status: 'running' | 'success' | 'error'
+  error_message: string | null
+  duration_ms: number | null
+}
+
+export default function SubAgentWidget({ spaceId, className = '' }: SubAgentWidgetProps) {
   const queryClient = useQueryClient()
   const [selectedAgent, setSelectedAgent] = useState<string | null>(null)
   const [deletingAgent, setDeletingAgent] = useState<string | null>(null)
   const [editingAgent, setEditingAgent] = useState<AgentFromAPI | null>(null)
+  const [showAddModal, setShowAddModal] = useState(false)
+  const [viewingLogsFor, setViewingLogsFor] = useState<string | null>(null)
 
   // Fetch agents from API
   const { data: agentsData, isLoading, refetch } = useQuery({
     queryKey: ['agents', spaceId],
     queryFn: async () => {
-      const response = await apiClient.get<AgentFromAPI[]>(`/agents/registry?space_id=${spaceId}`)
+      const response = await api.get<AgentFromAPI[]>(`/agents/registry?space_id=${spaceId}`)
       return response.data
     },
     refetchInterval: 30000,
     enabled: !!spaceId,
+  })
+
+  // Fetch runs for selected agent
+  const { data: agentRuns, isLoading: runsLoading } = useQuery({
+    queryKey: ['agent-runs', viewingLogsFor],
+    queryFn: async () => {
+      const response = await api.get<AgentRun[]>(`/agents/registry/${viewingLogsFor}/runs`)
+      return response.data
+    },
+    enabled: !!viewingLogsFor,
   })
 
   const rawAgents = agentsData || []
@@ -80,7 +101,7 @@ export default function SubAgentWidget({ spaceId, className = '', onAddAgent }: 
   // Delete agent mutation
   const deleteMutation = useMutation({
     mutationFn: async (agentId: string) => {
-      await apiClient.delete(`/agents/registry/${agentId}`)
+      await api.delete(`/agents/registry/${agentId}`)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['agents', spaceId] })
@@ -166,7 +187,7 @@ export default function SubAgentWidget({ spaceId, className = '', onAddAgent }: 
             <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
           </button>
           <button
-            onClick={onAddAgent}
+            onClick={() => setShowAddModal(true)}
             className="flex items-center gap-1 px-2 py-1 text-xs bg-primary-600 hover:bg-primary-500 text-white rounded transition-colors"
           >
             <Plus className="w-3 h-3" />
@@ -221,9 +242,19 @@ export default function SubAgentWidget({ spaceId, className = '', onAddAgent }: 
 
             {selectedAgent === agent.id && (
               <div className="mt-3 pt-3 border-t border-dark-600 flex gap-2">
-                <button className="flex items-center gap-1 px-2 py-1 text-xs bg-dark-700 hover:bg-dark-600 text-dark-300 rounded transition-colors">
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setViewingLogsFor(viewingLogsFor === agent.id ? null : agent.id)
+                  }}
+                  className={`flex items-center gap-1 px-2 py-1 text-xs rounded transition-colors ${
+                    viewingLogsFor === agent.id 
+                      ? 'bg-primary-600 text-white' 
+                      : 'bg-dark-700 hover:bg-dark-600 text-dark-300'
+                  }`}
+                >
                   <FileText className="w-3 h-3" />
-                  Logs
+                  {viewingLogsFor === agent.id ? 'Hide Logs' : 'Logs'}
                 </button>
                 <button 
                   onClick={(e) => {
@@ -256,12 +287,49 @@ export default function SubAgentWidget({ spaceId, className = '', onAddAgent }: 
                 </button>
               </div>
             )}
+
+            {/* Logs display */}
+            {viewingLogsFor === agent.id && (
+              <div className="mt-3 pt-3 border-t border-dark-600">
+                <div className="text-xs text-dark-400 mb-2">Recent Runs</div>
+                {runsLoading ? (
+                  <div className="text-xs text-dark-500 flex items-center gap-1">
+                    <Loader2 className="w-3 h-3 animate-spin" />
+                    Loading...
+                  </div>
+                ) : agentRuns && agentRuns.length > 0 ? (
+                  <div className="space-y-1 max-h-32 overflow-y-auto">
+                    {agentRuns.slice(0, 5).map((run) => (
+                      <div key={run.id} className="flex items-center justify-between text-xs p-1.5 bg-dark-700 rounded">
+                        <div className="flex items-center gap-2">
+                          {run.status === 'success' ? (
+                            <CheckCircle className="w-3 h-3 text-green-400" />
+                          ) : run.status === 'error' ? (
+                            <AlertCircle className="w-3 h-3 text-red-400" />
+                          ) : (
+                            <Clock className="w-3 h-3 text-blue-400 animate-pulse" />
+                          )}
+                          <span className="text-dark-300">
+                            {new Date(run.started_at).toLocaleTimeString()}
+                          </span>
+                        </div>
+                        {run.duration_ms && (
+                          <span className="text-dark-500">{(run.duration_ms / 1000).toFixed(1)}s</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-xs text-dark-500 italic">No runs recorded yet</div>
+                )}
+              </div>
+            )}
           </div>
         ))}
 
         {/* Add agent placeholder */}
         <button
-          onClick={onAddAgent}
+          onClick={() => setShowAddModal(true)}
           className="p-3 rounded-lg border-2 border-dashed border-dark-600 hover:border-primary-500/50 text-dark-400 hover:text-dark-300 transition-colors flex items-center justify-center gap-2"
         >
           <Plus className="w-5 h-5" />
@@ -275,6 +343,13 @@ export default function SubAgentWidget({ spaceId, className = '', onAddAgent }: 
         spaceId={spaceId}
         isOpen={!!editingAgent}
         onClose={() => setEditingAgent(null)}
+      />
+
+      {/* Add Agent Modal */}
+      <AddAgentModal
+        spaceId={spaceId}
+        isOpen={showAddModal}
+        onClose={() => setShowAddModal(false)}
       />
     </div>
   )

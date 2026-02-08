@@ -1,20 +1,12 @@
 import { useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { X, Bot, Loader2 } from 'lucide-react'
-import { apiClient } from '@/api/client'
+import api from '@/api/client'
 
 interface AddAgentModalProps {
   spaceId: string
   isOpen: boolean
   onClose: () => void
-}
-
-interface AgentFormData {
-  name: string
-  description: string
-  model: string
-  schedule_type: 'interval' | 'cron' | 'manual'
-  schedule_value: string
 }
 
 const MODEL_OPTIONS = [
@@ -24,48 +16,42 @@ const MODEL_OPTIONS = [
 ]
 
 const SCHEDULE_PRESETS = [
-  { value: '15m', label: 'Every 15 minutes' },
-  { value: '30m', label: 'Every 30 minutes' },
-  { value: '1h', label: 'Every hour' },
+  { value: '*/15 * * * *', label: 'Every 15 minutes' },
+  { value: '0 * * * *', label: 'Every hour' },
+  { value: '0 */4 * * *', label: 'Every 4 hours' },
   { value: '0 9 * * *', label: 'Daily at 9:00' },
-  { value: '0 18 * * *', label: 'Daily at 18:00' },
-  { value: 'custom', label: 'Custom...' },
+  { value: '0 9 * * 1-5', label: 'Weekdays at 9:00' },
 ]
 
 export default function AddAgentModal({ spaceId, isOpen, onClose }: AddAgentModalProps) {
   const queryClient = useQueryClient()
-  const [formData, setFormData] = useState<AgentFormData>({
-    name: '',
-    description: '',
-    model: 'openrouter/moonshotai/kimi-k2.5',
-    schedule_type: 'interval',
-    schedule_value: '15m',
-  })
-  const [customSchedule, setCustomSchedule] = useState('')
-  const [useCustom, setUseCustom] = useState(false)
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [model, setModel] = useState('openrouter/moonshotai/kimi-k2.5')
+  const [scheduleValue, setScheduleValue] = useState('*/15 * * * *')
+  const [instructions, setInstructions] = useState('')
 
   const createMutation = useMutation({
-    mutationFn: async (data: AgentFormData) => {
-      const payload = {
-        space_id: spaceId,
-        name: data.name,
-        description: data.description || null,
-        model: data.model,
-        schedule_type: data.schedule_type,
-        schedule_value: useCustom ? customSchedule : data.schedule_value,
-      }
-      return apiClient.post('/agents/registry', payload)
+    mutationFn: async (data: {
+      name: string
+      description: string | null
+      model: string
+      schedule_type: string
+      schedule_value: string
+      space_id: string
+      instructions: string
+    }) => {
+      return api.post('/agents/registry', data)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['agents', spaceId] })
+      // Reset form
+      setName('')
+      setDescription('')
+      setModel('openrouter/moonshotai/kimi-k2.5')
+      setScheduleValue('*/15 * * * *')
+      setInstructions('')
       onClose()
-      setFormData({
-        name: '',
-        description: '',
-        model: 'openrouter/moonshotai/kimi-k2.5',
-        schedule_type: 'interval',
-        schedule_value: '15m',
-      })
     },
   })
 
@@ -73,33 +59,27 @@ export default function AddAgentModal({ spaceId, isOpen, onClose }: AddAgentModa
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!formData.name.trim()) return
-    createMutation.mutate(formData)
-  }
-
-  const handleScheduleChange = (value: string) => {
-    if (value === 'custom') {
-      setUseCustom(true)
-    } else {
-      setUseCustom(false)
-      // Detect if it's a cron expression
-      const isCron = value.includes('*') || value.split(' ').length >= 5
-      setFormData({
-        ...formData,
-        schedule_type: isCron ? 'cron' : 'interval',
-        schedule_value: value,
-      })
-    }
+    if (!name.trim()) return
+    
+    createMutation.mutate({
+      name: name.trim(),
+      description: description.trim() || null,
+      model,
+      schedule_type: 'cron',
+      schedule_value: scheduleValue,
+      space_id: spaceId,
+      instructions: instructions.trim(),
+    })
   }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="bg-dark-800 rounded-lg border border-dark-700 w-full max-w-md mx-4 shadow-xl">
+      <div className="bg-dark-800 rounded-lg border border-dark-700 w-full max-w-lg mx-4 shadow-xl max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-dark-700">
+        <div className="flex items-center justify-between p-4 border-b border-dark-700 sticky top-0 bg-dark-800">
           <div className="flex items-center gap-2">
             <Bot className="w-5 h-5 text-primary-400" />
-            <h2 className="text-lg font-semibold text-dark-100">Add Sub-Agent</h2>
+            <h2 className="text-lg font-semibold text-dark-100">Add New Agent</h2>
           </div>
           <button
             onClick={onClose}
@@ -118,9 +98,9 @@ export default function AddAgentModal({ spaceId, isOpen, onClose }: AddAgentModa
             </label>
             <input
               type="text"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="e.g., Sentinel, Reporter, Coder"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="e.g., Research Agent"
               className="w-full px-3 py-2 bg-dark-900 border border-dark-600 rounded-lg text-dark-100 placeholder-dark-500 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
               required
             />
@@ -132,10 +112,10 @@ export default function AddAgentModal({ spaceId, isOpen, onClose }: AddAgentModa
               Description
             </label>
             <textarea
-              value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              placeholder="What does this agent do?"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               rows={2}
+              placeholder="What does this agent do?"
               className="w-full px-3 py-2 bg-dark-900 border border-dark-600 rounded-lg text-dark-100 placeholder-dark-500 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none resize-none"
             />
           </div>
@@ -146,8 +126,8 @@ export default function AddAgentModal({ spaceId, isOpen, onClose }: AddAgentModa
               Model
             </label>
             <select
-              value={formData.model}
-              onChange={(e) => setFormData({ ...formData, model: e.target.value })}
+              value={model}
+              onChange={(e) => setModel(e.target.value)}
               className="w-full px-3 py-2 bg-dark-900 border border-dark-600 rounded-lg text-dark-100 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
             >
               {MODEL_OPTIONS.map((opt) => (
@@ -164,25 +144,37 @@ export default function AddAgentModal({ spaceId, isOpen, onClose }: AddAgentModa
               Schedule
             </label>
             <select
-              value={useCustom ? 'custom' : formData.schedule_value}
-              onChange={(e) => handleScheduleChange(e.target.value)}
-              className="w-full px-3 py-2 bg-dark-900 border border-dark-600 rounded-lg text-dark-100 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
+              value={scheduleValue}
+              onChange={(e) => setScheduleValue(e.target.value)}
+              className="w-full px-3 py-2 bg-dark-900 border border-dark-600 rounded-lg text-dark-100 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none mb-2"
             >
-              {SCHEDULE_PRESETS.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label}
+              {SCHEDULE_PRESETS.map((preset) => (
+                <option key={preset.value} value={preset.value}>
+                  {preset.label}
                 </option>
               ))}
             </select>
-            {useCustom && (
-              <input
-                type="text"
-                value={customSchedule}
-                onChange={(e) => setCustomSchedule(e.target.value)}
-                placeholder="e.g., 0 */2 * * * (cron) or 2h (interval)"
-                className="w-full mt-2 px-3 py-2 bg-dark-900 border border-dark-600 rounded-lg text-dark-100 placeholder-dark-500 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none"
-              />
-            )}
+            <input
+              type="text"
+              value={scheduleValue}
+              onChange={(e) => setScheduleValue(e.target.value)}
+              placeholder="Custom cron: 0 9 * * *"
+              className="w-full px-3 py-2 bg-dark-900 border border-dark-600 rounded-lg text-dark-100 placeholder-dark-500 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none font-mono text-sm"
+            />
+          </div>
+
+          {/* Instructions */}
+          <div>
+            <label className="block text-sm font-medium text-dark-300 mb-1">
+              Instructions
+            </label>
+            <textarea
+              value={instructions}
+              onChange={(e) => setInstructions(e.target.value)}
+              rows={4}
+              placeholder="What should this agent do on each run? Be specific about tasks, data sources, and reporting format."
+              className="w-full px-3 py-2 bg-dark-900 border border-dark-600 rounded-lg text-dark-100 placeholder-dark-500 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none resize-none"
+            />
           </div>
 
           {/* Error */}
@@ -203,7 +195,7 @@ export default function AddAgentModal({ spaceId, isOpen, onClose }: AddAgentModa
             </button>
             <button
               type="submit"
-              disabled={createMutation.isPending || !formData.name.trim()}
+              disabled={createMutation.isPending || !name.trim()}
               className="flex items-center gap-2 px-4 py-2 text-sm bg-primary-600 hover:bg-primary-500 disabled:bg-dark-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
             >
               {createMutation.isPending && <Loader2 className="w-4 h-4 animate-spin" />}

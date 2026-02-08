@@ -12,6 +12,7 @@ import { useBoardStore } from '@/stores/boards'
 import { useToast } from '@/components/common/Toast'
 import { useConfirm } from '@/components/common/ConfirmDialog'
 import KanbanCard from './KanbanCard'
+import TemplateSelector from './TemplateSelector'
 import type { Column, Card } from '@/types'
 
 interface KanbanColumnProps {
@@ -71,6 +72,13 @@ export default function KanbanColumn({
   const { addCard, removeColumn } = useBoardStore()
   const [showAddCard, setShowAddCard] = useState(false)
   const [newCardName, setNewCardName] = useState('')
+  const [newCardDescription, setNewCardDescription] = useState('')
+  const [selectedTemplate, setSelectedTemplate] = useState<{
+    id: string
+    name: string
+    icon: string
+    fields: { name: string; description: string; tag_names?: string[] }
+  } | null>(null)
   const [showMenu, setShowMenu] = useState(false)
   const addCardRef = useRef<HTMLDivElement>(null)
   const isInitialMount = useRef(true)
@@ -84,6 +92,8 @@ export default function KanbanColumn({
       if (addCardRef.current && !addCardRef.current.contains(event.target as Node)) {
         setShowAddCard(false)
         setNewCardName('')
+        setNewCardDescription('')
+        setSelectedTemplate(null)
       }
     }
     if (showAddCard) {
@@ -117,11 +127,13 @@ export default function KanbanColumn({
   }
 
   const createCardMutation = useMutation({
-    mutationFn: (data: { column_id: string; name: string; start_date: string }) => cardsApi.create(data),
+    mutationFn: (data: { column_id: string; name: string; description?: string; tag_names?: string[]; start_date: string }) => cardsApi.create(data),
     onSuccess: (newCard) => {
       addCard(column.id, newCard)
       setShowAddCard(false)
       setNewCardName('')
+      setNewCardDescription('')
+      setSelectedTemplate(null)
       if (onCardClick) {
         queryClient.setQueryData(['card', newCard.id], newCard)
         onCardClick(newCard)
@@ -166,9 +178,25 @@ export default function KanbanColumn({
       createCardMutation.mutate({
         column_id: column.id,
         name: newCardName,
+        description: newCardDescription || undefined,
+        tag_names: selectedTemplate?.fields.tag_names,
         start_date: new Date().toISOString(),
       })
     }
+  }
+
+  const handleTemplateSelect = (template: typeof selectedTemplate) => {
+    setSelectedTemplate(template)
+    if (template) {
+      setNewCardName(template.fields.name)
+      setNewCardDescription(template.fields.description)
+    }
+  }
+
+  const handleTemplateClear = () => {
+    setSelectedTemplate(null)
+    setNewCardName('')
+    setNewCardDescription('')
   }
 
   const showArchiveFilters = column.category === 'archive'
@@ -348,11 +376,16 @@ export default function KanbanColumn({
                 onSubmit={handleAddCard}
                 className="bg-dark-700 rounded-lg p-3 space-y-2"
               >
+                <TemplateSelector
+                  onSelect={handleTemplateSelect}
+                  onClear={handleTemplateClear}
+                  selectedTemplate={selectedTemplate}
+                />
                 <input
                   type="text"
                   value={newCardName}
                   onChange={(e) => setNewCardName(e.target.value)}
-                  placeholder={t('cards.cardName')}
+                  placeholder={selectedTemplate ? `${selectedTemplate.icon} ${t('cards.cardName')}` : t('cards.cardName')}
                   className="w-full px-3 py-2 bg-dark-600 border border-dark-500 rounded text-dark-100 text-sm focus:outline-none focus:border-primary-500"
                   autoFocus
                 />
